@@ -16,53 +16,17 @@ library(tidyverse)
 library(rvest)
 library(conflicted)
 conflicts_prefer(dplyr::filter)
+source("functions.R")
 ```
 
-```{r}
-make_fname <- function(x, y, z) {
-  str_c(x, "_", y, "_", z, ".rds")
-}
-```
-
-
-```{r}
-get_schedule <- function(country_name, league_name, season) {
-  my_url <- str_c("https://www.worldfootball.net/all_matches/", country_name, "-", league_name, "-", season, "/")
-  fname <- make_fname(country_name, league_name, season)
-  h <- read_html(my_url)
-  h %>% html_node(xpath = '//*[@id="site"]/div[2]/div[1]/div[1]/div[3]/div/table') %>% 
-    html_table(header = FALSE) %>% 
-    filter(!str_detect(X1, "Round")) %>% 
-    mutate(X1 = ifelse(X1 == "", NA, X1)) %>% 
-    fill(X1) %>% 
-    mutate(kostr = str_c(X1, " ", X2)) %>% 
-    mutate(ko = dmy_hm(kostr, tz = "Europe/London")) %>%  # it looks as if it's UK time
-    mutate(ko = with_tz(ko, "America/Toronto")) %>% 
-    select(ko, t1 = X3, t2 = X5, score0 = X6) %>%
-    extract(score0, into = c("s1", "s2"), "^(\\d+):(\\d+)") %>%
-    mutate(score = str_c(s1, " - ", s2)) %>%
-    select(-s1, -s2) %>% 
-    write_rds(fname) -> x
-  fname
-}
-```
-
-```{r}
-leagues <- read_csv("leagues.csv")
-leagues
-```
 
 
 ```{r}
 leagues %>% mutate(fname = make_fname(country, league, season))
 ```
 
-```{r}
-get_schedule_row <- function(n, leagues) {
-  with(leagues, get_schedule(country[n], league[n], season[n]))
-} 
-```
 
+download all leagues
 
 ```{r}
 nrow <- nrow(leagues)
@@ -70,14 +34,37 @@ nrow
 walk(1:nrow, \(i) get_schedule_row(i, leagues))
 ```
 
+get leagues I don't have any of yet
 
 ```{r}
-display_league <- function(n, leagues) {
-  leagues %>% slice(n) %>% 
-    mutate(fname = make_fname(country, league, season)) %>%
-    pull(fname) -> filename
-  read_rds(filename)
-}
-display_league(2, leagues)
+leagues %>% mutate(fname = make_fname(country, league, season)) %>% 
+  mutate(mtime = file.mtime(fname)) %>% 
+  filter(is.na(mtime)) -> l_to_get
+l_to_get
+walk(1:nrow(l_to_get), \(i) get_schedule_row(i, l_to_get))
 ```
 
+
+```{r}
+find_games(leagues, hours_back = 2, hours_forward = 10)
+```
+
+games that have finished since last download
+
+```{r}
+leagues %>% mutate(fname = make_fname(country, league, season)) %>% 
+  mutate(mtime = file.mtime(fname)) -> ll
+ll
+find_games(ll, ll$mtime, 2.25, 0) -> l3 
+l3 %>% select(country, league, ko, t1, t2, score)
+l3 %>% nest_by(country, league, season) -> lll
+walk(1:nrow(lll), \(i) get_schedule_row(i, lll))
+```
+
+there is also an overview page with latest games and league table.
+This might be better to download to check latest scores.
+
+to check for score changes:
+- find the games that might have changed since last download, save df
+- redownload those, save new df
+- compare
