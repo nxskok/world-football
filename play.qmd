@@ -29,42 +29,66 @@ leagues %>% mutate(fname = make_fname(country, league, season))
 download all leagues
 
 ```{r}
-nrow <- nrow(leagues)
-nrow
-walk(1:nrow, \(i) get_schedule_row(i, leagues))
+# download_these(leagues)
 ```
 
 get leagues I don't have any of yet
 
 ```{r}
+#| warning: false
 leagues %>% mutate(fname = make_fname(country, league, season)) %>% 
   mutate(mtime = file.mtime(fname)) %>% 
   filter(is.na(mtime)) -> l_to_get
 l_to_get
-walk(1:nrow(l_to_get), \(i) get_schedule_row(i, l_to_get))
+download_these(l_to_get)
 ```
 
 
 ```{r}
-find_games(leagues, hours_back = 2, hours_forward = 10)
+find_games(leagues, hours_back = 2, hours_forward = 10) %>% 
+  select(country, league, ko, t1, t2, score)
 ```
 
-games that have finished since last download
+games that may have finished since last download
 
 ```{r}
-leagues %>% mutate(fname = make_fname(country, league, season)) %>% 
-  mutate(mtime = file.mtime(fname)) -> ll
-ll
-find_games(ll, ll$mtime, 2.25, 0) -> l3 
-l3 %>% select(country, league, ko, t1, t2, score)
-l3 %>% nest_by(country, league, season) -> lll
-walk(1:nrow(lll), \(i) get_schedule_row(i, lll))
 ```
+
+
+```{r}
+gg <- games_to_get(leagues, 3)
+gg
+lg <- leagues_to_get(gg)
+```
+
+```{r}
+#| warning: false
+download_these(lg)
+gg1 <- games_to_get(leagues, 3)
+gg1 %>% left_join(gg, by = c("season", "country", "league", "ko", "t1", "t2")) %>% 
+  mutate(same = case_when(
+    score.x == score.y ~ TRUE,
+    score.x != score.y ~ FALSE,
+    is.na(score.x)     ~ TRUE,
+    is.na(score.y)     ~ FALSE
+  )) %>% 
+  filter(!same) %>% 
+  select(country, league, ko, t1, t2, old = score.y, new = score.x)
+```
+
+what this doesn't have is minutes or status (indication that match has finished)
+
 
 there is also an overview page with latest games and league table.
 This might be better to download to check latest scores.
 
-to check for score changes:
-- find the games that might have changed since last download, save df
-- redownload those, save new df
-- compare
+
+
+
+more leagues
+
+```{r}
+old_leagues <- read_rds("../ratings/league_ids.rds")
+old_leagues %>% slice_sample(n = 10)
+```
+

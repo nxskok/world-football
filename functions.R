@@ -1,14 +1,16 @@
 # functions for worldfootball.net
 
 make_fname <- function(x, y, z) {
-  str_c("rds/", x, "_", y, "_", z, ".rds")
+  fn <- str_c("rds/", x, "_", y, "_", z, ".rds")
 }
 
 
 get_schedule <- function(country_name, league_name, season) {
   Sys.sleep(1)
   my_url <- str_c("https://www.worldfootball.net/all_matches/", country_name, "-", league_name, "-", season, "/")
+  my_url <- str_replace(my_url, "/ger-", "/")
   fname <- make_fname(country_name, league_name, season)
+  print(glue::glue("Getting {fname}."))
   h <- read_html(my_url)
   h %>% html_node(xpath = '//*[@id="site"]/div[2]/div[1]/div[1]/div[3]/div/table') %>%
     html_table(header = FALSE) %>%
@@ -34,6 +36,11 @@ get_schedule_row <- function(n, leagues) {
   with(leagues, get_schedule(country[n], league[n], season[n]))
 }
 
+download_these <- function(l) {
+  nr <- nrow(l)
+  walk(1:nr, \(i) get_schedule_row(i, l))
+}
+
 
 display_league <- function(n, leagues) {
   leagues %>% slice(n) %>%
@@ -47,9 +54,25 @@ find_games <- function(leagues, datum_time = now(), hours_back = 0, hours_forwar
     rowwise() %>%
     mutate(games = list(display_league(r, leagues))) %>%
     unnest(games) %>%
+    drop_na(ko) %>%
     mutate(hours = as.period(ko %--% datum_time) / hours(1)) %>%
     filter(hours <= hours_back) %>%
     filter(-hours <= hours_forward)
 }
+
+games_to_get <- function(leagues, hours_back = 3) {
+  leagues %>%
+    mutate(fname = make_fname(country, league, season)) %>%
+    mutate(mtime = file.mtime(fname)) -> l1
+  find_games(l1, l1$mtime, hours_back, 0) %>%
+    select(season, country, league, ko, t1, t2, score)
+}
+
+leagues_to_get <- function(leagues) {
+  # pass the output of games-to-get here
+  leagues %>% nest_by(country, league, season) %>%
+    select(-data)
+}
+
 
 
