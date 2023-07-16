@@ -1,0 +1,83 @@
+# Using worldfootball.net to get soccer results
+
+This is a sandbox to make things go.
+
+Typical url is
+
+```{r}
+#| eval: false
+my_url <- "https://www.worldfootball.net/all_matches/eng-premier-league-1996-1997/"
+```
+
+packages
+
+```{r}
+library(tidyverse)
+library(rvest)
+library(conflicted)
+conflicts_prefer(dplyr::filter)
+```
+
+```{r}
+make_fname <- function(x, y, z) {
+  str_c(x, "_", y, "_", z, ".rds")
+}
+```
+
+
+```{r}
+get_schedule <- function(country_name, league_name, season) {
+  my_url <- str_c("https://www.worldfootball.net/all_matches/", country_name, "-", league_name, "-", season, "/")
+  fname <- make_fname(country_name, league_name, season)
+  h <- read_html(my_url)
+  h %>% html_node(xpath = '//*[@id="site"]/div[2]/div[1]/div[1]/div[3]/div/table') %>% 
+    html_table(header = FALSE) %>% 
+    filter(!str_detect(X1, "Round")) %>% 
+    mutate(X1 = ifelse(X1 == "", NA, X1)) %>% 
+    fill(X1) %>% 
+    mutate(kostr = str_c(X1, " ", X2)) %>% 
+    mutate(ko = dmy_hm(kostr, tz = "Europe/London")) %>%  # it looks as if it's UK time
+    mutate(ko = with_tz(ko, "America/Toronto")) %>% 
+    select(ko, t1 = X3, t2 = X5, score0 = X6) %>%
+    extract(score0, into = c("s1", "s2"), "^(\\d+):(\\d+)") %>%
+    mutate(score = str_c(s1, " - ", s2)) %>%
+    select(-s1, -s2) %>% 
+    write_rds(fname) -> x
+  fname
+}
+```
+
+```{r}
+leagues <- read_csv("leagues.csv")
+leagues
+```
+
+
+```{r}
+leagues %>% mutate(fname = make_fname(country, league, season))
+```
+
+```{r}
+get_schedule_row <- function(n, leagues) {
+  with(leagues, get_schedule(country[n], league[n], season[n]))
+} 
+```
+
+
+```{r}
+nrow <- nrow(leagues)
+nrow
+walk(1:nrow, \(i) get_schedule_row(i, leagues))
+```
+
+
+```{r}
+display_league <- function(n, leagues) {
+  leagues %>% slice(n) %>% 
+    mutate(fname = make_fname(country, league, season)) %>%
+    pull(fname) -> filename
+  read_rds(filename)
+}
+display_league(2, leagues)
+```
+
