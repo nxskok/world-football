@@ -48,41 +48,43 @@ get_schedule_row <- function(n, leagues) {
 
 download_these <- function(l) {
   nr <- nrow(l)
+  if (nr == 0) stop("no leagues to download")
   walk(1:nr, \(i) get_schedule_row(i, l))
 }
 
 
 display_league <- function(leagues, n) {
+  if (nrow(leagues) == 0) stop ("no rows to display")
   leagues %>% slice(n) %>%
     mutate(fname = make_fname(country, league, season, part)) %>%
     pull(fname) -> filename
   read_rds(filename)
 }
 
-find_games <- function(leagues, datum_time = now(), hours_back = 0, hours_forward = 0) {
+find_games <- function(leagues, start_time, end_time) {
+  if (nrow(leagues) == 0) stop ("no rows to display")
   leagues %>% mutate(r = row_number()) %>%
     rowwise() %>%
     mutate(games = list(display_league(leagues, r))) %>%
     unnest(games) %>%
     drop_na(ko) %>%
-    mutate(hours = as.period(ko %--% datum_time) / hours(1)) %>%
-    filter(hours <= hours_back) %>%
-    filter(-hours <= hours_forward)
+    filter(between(ko, start_time, end_time))
 }
 
-games_to_get <- function(leagues, hours_back = 3) {
+update_leagues <- function(leagues) {
   leagues %>%
+    mutate(r = row_number()) %>%
     mutate(fname = make_fname(country, league, season, part)) %>%
-    mutate(mtime = file.mtime(fname)) -> l1
-  find_games(l1, l1$mtime, hours_back, 0) %>%
-    select(season, country, league, part, ko, t1, t2, score)
+    mutate(mtime = file.mtime(fname)) %>%
+    rowwise() %>%
+    mutate(gg = list(display_league(leagues, r))) %>%
+    unnest(gg) %>%
+    filter(ko - hours(3) > mtime) %>%
+    filter(ko < now()) -> gg
+  gg %>%
+    nest_by(country, league, season, part) %>%
+    select(-data) -> to_get
+  if (nrow(to_get) == 0) stop("No leagues to get.")
+  download_these(to_get)
+  gg
 }
-
-leagues_to_get <- function(leagues) {
-  # pass the output of games-to-get here
-  leagues %>% nest_by(country, league, season, part) %>%
-    select(-data)
-}
-
-
-

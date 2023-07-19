@@ -47,44 +47,24 @@ download_these(l_to_get)
 
 ```{r}
 leagues
-display_league(leagues, 10)
+display_league(leagues, 52)
 ```
+
+
 
 
 
 games that may have finished since last download
 
 
-
-```{r}
-gg <- games_to_get(leagues, 3)
-gg
-lg <- leagues_to_get(gg)
-lg
-```
-
 ```{r}
 #| warning: false
-download_these(lg)
-# gg1 <- games_to_get(leagues, 3)
-# gg1 %>% left_join(gg, by = c("season", "country", "league", "ko", "t1", "t2")) %>% 
-#   mutate(same = case_when(
-#     score.x == score.y ~ TRUE,
-#     score.x != score.y ~ FALSE,
-#     is.na(score.x)     ~ TRUE,
-#     is.na(score.y)     ~ FALSE
-#   )) %>% 
-#   filter(!same) %>% 
-#   select(country, league, ko, t1, t2, old = score.y, new = score.x)
+update_leagues(leagues)
 ```
 
-what this doesn't have is minutes or status (indication that match has finished), which seems not even to be in the match details
+ratings
 
+method 1: update ratings each time each league is updated (extra computation)
+method 2: do it like 25, have a target date for the next rate and rerate the ones that have reached the target date
 
-there is also an overview page with latest games and league table.
-This might be better to download to check latest scores.
-
-next: ratings from these leagues. Use a non-informative prior.
-
-
-
+next task
