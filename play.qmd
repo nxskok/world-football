@@ -47,7 +47,7 @@ download_these(l_to_get)
 
 ```{r}
 leagues
-display_league(leagues, 52)
+display_league(leagues, 73) %>% View()
 ```
 
 
@@ -68,3 +68,11 @@ method 1: update ratings each time each league is updated (extra computation)
 method 2: do it like 25, have a target date for the next rate and rerate the ones that have reached the target date
 
 next task
+
+rate a league
+
+after that
+
+sim-league
+for predict-the-football
+

@@ -80,11 +80,11 @@ update_leagues <- function(leagues) {
     mutate(gg = list(display_league(leagues, r))) %>%
     unnest(gg) %>%
     filter(ko - hours(3) > mtime) %>%
-    filter(ko < now()) -> gg
-  gg %>%
+    filter(ko < now()) -> gg1
+  gg1 %>%
     nest_by(country, league, season, part) %>%
     select(-data) -> to_get
   if (nrow(to_get) == 0) stop("No leagues to get.")
   download_these(to_get)
-  gg
+  gg1
 }
