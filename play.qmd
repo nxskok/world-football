@@ -54,7 +54,7 @@ display_league(leagues, 73) %>% View()
 
 
 
-games that may have finished since last download
+games that may have finished (or started) since last download
 
 
 ```{r}

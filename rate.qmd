@@ -1,0 +1,32 @@
+---
+title: "rate"
+format: html
+---
+
+## Packages
+
+```{r}
+library(tidyverse)
+library(cmdstanr)
+source("rate_functions.R")
+```
+
+try it
+
+```{r}
+my_fname <- "ltu_a-lyga_2023.rds"
+# my_fname <- "wal_premier-league_2023-2024.rds"
+# my_fname <- "nor_eliteserien_2023.rds"
+# my_fname <- "swe_allsvenskan_2023.rds"
+my_fit <- rate(my_fname)
+```
+
+```{r}
+typeof(my_fit$fit)
+```
+
+```{r}
+rating_table(my_fit)
+```
+
+this seems to make sense
