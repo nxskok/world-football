@@ -79,7 +79,7 @@ update_leagues <- function(leagues) {
     rowwise() %>%
     mutate(gg = list(display_league(leagues, r))) %>%
     unnest(gg) %>%
-    filter(ko - hours(3) > mtime) %>%
+    filter(ko + hours(3) > mtime) %>%
     filter(ko < now()) -> gg1
   gg1 %>%
     nest_by(country, league, season, part) %>%

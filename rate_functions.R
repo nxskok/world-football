@@ -1,7 +1,12 @@
 
 
 rate <- function(fname) { # rds filename with results in it, no folder
-  pp <- cmdstan_model("rate_poisson.stan")
+  if (file.exists("pp.rds")) {
+    pp <- read_rds("pp.rds")
+  } else {
+    pp <- cmdstan_model("rate_poisson.stan")
+    write_rds(pp, "pp.rds")
+  }
   my_fname <- str_c("rds/", fname)
   games <- read_rds(my_fname)
   # lookup table
@@ -9,13 +14,16 @@ rate <- function(fname) { # rds filename with results in it, no folder
     count(team) %>%
     select(-n) %>%
     mutate(id = row_number()) -> lookup_table
+  # save lookup table
+  my_lname <- str_c("lu/", fname)
+  write_rds(lookup_table, my_lname)
   # keep only actual games
   games %>% drop_na(score) %>%
     separate(score, into = c("s1", "s2"), convert = TRUE) -> games
   if (nrow(games)==0) {
-    ll <- list(fit = NA, teams = lookup_table)
-    write_rds(ll, str_c("fit/", fname))
-    return(ll)
+    fit = NA
+    write_rds(fit, str_c("fit/", fname))
+    return(list(fit = fit, teams = lookup_table))
   }
   # otherwise continue
   games %>% left_join(lookup_table, by = c("t1" = "team")) %>%
@@ -26,15 +34,15 @@ rate <- function(fname) { # rds filename with results in it, no folder
     x = cbind(id.x, id.y),
     y = cbind(s1, s2)))
   fit <- pp$sample(data = stan_data)
+  fit$save_object(str_c("fit/", fname))
   ll <- list(fit = fit, teams = lookup_table)
-  write_rds(ll, str_c("fit/", fname))
   ll
 }
 
-rating_table <- function(fit_object) {
-  fit <- fit_object$fit
+rating_table <- function(fname) {
+  fit <- read_rds(str_c("fit/", fname))
   if (typeof(fit) == "logical") stop("no games played yet")
-  lookup_table <- fit_object$teams
+  lookup_table <- read_rds(str_c("lu/", fname))
   fit$draws(format = "df") %>%
     select(-lp__, -.chain, -.iteration, -.draw) %>%
     pivot_longer(everything()) %>%
@@ -48,3 +56,26 @@ rating_table <- function(fit_object) {
     select(team, rate, o, d) %>%
     arrange(desc(rate))
 }
+
+update_rate <- function(leagues) {
+  leagues %>% mutate(fname1 = make_fname(country, league, season, part)) %>%
+    mutate(fname2 = str_replace(fname1, "rds/", "fit/")) %>%
+    mutate(across(starts_with("fname"), \(f) file.mtime(f), .names = "mtime_{.col}")) %>%
+    mutate(needs_update = case_when(
+      is.na(mtime_fname2) ~ "yes",
+      is.na(mtime_fname1) ~ "no",
+      mtime_fname1 > mtime_fname2 ~ "yes",
+      .default = "no"
+    )) %>%
+    filter(needs_update == "yes") -> nn
+  print(glue::glue("Needing update: {nrow(nn)}"))
+  nn %>%
+    # slice_sample(n = 20) %>%
+    pull(fname1) -> todos
+  if (length(todos) == 0) stop("Nothing to do")
+  print(todos)
+  todos %>%
+    str_replace("rds/", "") %>%
+    walk(\(x) rate(x))
+}
+

@@ -47,7 +47,7 @@ download_these(l_to_get)
 
 ```{r}
 leagues
-display_league(leagues, 73) %>% View()
+display_league(leagues, 53) %>% View()
 ```
 
 
