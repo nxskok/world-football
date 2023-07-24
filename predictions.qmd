@@ -15,48 +15,25 @@ conflicts_prefer(tidyr::extract)
 source("functions.R")
 source("rate_functions.R")
 source("stats_functions.R")
+source("predictions_functions.R")
 ```
 
-posterior predictive from ratings
+file name, choose
 
 ```{r}
-make_ppd <- function(fname, t1, t2) {
-  teams_to_pred <- as.character(c(t1, t2))
-  cols_wanted <-  
-    c(str_c("o[", teams_to_pred, "]"),
-      str_c("d[", teams_to_pred, "]"),
-      "h")
-  fit <- read_rds(str_c("fit/", fname))
-  if (typeof(fit) == "logical") stop("no ratings yet")
-  dw <- fit$draws(format = "df") 
-  nr <- nrow(dw)
-  dw %>% select(all_of(cols_wanted)) %>%
-    mutate(hm = exp(get(cols_wanted[1]) - get(cols_wanted[4]) + h),
-           aw = exp(get(cols_wanted[2]) - get(cols_wanted[3]))) %>% 
-    mutate(hh = rpois(nr, hm), aa = rpois(nr, aw)) %>% 
-    count(hh, aa) %>% 
-    mutate(p = n / nr) %>% 
-    arrange(desc(p)) %>% 
-    unite("score", hh, aa,  sep = "-") %>% 
-    select(-n)
-}
-
 fname <- "swe_allsvenskan_2023.rds"
-# make_ppd(fname, 2, 3)
+league_url <- "https://allsvenskan.predictthefootball.com"
+league_url <- "https://championship.predictthefootball.com" # England championship
+# league_url <- "https://superleague.predictthefootball.com" # Greece
+league_url <- "https://scottish-premier.predictthefootball.com" # Scotland
+league_url <- "https://laliga.predictthefootball.com" # Spain
+
 ```
 
-lookup table
+lookup table, Predict the football session
 
 ```{r}
 lu <- read_rds(str_c("lu/", fname))
-```
-
-
-and then the question of how to store this for use with ptf
-
-Predict the football
-
-```{r}
 the_url <- "https://www.predictthefootball.com/?lang=en_us"
 sess <- session(the_url)
 form <- html_form(sess)
@@ -70,100 +47,24 @@ filled_form <- html_form_set(form[[1]],
 session_submit(sess, filled_form)
 ```
 
-
-
 ```{r}
-league_url <- "https://allsvenskan.predictthefootball.com"
-get_form(league_url, sess) -> ptf_form
-  # filter(is.na(pred_1)) -> ptf_form
-
-ptf_form
+get_form(league_url, sess) %>% 
+  filter(is.na(pred_1)) -> ptf_form
+ptf_form %>% 
+  mutate(scores = str_sub(scores, end = 7)) %>% 
+  select(name_1, name_2, preds, results, scores)
 ```
 
-
-
-
-idea: fuzzy matching from `stringdist`.
-
-
-
-write a function for this
-
-```{r}
-best_match <- function(x, lookup) {
-  stringsimmatrix(x, lookup$team, method = "lcs") %>% 
-    apply(1, which.max) -> perm
-  lookup$team[perm]
-}
-# best_match(ptf_form$name_1, lu)
-```
+go down this far for first games of season (pick the most popular score)
 
 ```{r}
 ptf_form %>% 
   mutate(t1 = best_match(name_1, lu),
          t2 = best_match(name_2, lu)) %>% 
   left_join(lu, by = c("t1" = "team")) %>% 
-  left_join(lu, by = c("t2" = "team")) -> form2 # id.x and id.y are the teams to look up
-form2
-```
-
-
-
-expected points
-
-```{r}
-result_of <- function(tscore) {
-  # get result of text score, vectorized
-  enframe(tscore, name = NULL, value = "score") %>% 
-    separate(score, into = c("s1", "s2"), convert = TRUE) %>% 
-    mutate(result = case_when(
-      s1 > s2 ~ "2",
-      s1 < s2 ~ "0",
-      .default = "1"
-    )) %>% 
-    pull(result)
-}
-# result_of(c("2-2", "2-1", "0-1"))
-
-ept <- function(pred, ppd, results, scores) {
-  ppd %>% 
-    mutate(predn = pred) %>%
-    mutate(r_score = result_of(score)) %>% 
-    mutate(r_predn = result_of(predn)) %>% 
-    mutate(pt = 1 * (r_score == r_predn) +
-                2 * (score == predn) +
-                2 * (r_score == r_predn) * (str_detect(results, r_score)) +
-                2 * (score == predn) * (!str_detect(scores, score))
-             ) %>% 
-    summarize(ept = sum(pt * p)) %>% 
-    pull(ept)
-}
-# my_score <- "2-1"
-# my_res <- "0"
-# my_scores <- "1-0:2-1:2-0:1-1:3-1:2-2:1-2"
-# ept(my_score, ppd, my_res, my_scores)
-```
-
-```{r}
-max_ept <- function(ppd, results, scores) {
-  crossing(x = 0:6, y = 0:6) %>% 
-    unite(psc, x, y, sep = "-") %>% 
-    rowwise() %>% 
-    mutate(my_ept = ept(psc, ppd, results, scores)) %>% 
-    ungroup() %>% 
-    slice_max(my_ept, n = 1) %>% 
-    pull(psc)
-}
-# max_ept(ppd, my_res, my_scores)
-```
-
-
-```{r}
-form2 %>% 
+  left_join(lu, by = c("t2" = "team")) %>%  # id.x and id.y are the teams to look up
   rowwise() %>% 
   mutate(ppd = list(make_ppd(fname, id.x, id.y))) %>% 
   mutate(opt_pred = max_ept(ppd, results, scores)) %>% 
   select(name_1, name_2, opt_pred)
 ```
-
-

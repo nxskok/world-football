@@ -75,7 +75,7 @@ map(r, \(r) display_league(leagues, r)) %>% bind_rows() -> all_games
 # all_games
 ggg %>% left_join(all_games, by = c("ko", "t1", "t2")) %>% 
   mutate(show = case_when(
-    is.na(score.y) ~ "no",
+    is.na(score.y) ~ "yes",
     is.na(score.x) ~ "yes",
     score.x == score.y ~ "no",
     .default = "yes"
