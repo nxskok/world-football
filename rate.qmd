@@ -15,9 +15,8 @@ source("rate_functions.R")
 try it
 
 ```{r}
-leagues %>% slice(42) %>% 
-  mutate(fname = make_fname(country, league, season, part)) %>% pull(fname) %>% 
-  str_replace("rds/", "") -> my_fname
+leagues %>% slice(90) %>% 
+  mutate(fname = make_fname(country, league, season, part, prefix = "")) %>% pull(fname) -> my_fname
 # my_fname <- "wal_premier-league_2023-2024.rds"
 # my_fname <- "nor_eliteserien_2023.rds"
 # my_fname <- "swe_allsvenskan_2023.rds"
@@ -29,7 +28,7 @@ typeof(my_fit$fit)
 ```
 
 ```{r}
-my_fit$fit$summary()
+# my_fit$fit$summary()
 rating_table(my_fname) %>% View()
 ```
 
@@ -40,5 +39,5 @@ this seems to make sense
 find the ones that need doing and do them (or some of them)
 
 ```{r}
-update_rate(leagues)
+update_rate(leagues) 
 ```

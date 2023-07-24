@@ -1,7 +1,7 @@
 # functions for worldfootball.net
 
-make_fname <- function(x, y, z, w) {
-  fn <- str_c("rds/", x, "_", y, "_", z)
+make_fname <- function(x, y, z, w, prefix = "rds") {
+  fn <- ifelse(prefix == "", str_c(x, "_", y, "_", z), str_c(prefix, "/", x, "_", y, "_", z))
   fn <- ifelse(is.na(w),
                str_c(fn, ".rds"),
                str_c(fn, "_", w, ".rds"))
@@ -19,7 +19,9 @@ get_schedule <- function(country_name, league_name, season, part) {
   fname <- make_fname(country_name, league_name, season, part)
   print(glue::glue("Getting {fname}."))
   h <- read_html(my_url)
-  h %>% html_node(xpath = '//*[@id="site"]/div[2]/div[1]/div[1]/div[3]/div/table') %>%
+  h %>% html_node(xpath = '//*[@id="site"]/div[2]/div[1]/div[1]/div[3]/div/table') -> hh
+  if (class(hh) == "xml_missing") return(fname) # don't process and save
+  hh %>%
     html_table(header = FALSE) %>%
     filter(!str_detect(X1, "Round")) %>%
     mutate(X1 = ifelse(X1 == "", NA, X1)) %>%
@@ -58,7 +60,7 @@ display_league <- function(leagues, n) {
   leagues %>% slice(n) %>%
     mutate(fname = make_fname(country, league, season, part)) %>%
     pull(fname) -> filename
-  read_rds(filename)
+  if (file.exists(filename)) read_rds(filename) else list()
 }
 
 find_games <- function(leagues, start_time, end_time) {
@@ -74,10 +76,13 @@ find_games <- function(leagues, start_time, end_time) {
 update_leagues <- function(leagues) {
   leagues %>%
     mutate(r = row_number()) %>%
+    rowwise() %>%
     mutate(fname = make_fname(country, league, season, part)) %>%
     mutate(mtime = file.mtime(fname)) %>%
     rowwise() %>%
     mutate(gg = list(display_league(leagues, r))) %>%
+    mutate(tibbly = is_tibble(gg)) %>%
+    filter(tibbly) %>%
     unnest(gg) %>%
     filter(ko + hours(3) > mtime) %>%
     filter(ko < now()) -> gg1

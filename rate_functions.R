@@ -39,13 +39,18 @@ rate <- function(fname) { # rds filename with results in it, no folder
   ll
 }
 
-rating_table <- function(fname) {
+long_draws <- function(fname) {
   fit <- read_rds(str_c("fit/", fname))
   if (typeof(fit) == "logical") stop("no games played yet")
-  lookup_table <- read_rds(str_c("lu/", fname))
   fit$draws(format = "df") %>%
-    select(-lp__, -.chain, -.iteration, -.draw) %>%
-    pivot_longer(everything()) %>%
+    select(-lp__, -.chain, -.iteration) %>%
+    pivot_longer(-.draw)
+}
+
+
+rating_table <- function(fname) {
+  lookup_table <- read_rds(str_c("lu/", fname))
+  long_draws(fname) %>%
     group_by(name) %>%
     summarize(post_mean = mean(value)) %>%
     extract(name, into = c("what", "id"), "(.)\\[(\\d+)\\]", convert = TRUE) %>%
@@ -58,12 +63,14 @@ rating_table <- function(fname) {
 }
 
 update_rate <- function(leagues) {
-  leagues %>% mutate(fname1 = make_fname(country, league, season, part)) %>%
-    mutate(fname2 = str_replace(fname1, "rds/", "fit/")) %>%
+  leagues %>% rowwise() %>%
+    mutate(fname1 = make_fname(country, league, season, part, prefix = "rds")) %>%
+    mutate(fname2 = make_fname(country, league, season, part, prefix = "fit")) %>%
+    mutate(fit_size = file.size(fname2)) %>%
     mutate(across(starts_with("fname"), \(f) file.mtime(f), .names = "mtime_{.col}")) %>%
     mutate(needs_update = case_when(
-      is.na(mtime_fname2) ~ "yes",
       is.na(mtime_fname1) ~ "no",
+      is.na(mtime_fname2) ~ "yes",
       mtime_fname1 > mtime_fname2 ~ "yes",
       .default = "no"
     )) %>%
