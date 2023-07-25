@@ -6,13 +6,16 @@ make_ppd <- function(fname, t1, t2) {
     c(str_c("o[", teams_to_pred, "]"),
       str_c("d[", teams_to_pred, "]"),
       "h")
+  print(glue::glue("cols wanted: {cols_wanted}"))
   fit <- read_rds(str_c("fit/", fname))
   if (typeof(fit) == "logical") stop("no ratings yet")
   dw <- fit$draws(format = "df")
   nr <- nrow(dw)
   dw %>% select(all_of(cols_wanted)) %>%
     mutate(hm = exp(get(cols_wanted[1]) - get(cols_wanted[4]) + h),
-           aw = exp(get(cols_wanted[2]) - get(cols_wanted[3]))) %>%
+           aw = exp(get(cols_wanted[2]) - get(cols_wanted[3]))) -> d
+  return(d)
+  d %>%
     mutate(hh = rpois(nr, hm), aa = rpois(nr, aw)) %>%
     count(hh, aa) %>%
     mutate(p = n / nr) %>%
@@ -72,4 +75,33 @@ max_ept <- function(ppd, results, scores) {
 }
 # max_ept(ppd, my_res, my_scores)
 
+make_result_probs <- function(fname, t1, t2) {
+  make_ppd(fname, t1, t2) %>%
+    separate(score, into = c("s1", "s2"), convert = TRUE) %>%
+    mutate(result = case_when(
+      s1 > s2 ~ 2,
+      s1 < s2 ~ 0,
+      .default = 1
+    )) %>%
+    group_by(result) %>%
+    summarize(pp = sum(p)) %>%
+    mutate(ppp = 100 * round(pp, 2)) %>%
+    select(-pp) %>%
+    deframe()
+}
 
+league_preds <- function(fname) {
+  lu <- read_rds(str_c("lu/", fname))
+  read_rds(str_c("rds/", fname)) %>%
+    filter(is.na(score)) %>%
+    filter(ko < now() + days(3)) %>%
+    left_join(lu, by = c("t1" = "team")) %>%
+    left_join(lu, by = c("t2" = "team")) %>%
+    rowwise() %>%
+    mutate(pr = list(make_result_probs(fname, id.x, id.y))) %>%
+    unnest_wider(pr) %>%
+    mutate(fname = fname) %>%
+    select(fname, ko, t1, t2, `2`, `1`, `0`)
+}
+#
+#

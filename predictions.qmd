@@ -8,7 +8,7 @@ packages
 ```{r}
 library(tidyverse)
 library(rvest)
-library(stringdist)
+library(stringdist) # idea from https://www.r-bloggers.com/2017/12/vectorize-fuzzy-matching/
 library(conflicted)
 conflicts_prefer(dplyr::filter)
 conflicts_prefer(tidyr::extract)
@@ -18,22 +18,9 @@ source("stats_functions.R")
 source("predictions_functions.R")
 ```
 
-file name, choose
+Predict the football session (run once)
 
 ```{r}
-fname <- "swe_allsvenskan_2023.rds"
-league_url <- "https://allsvenskan.predictthefootball.com"
-league_url <- "https://championship.predictthefootball.com" # England championship
-# league_url <- "https://superleague.predictthefootball.com" # Greece
-league_url <- "https://scottish-premier.predictthefootball.com" # Scotland
-league_url <- "https://laliga.predictthefootball.com" # Spain
-
-```
-
-lookup table, Predict the football session
-
-```{r}
-lu <- read_rds(str_c("lu/", fname))
 the_url <- "https://www.predictthefootball.com/?lang=en_us"
 sess <- session(the_url)
 form <- html_form(sess)
@@ -47,6 +34,18 @@ filled_form <- html_form_set(form[[1]],
 session_submit(sess, filled_form)
 ```
 
+file name, choose; lookup table
+
+```{r}
+fname <- "swe_allsvenskan_2023.rds"
+league_url <- "https://allsvenskan.predictthefootball.com"
+# league_url <- "https://championship.predictthefootball.com" # England championship
+# league_url <- "https://superleague.predictthefootball.com" # Greece
+# league_url <- "https://scottish-premier.predictthefootball.com" # Scotland
+# league_url <- "https://laliga.predictthefootball.com" # Spain
+lu <- read_rds(str_c("lu/", fname))
+```
+
 ```{r}
 get_form(league_url, sess) %>% 
   filter(is.na(pred_1)) -> ptf_form
@@ -56,6 +55,8 @@ ptf_form %>%
 ```
 
 go down this far for first games of season (pick the most popular score)
+
+below gets predictions via max ept
 
 ```{r}
 ptf_form %>% 
@@ -68,3 +69,11 @@ ptf_form %>%
   mutate(opt_pred = max_ept(ppd, results, scores)) %>% 
   select(name_1, name_2, opt_pred)
 ```
+
+similar ideas:
+
+-   table of predictions for upcoming matches (using the ppd idea), can go on the end of ratings
+
+-   predictions for italy
+
+-   sim-league

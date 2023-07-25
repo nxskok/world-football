@@ -10,9 +10,10 @@ library(tidyverse)
 library(cmdstanr)
 source("functions.R")
 source("rate_functions.R")
+source("predictions_functions.R")
 ```
 
-try it
+try it for one
 
 ```{r}
 leagues %>% slice(90) %>% 
@@ -40,4 +41,21 @@ find the ones that need doing and do them (or some of them)
 
 ```{r}
 update_rate(leagues) 
+```
+
+## predictions for upcoming games based on most recent ratings
+
+not quite there yet
+
+```{r}
+leagues %>% mutate(r = row_number()) %>% 
+  rowwise() %>% 
+  mutate(fname = make_fname(country, league, season, part, prefix = "")) %>% 
+  mutate(mtime = file.mtime(str_c("fit/", fname))) %>% 
+  mutate(size = file.size(str_c("fit/", fname))) %>% 
+  filter(!is.na(mtime)) %>% 
+  filter(size > 100) %>% 
+  slice_sample(n = 2) %>% 
+  pull(fname) %>% 
+  map(\(x) league_preds(x))
 ```
