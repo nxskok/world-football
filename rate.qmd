@@ -13,28 +13,6 @@ source("rate_functions.R")
 source("predictions_functions.R")
 ```
 
-try it for one
-
-```{r}
-leagues %>% slice(90) %>% 
-  mutate(fname = make_fname(country, league, season, part, prefix = "")) %>% pull(fname) -> my_fname
-# my_fname <- "wal_premier-league_2023-2024.rds"
-# my_fname <- "nor_eliteserien_2023.rds"
-# my_fname <- "swe_allsvenskan_2023.rds"
-my_fit <- rate(my_fname)
-```
-
-```{r}
-typeof(my_fit$fit)
-```
-
-```{r}
-# my_fit$fit$summary()
-rating_table(my_fname) %>% View()
-```
-
-this seems to make sense
-
 ## do more than one
 
 find the ones that need doing and do them (or some of them)
@@ -45,9 +23,8 @@ update_rate(leagues)
 
 ## predictions for upcoming games based on most recent ratings
 
-not quite there yet
-
 ```{r}
+#| warning: false
 leagues %>% mutate(r = row_number()) %>% 
   rowwise() %>% 
   mutate(fname = make_fname(country, league, season, part, prefix = "")) %>% 
@@ -55,7 +32,10 @@ leagues %>% mutate(r = row_number()) %>%
   mutate(size = file.size(str_c("fit/", fname))) %>% 
   filter(!is.na(mtime)) %>% 
   filter(size > 100) %>% 
-  slice_sample(n = 2) %>% 
+  ungroup() %>% 
+  slice_sample(n = 100) %>% 
   pull(fname) %>% 
-  map(\(x) league_preds(x))
+  map(\(x) league_preds(x)) %>% bind_rows() %>% arrange(ko) -> predictions
+predictions
+write_rds(predictions, "predictions.rds")
 ```

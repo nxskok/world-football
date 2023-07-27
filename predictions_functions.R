@@ -6,16 +6,13 @@ make_ppd <- function(fname, t1, t2) {
     c(str_c("o[", teams_to_pred, "]"),
       str_c("d[", teams_to_pred, "]"),
       "h")
-  print(glue::glue("cols wanted: {cols_wanted}"))
   fit <- read_rds(str_c("fit/", fname))
   if (typeof(fit) == "logical") stop("no ratings yet")
   dw <- fit$draws(format = "df")
   nr <- nrow(dw)
   dw %>% select(all_of(cols_wanted)) %>%
     mutate(hm = exp(get(cols_wanted[1]) - get(cols_wanted[4]) + h),
-           aw = exp(get(cols_wanted[2]) - get(cols_wanted[3]))) -> d
-  return(d)
-  d %>%
+           aw = exp(get(cols_wanted[2]) - get(cols_wanted[3]))) %>%
     mutate(hh = rpois(nr, hm), aa = rpois(nr, aw)) %>%
     count(hh, aa) %>%
     mutate(p = n / nr) %>%
@@ -91,10 +88,15 @@ make_result_probs <- function(fname, t1, t2) {
 }
 
 league_preds <- function(fname) {
-  lu <- read_rds(str_c("lu/", fname))
-  read_rds(str_c("rds/", fname)) %>%
+  print(fname)
+  lu_name <- str_c("lu/", fname)
+  rds_name <- str_c("rds/", fname)
+  lu <- read_rds(lu_name)
+  read_rds(rds_name) %>%
     filter(is.na(score)) %>%
-    filter(ko < now() + days(3)) %>%
+    filter(ko < now() + days(3)) -> dd
+  if (nrow(dd) == 0) return(NULL)
+  dd %>%
     left_join(lu, by = c("t1" = "team")) %>%
     left_join(lu, by = c("t2" = "team")) %>%
     rowwise() %>%

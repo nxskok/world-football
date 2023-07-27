@@ -1,0 +1,48 @@
+---
+title: "simleague"
+format: html
+editor: visual
+---
+
+## packages
+
+```{r}
+library(tidyverse)
+library(rvest)
+```
+
+## get a league table
+
+```{r}
+my_url <- "https://www.worldfootball.net/all_matches/swe-allsvenskan-2023/"
+html <- read_html(my_url)
+html
+```
+
+```{r}
+html %>% html_children() %>% 
+  pluck(2) %>% # body
+  html_elements('div.navibox2') %>% 
+  html_children() %>% 
+  html_children() %>% 
+  pluck(2) %>% 
+  html_nodes('a') %>% 
+  pluck(1) %>% 
+  html_attr('href') -> sched_url
+sched_url
+```
+
+```{r}
+my_url <- str_c("https://www.worldfootball.net", sched_url)
+my_url
+table_html <- read_html(my_url)
+table_html %>% html_nodes('table.standard_tabelle') %>% 
+  pluck(2) %>% 
+  html_nodes('td') -> tds
+tds
+tds %>% html_text() -> texts
+texts
+tds %>% html_attr("bgcolor") -> colours
+tibble(text = texts, bgcol = colours) %>% 
+  mutate()
+```

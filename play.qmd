@@ -22,7 +22,7 @@ source("functions.R")
 
 
 ```{r}
-leagues %>% mutate(fname = make_fname(country, league, season, part))
+leagues %>% rowwise() %>% mutate(fname = make_fname(country, league, season, part))
 ```
 
 
@@ -67,6 +67,7 @@ ggg
 now I need to get the same games from the new download
 
 ```{r}
+predictions <- read_rds("predictions.rds")
 # ggg <- .Last.value # for row
 # ggg
 ggg %>% count(r) %>% pull(r) -> r
@@ -82,10 +83,12 @@ ggg %>% left_join(all_games, by = c("ko", "t1", "t2")) %>%
   )) %>% 
   filter(show == "yes") %>% 
   select(-tibbly) %>% 
-  select(country, league, ko:score.y)
+  select(country, league, ko:score.y) %>% 
+  arrange(ko) %>% 
+  left_join(predictions, by = c("t1", "t2")) %>% 
+  select(country, ko = ko.x, t1, t2, score.x, score.y, `2`, `1`, `0`)
 ```
 
-I could add predictions to these
 
 ratings
 
@@ -99,5 +102,4 @@ rate a league
 after that
 
 sim-league
-for predict-the-football
 
