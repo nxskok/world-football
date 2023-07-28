@@ -15,7 +15,7 @@ conflicts_prefer(tidyr::extract)
 source("functions.R")
 source("rate_functions.R")
 source("stats_functions.R")
-source("predictions_functions.R")
+  source("predictions_functions.R")
 ```
 
 Predict the football session (run once)
