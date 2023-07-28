@@ -36,6 +36,6 @@ leagues %>% mutate(r = row_number()) %>%
   slice_sample(n = 100) %>% 
   pull(fname) %>% 
   map(\(x) league_preds(x)) %>% bind_rows() %>% arrange(ko) -> predictions
-predictions
+predictions %>% View()
 write_rds(predictions, "predictions.rds")
 ```

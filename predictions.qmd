@@ -38,12 +38,13 @@ file name, choose; lookup table
 
 ```{r}
 fname <- "swe_allsvenskan_2023.rds"
-league_url <- "https://allsvenskan.predictthefootball.com"
+lu <- read_rds(str_c("lu/", fname))
+# league_url <- "https://allsvenskan.predictthefootball.com"
 # league_url <- "https://championship.predictthefootball.com" # England championship
 # league_url <- "https://superleague.predictthefootball.com" # Greece
-# league_url <- "https://scottish-premier.predictthefootball.com" # Scotland
+league_url <- "https://scottish-premier.predictthefootball.com" # Scotland
 # league_url <- "https://laliga.predictthefootball.com" # Spain
-lu <- read_rds(str_c("lu/", fname))
+
 ```
 
 ```{r}
@@ -51,7 +52,7 @@ get_form(league_url, sess) %>%
   filter(is.na(pred_1)) -> ptf_form
 ptf_form %>% 
   mutate(scores = str_sub(scores, end = 7)) %>% 
-  select(name_1, name_2, preds, results, scores)
+  select(name_1, name_2, preds, results, scores) %>% View()
 ```
 
 go down this far for first games of season (pick the most popular score)
