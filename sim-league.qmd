@@ -9,42 +9,23 @@ editor: visual
 ```{r}
 library(tidyverse)
 library(rvest)
+source("functions.R")
 source("predictions_functions.R")
 source("sim-league_functions.R")
 ```
 
-## get a league table and unplayed games
-
 ```{r}
-rdsname <- "swe_allsvenskan_2023.rds"
-ltt <- league_table_from_rdsname(rdsname)
-ltt
-games <- get_unplayed(rdsname)
+leagues %>% rowwise() %>% 
+  mutate(fname = make_fname(country, league, season, part, prefix = "")) %>% 
+  pull(fname) -> fnames
+fnames %>% sample(1)
 ```
 
-## get the lookup table and lookup the teams with ppd
 
 ```{r}
-with_ppd <- get_with_ppd(rdsname, games)
-with_ppd
+#| warning: false
+# rdsname <- "swe_allsvenskan_2023.rds"
+# rdsname <- "swe_superettan_2023.rds"
+fnames %>% walk(\(x) sample_from_rdsname(x))
+# sample_from_rdsname(rdsname)
 ```
-
-## sample from a ppd
-
-```{r}
-s1 <- sample_from_ppd(with_ppd, ltt)
-s1
-```
-
-```{r}
-s2 <- sample_from_ppd(with_ppd, ltt)
-s2
-```
-
-this does what I want, but I don't know how to generalize to many sims:
-
-```{r}
-Map(c, s1, s2) %>% map(table)
-```
-
-more thought needed (want counts for *all* the teams, not just the ones with counts greater than zero)

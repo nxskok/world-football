@@ -132,11 +132,45 @@ sample_from_ppd <- function(with_ppd, lt) {
   bind_rows(lt$table, sum1, sum2) %>%
     group_by(team) %>%
     summarize(across(g:gd, \(x) sum(x))) %>%
-    arrange(desc(pt), desc(gd)) %>% mutate(rank = row_number()) -> sim_result
-  # return(sim_result)
-  # sim_result
-  map(lt$ranks, \(x) teams_within_rank(sim_result, x)) -> top_teams
-  names(top_teams) = as.character(lt$ranks)
-  top_teams
+    arrange(desc(pt), desc(gd)) %>% mutate(rank = row_number())
+}
+
+sample_many_from_ppd <- function(with_ppd, lt, n_sim = 1000) {
+  tibble(sim_count = 1:n_sim) %>%
+    rowwise() %>%
+    mutate(sim = list(sample_from_ppd(with_ppd, lt))) %>%
+    pull(sim) %>% bind_rows() -> dd
+
+  dd %>%
+    group_by(team) %>%
+    summarize(mean_rank = mean(rank)) %>%
+    arrange(mean_rank) -> mean_ranks
+
+  dd %>%
+    rowwise() %>%
+    mutate(cutoff = list(lt$ranks)) %>%
+    unnest(cutoff) %>%
+    mutate(is_in = rank <= cutoff) %>%
+    group_by(team, cutoff) %>%
+    summarise(total = sum(is_in)) %>%
+    pivot_wider(names_from = cutoff, values_from = total) -> d3 # or keep it long for now
+
+  mean_ranks %>% left_join(lt$table) %>% left_join(d3)
+}
+
+make_sim_fname <- function(rdsname) {
+  now <- now()
+  fname <- str_replace(rdsname, "\\.rds$", str_c("_", now, ".rds"))
+  str_c("sim/", fname)
+}
+
+sample_from_rdsname <- function(rdsname, n_sim = 1000) {
+  ltt <- league_table_from_rdsname(rdsname) # has table in table, ranks to sim for in ranks
+  games <- get_unplayed(rdsname)
+  with_ppd <- get_with_ppd(rdsname, games)
+  sample_many_from_ppd(with_ppd, ltt, n_sim) -> sim
+  fname <- make_sim_fname(rdsname)
+  write_rds(sim, fname)
+  sim
 }
 
