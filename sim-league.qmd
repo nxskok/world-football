@@ -12,20 +12,21 @@ library(rvest)
 source("functions.R")
 source("predictions_functions.R")
 source("sim-league_functions.R")
-```
-
-```{r}
-leagues %>% rowwise() %>% 
-  mutate(fname = make_fname(country, league, season, part, prefix = "")) %>% 
-  pull(fname) -> fnames
-fnames %>% sample(1)
+source("report_functions.R")
 ```
 
 
 ```{r}
 #| warning: false
-# rdsname <- "swe_allsvenskan_2023.rds"
-# rdsname <- "swe_superettan_2023.rds"
-fnames %>% walk(\(x) sample_from_rdsname(x))
-# sample_from_rdsname(rdsname)
+#| message: false
+sim_as_needed(leagues)
 ```
+
+
+report: see report.qmd
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+---
+title: "Report"
+format: html
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+library(knitr)
+source("report_functions.R")
+cutoff_date <- ymd_hm("2023-07-31 12:00", tz = 'America/Toronto')
+```
+
+```{r}
+make_report <- function(rdsname, cutoff_date) {
+  tables <- tables_for_report(rdsname, cutoff_date)
+  if (length(tables) == 0) {
+    a <- knit_expand(text = c("# {{rdsname}}",
+                         "Nothing to say.\n"))
+  } else {
+    a <- knit_expand(text = c("# {{rdsname}}",
+                         "## Changes", "{{kable(tables[[1]])}}",
+                         "## Games", "{{kable(tables[[2]])}}",
+                         "## Odds now", "{{kable(tables[[3]])}}"))
+  }
+  cat(a, sep = "\n")
+}
+```
+
+```{r}
+#| output: asis
+list.files(path = "fit", pattern = "\\.rds", full.names = TRUE) %>% 
+  enframe(name = NULL, value = "fname") %>% 
+  mutate(mtime = file.mtime(fname)) %>%
+  filter(mtime > cutoff_date) %>% 
+  mutate(fname = str_remove(fname, "^fit/")) %>% 
+  pull(fname) -> fnames
+fnames
+walk(fnames, \(x) make_report(x, cutoff_date))
+```
+
+
+
+
+

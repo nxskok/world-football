@@ -11,33 +11,23 @@ make_url <- function(rdsname) {
 get_league_table_url <- function(rdsname) {
   # url like this aimed for: https://www.worldfootball.net/schedule/swe-allsvenskan-2023-spieltag/99/
   fname <- make_url(rdsname)
-  # so far like https://www.worldfootball.net/all_matches/swe-allsvenskan-2023/
-  # print(fname)
   fname <- str_replace(fname, "all_matches", "schedule")
-  # print(fname)
   fname <- str_replace(fname, "/$", "-spieltag/99/")
-  # print(fname)
+  if (str_detect(rdsname, "^ger_"))
+    fname <- str_replace(fname, "/ger-", "/")
+  if (str_detect(rdsname, "rus_1-division"))
+    fname <- str_replace(fname, "2023-2024", "2023-24")
+  print(fname)
   fname
-  # Sys.sleep(1)
-  # html <- read_html(my_url)
-  # html %>% html_children() %>%
-  #   pluck(2) %>% # body
-  #   html_elements('div.navibox2') %>%
-  #   html_children() %>%
-  #   html_children() %>%
-  #   pluck(2) %>%
-  #   html_nodes('a') %>%
-  #   pluck(1) %>%
-  #   html_attr('href') -> sched_url
-  # sched_url
 }
 
 get_league_table <- function(my_url) {
+  # print(my_url)
 #  my_url <- str_c("https://www.worldfootball.net", my_url)
   Sys.sleep(1)
   table_html <- read_html(my_url)
   table_html %>% html_nodes('table.standard_tabelle') %>%
-    pluck(1) %>% # there might be a third one if there are two divisions / conferences
+    pluck(1) %>% # there might be an extra one if there are two divisions / conferences
     html_nodes('td') -> tds
   tds
   tds %>% html_text() -> texts
@@ -51,9 +41,9 @@ get_league_table <- function(my_url) {
     filter(col %in% c(3, 4, 9, 10)) %>%
     pivot_wider(names_from = col, values_from = text) %>%
     rename(team = "3", played = "4", gd = "9", pts = "10") %>%
-    mutate(team = str_replace(team, "^\\n", "")) %>%
-    mutate(team = str_replace(team, "\\n.*$", "")) %>%
-    mutate(team = str_replace(team, "\\n$", "")) -> table
+    mutate(team = str_remove(team, "^\\n")) %>%
+    mutate(team = str_remove(team, "\\n.*$")) %>%
+    mutate(team = str_remove(team, "\\n$")) -> table
   table
   # return(table)
   enframe(colours, name = NULL) %>%
@@ -158,6 +148,24 @@ sample_many_from_ppd <- function(with_ppd, lt, n_sim = 1000) {
   mean_ranks %>% left_join(lt$table) %>% left_join(d3)
 }
 
+make_no_sim <- function(lt) {
+  lt$table %>%
+    mutate(rank = row_number()) %>%
+    group_by(team) %>%
+    summarize(mean_rank = mean(rank)) %>%
+    arrange(mean_rank) -> mean_ranks
+  lt$table %>%
+    mutate(rank = row_number()) %>%
+    rowwise() %>%
+    mutate(cutoff = list(lt$ranks)) %>%
+    unnest(cutoff) %>%
+    mutate(is_in = (rank <= cutoff)) %>%
+    group_by(team, cutoff) %>%
+    summarize(total = 1000 * sum(is_in)) %>%
+    pivot_wider(names_from = cutoff, values_from = total) -> d3
+  mean_ranks %>% left_join(lt$table) %>% left_join(d3)
+}
+
 make_sim_fname <- function(rdsname) {
   now <- now()
   fname <- str_replace(rdsname, "\\.rds$", str_c("_", now, ".rds"))
@@ -165,12 +173,48 @@ make_sim_fname <- function(rdsname) {
 }
 
 sample_from_rdsname <- function(rdsname, n_sim = 1000) {
+  print(rdsname)
   ltt <- league_table_from_rdsname(rdsname) # has table in table, ranks to sim for in ranks
   games <- get_unplayed(rdsname)
-  with_ppd <- get_with_ppd(rdsname, games)
-  sample_many_from_ppd(with_ppd, ltt, n_sim) -> sim
+  if (nrow(games) > 0) {
+    with_ppd <- get_with_ppd(rdsname, games)
+    sample_many_from_ppd(with_ppd, ltt, n_sim) -> sim
+  } else {
+    sim <- make_no_sim(ltt)
+  }
   fname <- make_sim_fname(rdsname)
   write_rds(sim, fname)
   sim
 }
 
+last_sim <- function(rdsname) {
+  fname <- str_replace(rdsname, "\\.rds$", "")
+  v <- list.files(path = "sim", pattern = fname, full.names = TRUE)
+  if (length(v) == 0) return(NA)
+  v %>% file.mtime() %>% max()
+}
+
+sim_as_needed <- function(leagues) {
+  print(now())
+  leagues %>% rowwise() %>%
+    mutate(fname = make_fname(country, league, season, part, prefix = "")) %>%
+    select(fname) %>%
+    mutate(last_simul = last_sim(fname)) %>%
+    mutate(last_fit = file.mtime(str_c("fit/", fname))) %>%
+    mutate(fit_size = file.size(str_c("fit/", fname))) %>%
+    mutate(needs_doing = case_when(
+      is.na(last_fit)   ~ "no",
+      fit_size < 100    ~ "no",
+      is.na(last_simul) ~ "yes",
+      last_fit > last_simul ~ "yes",
+      .default = "no"
+    )) %>%
+    filter(needs_doing == "yes") %>%
+    ungroup() %>%
+    slice_sample(n = 20) %>%
+    pull(fname) -> fnames
+  print(fnames)
+  print("")
+  fnames %>% walk(\(x) sample_from_rdsname(x))
+  now()
+}

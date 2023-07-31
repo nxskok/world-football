@@ -15,7 +15,7 @@ conflicts_prefer(tidyr::extract)
 source("functions.R")
 source("rate_functions.R")
 source("stats_functions.R")
-  source("predictions_functions.R")
+source("predictions_functions.R")
 ```
 
 Predict the football session (run once)
@@ -39,10 +39,10 @@ file name, choose; lookup table
 ```{r}
 fname <- "swe_allsvenskan_2023.rds"
 lu <- read_rds(str_c("lu/", fname))
-# league_url <- "https://allsvenskan.predictthefootball.com"
+league_url <- "https://allsvenskan.predictthefootball.com"
 # league_url <- "https://championship.predictthefootball.com" # England championship
 # league_url <- "https://superleague.predictthefootball.com" # Greece
-league_url <- "https://scottish-premier.predictthefootball.com" # Scotland
+# league_url <- "https://scottish-premier.predictthefootball.com" # Scotland
 # league_url <- "https://laliga.predictthefootball.com" # Spain
 
 ```
@@ -52,7 +52,7 @@ get_form(league_url, sess) %>%
   filter(is.na(pred_1)) -> ptf_form
 ptf_form %>% 
   mutate(scores = str_sub(scores, end = 7)) %>% 
-  select(name_1, name_2, preds, results, scores) %>% View()
+  select(name_1, name_2, preds, results, scores) 
 ```
 
 go down this far for first games of season (pick the most popular score)
@@ -73,8 +73,6 @@ ptf_form %>%
 
 similar ideas:
 
--   table of predictions for upcoming matches (using the ppd idea), can go on the end of ratings
-
 -   predictions for italy
 
--   sim-league
+-   matching teams for euro and other things I do via oddschecker

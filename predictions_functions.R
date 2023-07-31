@@ -93,8 +93,8 @@ league_preds <- function(fname) {
   rds_name <- str_c("rds/", fname)
   lu <- read_rds(lu_name)
   read_rds(rds_name) %>%
-    filter(is.na(score)) %>%
-    filter(ko < now() + days(3)) -> dd
+    # filter(is.na(score)) %>%
+    filter(between(ko, now() - hours(3),  now() + days(3))) -> dd
   if (nrow(dd) == 0) return(NULL)
   dd %>%
     left_join(lu, by = c("t1" = "team")) %>%

@@ -4,11 +4,7 @@ This is a sandbox to make things go.
 
 Typical url is
 
-```{r}
-#| eval: false
-my_url <- "https://www.worldfootball.net/all_matches/eng-premier-league-1996-1997/"
-```
-
+`
 packages
 
 ```{r}
@@ -61,10 +57,9 @@ games that may have finished (or started) since last download
 #| warning: false
 now()
 ggg <- update_leagues(leagues)
-ggg
 ```
 
-now I need to get the same games from the new download
+now I need to get the same games from the new download, or look ahead
 
 ```{r}
 predictions <- read_rds("predictions.rds")
@@ -89,6 +84,16 @@ ggg %>% left_join(all_games, by = c("ko", "t1", "t2")) %>%
   select(country, ko = ko.x, t1, t2, score.x, score.y, `2`, `1`, `0`) %>% View()
 ```
 
+
+or, just grab the predictions
+
+```{r}
+predictions %>% arrange(ko) %>% View()
+```
+
+
+
+put russia 1 back in leagues file and make exception for league table
 
 ratings
 

@@ -8,6 +8,7 @@ format: html
 ```{r}
 library(tidyverse)
 library(cmdstanr)
+options(mc.cores = 4)
 source("functions.R")
 source("rate_functions.R")
 source("predictions_functions.R")
@@ -33,7 +34,7 @@ leagues %>% mutate(r = row_number()) %>%
   filter(!is.na(mtime)) %>% 
   filter(size > 100) %>% 
   ungroup() %>% 
-  slice_sample(n = 100) %>% 
+  slice_sample(n = 999) %>%
   pull(fname) %>% 
   map(\(x) league_preds(x)) %>% bind_rows() %>% arrange(ko) -> predictions
 predictions %>% View()
