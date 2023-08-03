@@ -57,6 +57,9 @@ ptf_form %>%
 
 go down this far for first games of season (pick the most popular score)
 
+or use oddschecker: get screenshot, use google lens to read text, edit
+
+
 below gets predictions via max ept
 
 ```{r}

@@ -93,7 +93,6 @@ predictions %>% arrange(ko) %>% View()
 
 
 
-put russia 1 back in leagues file and make exception for league table
 
 ratings
 
