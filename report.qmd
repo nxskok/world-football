@@ -8,7 +8,7 @@ editor: visual
 library(tidyverse)
 library(knitr)
 source("report_functions.R")
-cutoff_date <- ymd_hm("2023-07-31 12:00", tz = 'America/Toronto')
+cutoff_date <- ymd_hm("2023-08-03 12:00", tz = 'America/Toronto')
 ```
 
 ```{r}
@@ -19,6 +19,7 @@ make_report <- function(rdsname, cutoff_date) {
                          "Nothing to say.\n"))
   } else {
     a <- knit_expand(text = c("# {{rdsname}}",
+                         # "## M-times", {{as.POSIXct(tables[[4]])}},     
                          "## Changes", "{{kable(tables[[1]])}}",
                          "## Games", "{{kable(tables[[2]])}}",
                          "## Odds now", "{{kable(tables[[3]])}}"))
@@ -38,8 +39,3 @@ list.files(path = "fit", pattern = "\\.rds", full.names = TRUE) %>%
 fnames
 walk(fnames, \(x) make_report(x, cutoff_date))
 ```
-
-
-
-
-

@@ -17,10 +17,6 @@ source("functions.R")
 
 
 
-```{r}
-leagues %>% rowwise() %>% mutate(fname = make_fname(country, league, season, part))
-```
-
 
 download all leagues
 
@@ -42,11 +38,6 @@ l_to_get
 download_these(l_to_get)
 ```
 
-
-```{r}
-leagues
-display_league(leagues, 12) %>% View()
-```
 
 
 
@@ -81,7 +72,7 @@ ggg %>% left_join(all_games, by = c("ko", "t1", "t2")) %>%
   select(country, league, ko:score.y) %>% 
   arrange(ko) %>% 
   left_join(predictions, by = c("t1", "t2")) %>% 
-  select(country, ko = ko.x, t1, t2, score.x, score.y, `2`, `1`, `0`) %>% View()
+  select(country, ko = ko.x, t1, t2, score.x, score.y, `2`, `1`, `0`) %>% View(str_c("at: ", now()))
 ```
 
 

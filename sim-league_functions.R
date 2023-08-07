@@ -174,6 +174,7 @@ make_sim_fname <- function(rdsname) {
 
 sample_from_rdsname <- function(rdsname, n_sim = 1000) {
   print(rdsname)
+  print(now())
   ltt <- league_table_from_rdsname(rdsname) # has table in table, ranks to sim for in ranks
   games <- get_unplayed(rdsname)
   if (nrow(games) > 0) {
@@ -211,7 +212,7 @@ sim_as_needed <- function(leagues) {
     )) %>%
     filter(needs_doing == "yes") %>%
     ungroup() %>%
-    slice_sample(n = 20) %>%
+    # slice_sample(n = 20) %>%
     pull(fname) -> fnames
   print(fnames)
   print("")
