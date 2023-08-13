@@ -28,7 +28,7 @@ best_match <- function(x, lookup) {
   lookup$team[perm]
 }
 
-
+#
 result_of <- function(tscore) {
   # get result of text score, vectorized
   enframe(tscore, name = NULL, value = "score") %>%

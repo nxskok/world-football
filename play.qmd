@@ -2,9 +2,6 @@
 
 This is a sandbox to make things go.
 
-Typical url is
-
-`
 packages
 
 ```{r}
@@ -14,9 +11,6 @@ library(conflicted)
 conflicts_prefer(dplyr::filter)
 source("functions.R")
 ```
-
-
-
 
 download all leagues
 
@@ -38,11 +32,7 @@ l_to_get
 download_these(l_to_get)
 ```
 
-
-
-
 games that may have finished (or started) since last download
-
 
 ```{r}
 #| warning: false
@@ -75,20 +65,15 @@ ggg %>% left_join(all_games, by = c("ko", "t1", "t2")) %>%
   select(country, ko = ko.x, t1, t2, score.x, score.y, `2`, `1`, `0`) %>% View(str_c("at: ", now()))
 ```
 
-
 or, just grab the predictions
 
 ```{r}
 predictions %>% arrange(ko) %>% View()
 ```
 
-
-
-
 ratings
 
-method 1: update ratings each time each league is updated (extra computation)
-method 2: do it like 25, have a target date for the next rate and rerate the ones that have reached the target date
+method 1: update ratings each time each league is updated (extra computation) method 2: do it like 25, have a target date for the next rate and rerate the ones that have reached the target date
 
 next task
 
@@ -97,4 +82,3 @@ rate a league
 after that
 
 sim-league
-

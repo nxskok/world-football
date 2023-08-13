@@ -18,8 +18,19 @@ source("predictions_functions.R")
 
 find the ones that need doing and do them (or some of them)
 
+## next rate thing
+
 ```{r}
-update_rate(leagues) 
+all_next_rate_date(leagues) -> leagues0
+leagues0 %>% select(fname, next_rate, dow)
+leagues0  %>% 
+  filter(next_rate < now()) -> leagues1
+```
+
+pass the relevant ones from there into here
+
+```{r}
+update_rate(leagues1) 
 ```
 
 ## predictions for upcoming games based on most recent ratings
@@ -40,3 +51,6 @@ leagues %>% mutate(r = row_number()) %>%
 predictions %>% View()
 write_rds(predictions, "predictions.rds")
 ```
+
+
+

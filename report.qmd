@@ -8,7 +8,7 @@ editor: visual
 library(tidyverse)
 library(knitr)
 source("report_functions.R")
-cutoff_date <- ymd_hm("2023-08-03 12:00", tz = 'America/Toronto')
+cutoff_date <- ymd_hm("2023-08-13 12:00", tz = 'America/Toronto') # remember!
 ```
 
 ```{r}
@@ -36,6 +36,6 @@ list.files(path = "fit", pattern = "\\.rds", full.names = TRUE) %>%
   filter(mtime > cutoff_date) %>% 
   mutate(fname = str_remove(fname, "^fit/")) %>% 
   pull(fname) -> fnames
-fnames
+# fnames
 walk(fnames, \(x) make_report(x, cutoff_date))
 ```

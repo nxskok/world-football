@@ -19,9 +19,9 @@ model {
   real nu1;
   real nu2;
   // priors
-  o ~ normal(0, 3);
-  d ~ normal(0, 3);
-  h ~ normal(0, 3);
+  o ~ normal(0, 1);
+  d ~ normal(0, 1);
+  h ~ normal(0, 1); // a priori more equal
   // likelihood
   for (i in 1:ng)
   {

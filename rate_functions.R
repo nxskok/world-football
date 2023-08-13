@@ -86,3 +86,26 @@ update_rate <- function(leagues) {
     walk(\(x) rate(x))
 }
 
+next_rate_date <- function(rdsname) {
+  fit_name <- str_c("fit/", rdsname)
+  no_rate_date <- ymd_hms("2100-01-01 05:00:00")
+  if (!file.exists(fit_name)) return(no_rate_date)
+  rat_mtime <- file.mtime(fit_name)
+  games <- read_rds(str_c("rds/", rdsname))
+  games %>% filter(ko > rat_mtime) -> d
+  if (nrow(d) == 0) return(no_rate_date)
+  d %>%
+    pivot_longer(t1:t2) %>%
+    filter(!duplicated(value)) %>%
+    summarize(rate_date = max(ko) + hours(2)) %>%
+    pull(rate_date)
+}
+
+all_next_rate_date <- function(leagues) {
+  leagues %>%
+    rowwise() %>%
+    mutate(fname = make_fname(country, league, season, part, prefix = "")) %>%
+    # select(fname) %>%
+    mutate(next_rate = next_rate_date(fname), dow = weekdays(next_rate)) %>%
+    arrange(next_rate)
+}
