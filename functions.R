@@ -10,7 +10,7 @@ make_fname <- function(x, y, z, w, prefix = "rds") {
 
 
 get_schedule <- function(country_name, league_name, season, part) {
-  Sys.sleep(1)
+  Sys.sleep(1 + runif(1))
   my_url <- str_c("https://www.worldfootball.net/all_matches/", country_name, "-", league_name, "-", season)
   my_url <- ifelse(is.na(part),
                    str_c(my_url, "/"),
