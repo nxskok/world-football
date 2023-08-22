@@ -22,15 +22,15 @@ find the ones that need doing and do them (or some of them)
 
 ```{r}
 all_next_rate_date(leagues) -> leagues0
-leagues0 %>% select(fname, next_rate, dow)
+leagues0 %>% select(fname, next_rate, dow) 
 leagues0  %>% 
   filter(next_rate < now()) -> leagues1
 ```
 
-pass the relevant ones from there into here
+pass the relevant ones from there into here (slice leagues to do just a few / specific ones; DO NOT do them all!)
 
 ```{r}
-update_rate(leagues1) 
+leagues1 %>% update_rate() 
 ```
 
 ## predictions for upcoming games based on most recent ratings
@@ -48,9 +48,17 @@ leagues %>% mutate(r = row_number()) %>%
   slice_sample(n = 999) %>%
   pull(fname) %>% 
   map(\(x) league_preds(x)) %>% bind_rows() %>% arrange(ko) -> predictions
-predictions %>% View()
 write_rds(predictions, "predictions.rds")
 ```
 
+display some of these predictions
+
+```{r}
+now <- now()
+predictions %>% 
+  filter(between(ko, now - hours(3), now + hours(4))) %>% 
+  arrange(fname) %>% 
+  View()
+```
 
 

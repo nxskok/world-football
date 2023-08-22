@@ -36,7 +36,7 @@ download just these ones
 
 ```{r}
 #| warning: false
-leagues %>% slice(1, 16, 47) %>% download_these()
+leagues %>% slice(28, 29) %>% download_these()
 ```
 
 ## games that may have finished (or started) since last download
@@ -69,7 +69,7 @@ ggg %>% left_join(all_games, by = c("ko", "t1", "t2")) %>%
   select(country, league, ko:score.y) %>% 
   arrange(ko) %>% 
   left_join(predictions, by = c("t1", "t2")) %>% 
-  select(country, ko = ko.x, t1, t2, score.x, score.y, `2`, `1`, `0`) %>% View(str_c("at: ", now()))
+  select(country, league, ko = ko.x, t1, t2, score.x, score.y, `2`, `1`, `0`) %>% View(str_c("at: ", now()))
 ```
 
 or, just grab the predictions

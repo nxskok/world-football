@@ -37,9 +37,13 @@ session_submit(sess, filled_form)
 file name, choose; lookup table
 
 ```{r}
+# fname <- "eng_championship_2023-2024.rds"
+# league_url <- "https://championship.predictthefootball.com"
 fname <- "swe_allsvenskan_2023.rds"
-lu <- read_rds(str_c("lu/", fname))
 league_url <- "https://allsvenskan.predictthefootball.com"
+
+
+lu <- read_rds(str_c("lu/", fname))
 # league_url <- "https://championship.predictthefootball.com" # England championship
 # league_url <- "https://superleague.predictthefootball.com" # Greece
 # league_url <- "https://scottish-premier.predictthefootball.com" # Scotland
@@ -71,7 +75,7 @@ ptf_form %>%
   rowwise() %>% 
   mutate(ppd = list(make_ppd(fname, id.x, id.y))) %>% 
   mutate(opt_pred = max_ept(ppd, results, scores)) %>% 
-  select(name_1, name_2, opt_pred)
+  select(name_1, name_2, opt_pred) %>% View()
 ```
 
 similar ideas:
