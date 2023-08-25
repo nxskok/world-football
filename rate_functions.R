@@ -95,10 +95,15 @@ next_rate_date <- function(rdsname) {
   games %>% filter(ko > rat_mtime) -> d
   if (nrow(d) == 0) return(no_rate_date)
   d %>%
+    arrange(ko) %>%
     pivot_longer(t1:t2) %>%
-    filter(!duplicated(value)) %>%
-    summarize(rate_date = max(ko) + hours(2)) %>%
-    pull(rate_date)
+    mutate(dup = duplicated(value)) -> dd
+  dd %>% filter(dup) %>% summarize(min_ko = min(ko)) %>%
+    pull(min_ko) -> first_dup
+  if (is.na(first_dup)) return(max(d$ko) + hours(2))
+  dd %>% filter(ko < first_dup) %>%
+    summarize(max_ko = max(ko) + hours(2)) %>%
+    pull(max_ko)
 }
 
 all_next_rate_date <- function(leagues) {

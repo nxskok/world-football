@@ -27,7 +27,7 @@ leagues0  %>%
   filter(next_rate < now()) -> leagues1
 ```
 
-pass the relevant ones from there into here (slice leagues to do just a few / specific ones; DO NOT do them all!)
+pass the relevant ones from there into here (slice leagues to do just a few / specific ones; DO NOT do them all! Though this might be all right now I fixed the next rate date.)
 
 ```{r}
 leagues1 %>% update_rate() 
@@ -55,8 +55,8 @@ display some of these predictions
 
 ```{r}
 now <- now()
-predictions %>% 
-  filter(between(ko, now - hours(3), now + hours(4))) %>% 
+read_rds("predictions.rds") %>% 
+  filter(between(ko, now - hours(7), now + hours(4))) %>% 
   arrange(fname) %>% 
   View()
 ```
