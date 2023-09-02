@@ -20,6 +20,9 @@ find the ones that need doing and do them (or some of them)
 
 ## next rate thing
 
+I don't know about italy b.
+Figure out what happens the first time a rating is needed.
+
 ```{r}
 all_next_rate_date(leagues) -> leagues0
 leagues0 %>% select(fname, next_rate, dow) 
@@ -56,9 +59,7 @@ display some of these predictions
 ```{r}
 now <- now()
 read_rds("predictions.rds") %>% 
-  filter(between(ko, now - hours(7), now + hours(4))) %>% 
+  filter(between(ko, now - hours(3), now + hours(2))) %>% 
   arrange(fname) %>% 
   View()
 ```
-
-

@@ -36,7 +36,7 @@ download just these ones
 
 ```{r}
 #| warning: false
-leagues %>% slice(8, 60) %>% download_these()
+leagues %>% slice(47, 55, 83, 91:93) %>% download_these()
 ```
 
 ## games that may have finished (or started) since last download

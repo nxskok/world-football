@@ -39,8 +39,16 @@ file name, choose; lookup table
 ```{r}
 # fname <- "eng_championship_2023-2024.rds"
 # league_url <- "https://championship.predictthefootball.com"
-fname <- "swe_allsvenskan_2023.rds"
-league_url <- "https://allsvenskan.predictthefootball.com"
+# fname <- "eng_premier-league_2023-2024.rds"
+# league_url <- "https://premierleague.predictthefootball.com"
+fname <- "fra_ligue-1_2023-2024.rds"
+league_url <- "https://ligue1.predictthefootball.com"
+# fname <- "sco_premiership_2023-2024.rds"
+# league_url <- "https://scottish-premier.predictthefootball.com"
+# fname <- "esp_primera-division_2023-2024.rds"
+# league_url <- "https://laliga.predictthefootball.com"
+# fname <- "swe_allsvenskan_2023.rds"
+# league_url <- "https://allsvenskan.predictthefootball.com"
 
 
 lu <- read_rds(str_c("lu/", fname))
@@ -67,6 +75,8 @@ or use oddschecker with brave: copy paste dething etc.
 below gets predictions via max ept
 
 ```{r}
+#| warning: true
+#| error: true
 ptf_form %>% 
   mutate(t1 = best_match(name_1, lu),
          t2 = best_match(name_2, lu)) %>% 
