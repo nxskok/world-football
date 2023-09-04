@@ -44,7 +44,8 @@ get_league_table <- function(my_url) {
     mutate(team = str_remove(team, "^\\n")) %>%
     mutate(team = str_remove(team, "\\n.*$")) %>%
     mutate(team = str_remove(team, "\\n$")) -> table
-  table
+  table %>% mutate(r = row_number()) %>%
+    select(r, everything()) -> table
   # return(table)
   enframe(colours, name = NULL) %>%
     mutate(row = gl(nt, 10)) %>%
@@ -60,9 +61,9 @@ get_league_table <- function(my_url) {
 league_table_from_rdsname <- function(rdsname) {
   lt_url <- get_league_table_url(rdsname)
   lt <- get_league_table(lt_url)
-  lt$ranks
+  if (1 %in% lt$ranks) {} else {lt$ranks = c(1, lt$ranks)}
   lt$table %>%
-    select(team, g = played, pt = pts, gd) %>%
+    select(r, team, g = played, pt = pts, gd) %>%
     mutate(across(g:gd, \(x) as.numeric(x))) -> ltt
   list(table = ltt, ranks = lt$ranks)
 }

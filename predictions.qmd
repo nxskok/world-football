@@ -37,19 +37,28 @@ session_submit(sess, filled_form)
 file name, choose; lookup table
 
 ```{r}
-# fname <- "eng_championship_2023-2024.rds"
-# league_url <- "https://championship.predictthefootball.com"
-# fname <- "eng_premier-league_2023-2024.rds"
-# league_url <- "https://premierleague.predictthefootball.com"
-fname <- "fra_ligue-1_2023-2024.rds"
-league_url <- "https://ligue1.predictthefootball.com"
-# fname <- "sco_premiership_2023-2024.rds"
-# league_url <- "https://scottish-premier.predictthefootball.com"
-# fname <- "esp_primera-division_2023-2024.rds"
-# league_url <- "https://laliga.predictthefootball.com"
-# fname <- "swe_allsvenskan_2023.rds"
-# league_url <- "https://allsvenskan.predictthefootball.com"
+leagues_txt <- "
+id, lg, rdsname, ptf
+1, eng-ch, eng_championship_2023-2024.rds, https://championship.predictthefootball.com
+2, eng-pr, eng_premier-league_2023-2024.rds, https://premierleague.predictthefootball.com
+3, fra, fra_ligue-1_2023-2024.rds, https://ligue1.predictthefootball.com
+4, ger, ger_bundesliga_2023-2024.rds, https://bundesliga.predictthefootball.com
+5, gre, gre_super-league_2023-2024.rds, https://superleague.predictthefootball.com
+6, ita, ita_serie-a_2023-2024.rds, https://seriea.predictthefootball.com
+7, sco, sco_premiership_2023-2024.rds, https://scottish-premier.predictthefootball.com
+8, esp, esp_primera-division_2023-2024.rds, https://laliga.predictthefootball.com
+9, swe, swe_allsvenskan_2023.rds, https://allsvenskan.predictthefootball.com
+"
 
+league_df <- read_csv(leagues_txt)
+league_df
+
+row <- 3
+fname <- league_df$rdsname[row]
+league_url <- league_df$ptf[row]
+
+fname
+league_url
 
 lu <- read_rds(str_c("lu/", fname))
 # league_url <- "https://championship.predictthefootball.com" # England championship
@@ -93,3 +102,22 @@ similar ideas:
 -   predictions for italy
 
 -   matching teams for euro and other things I do via oddschecker
+
+```{r}
+ptf_form %>% 
+  mutate(t1 = best_match(name_1, lu),
+         t2 = best_match(name_2, lu)) %>%
+  select(name_1, name_2, t1, t2) %>% 
+  left_join(lu, join_by("t1" == "team")) %>% 
+  left_join(lu, join_by("t2" == "team")) %>% 
+  rowwise() %>% 
+  mutate(ppd = list(make_ppd(fname, id.x, id.y))) %>%
+  unnest(ppd) %>% 
+  select(name_1, name_2, score, p) %>% 
+  separate_wider_delim(score, delim = "-", names = c("s1", "s2")) %>% 
+  mutate(across(starts_with("s"), \(x) as.numeric(x))) %>% 
+  group_by(name_1, name_2) %>% 
+  summarize(s1_mean = sum(s1*p), s2_mean = sum(s2*p))
+
+```
+

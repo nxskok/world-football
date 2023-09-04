@@ -86,11 +86,18 @@ update_rate <- function(leagues) {
     walk(\(x) rate(x))
 }
 
+
+
 next_rate_date <- function(rdsname) {
   fit_name <- str_c("fit/", rdsname)
+  game_name <- str_c("rds/", rdsname)
   no_rate_date <- ymd_hms("2100-01-01 05:00:00")
-  if (!file.exists(fit_name)) return(no_rate_date)
-  rat_mtime <- file.mtime(fit_name)
+  if (!file.exists(fit_name)) {
+    if (!(file.exists(game_name))) return(no_rate_date)
+    rat_mtime <- ymd_hms("1900-01-01 05:00:00")
+  } else {
+    rat_mtime <- file.mtime(fit_name)
+  }
   games <- read_rds(str_c("rds/", rdsname))
   games %>% filter(ko > rat_mtime) -> d
   if (nrow(d) == 0) return(no_rate_date)

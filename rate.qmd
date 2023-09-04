@@ -20,8 +20,8 @@ find the ones that need doing and do them (or some of them)
 
 ## next rate thing
 
-I don't know about italy b.
-Figure out what happens the first time a rating is needed.
+I have added first place and team ranks to the display.
+Catch up on it during next week or two (as in, does it seem to be working?)
 
 ```{r}
 all_next_rate_date(leagues) -> leagues0
