@@ -27,9 +27,6 @@ report: see report.qmd
 
 
 
-```{r}
-league_table_from_rdsname("eng_league-one_2023-2024.rds")
-```
 
 
 
