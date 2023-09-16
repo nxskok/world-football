@@ -108,7 +108,9 @@ next_rate_date <- function(rdsname) {
   dd %>% filter(dup) %>% summarize(min_ko = min(ko)) %>%
     pull(min_ko) -> first_dup
   if (is.na(first_dup)) return(max(d$ko) + hours(2))
-  dd %>% filter(ko < first_dup) %>%
+  dd %>% filter(ko < first_dup) -> ddd
+  if (nrow(ddd) == 0) return(first_dup + hours(2))
+  ddd %>%
     summarize(max_ko = max(ko) + hours(2)) %>%
     pull(max_ko)
 }
