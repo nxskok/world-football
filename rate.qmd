@@ -30,6 +30,14 @@ leagues0  %>%
   filter(next_rate < now()) -> leagues1
 ```
 
+jot: ones I want to do
+
+```{r}
+# leagues0 %>%
+#   filter(str_detect(fname, "isl")) -> leagues1
+# leagues1
+```
+
 pass the relevant ones from there into here (slice leagues to do just a few / specific ones; DO NOT do them all! Though this might be all right now I fixed the next rate date.)
 
 ```{r}

@@ -15,19 +15,10 @@ source("sim-league_functions.R")
 source("report_functions.R")
 ```
 
-
 ```{r}
 #| warning: false
 #| message: false
 sim_as_needed(leagues)
 ```
 
-
 report: see report.qmd
-
-
-
-
-
-
-

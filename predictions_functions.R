@@ -73,6 +73,11 @@ max_ept <- function(ppd, results, scores) {
 # max_ept(ppd, my_res, my_scores)
 
 make_result_probs <- function(fname, t1, t2) {
+  if (is.na(t1) || is.na(t2)) {
+    nas <-rep(NA, 3L)
+    names(nas) <- 0:2
+    return(nas)
+  }
   make_ppd(fname, t1, t2) %>%
     separate(score, into = c("s1", "s2"), convert = TRUE) %>%
     mutate(result = case_when(
