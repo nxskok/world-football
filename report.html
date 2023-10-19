@@ -136,10 +136,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fname =</span> <span class="fu">str_remove</span>(fname, <span class="st">"^fit/"</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(fname) <span class="ot">-&gt;</span> fnames</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>fnames</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>[1] “ger_regionalliga-bayern_2023-2024.rds”</p>
+<p>[1] “sui_promotion-league_2023-2024.rds” “wal_premier-league_2023-2024.rds”</p>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">walk</span>(fnames, \(x) <span class="fu">make_report</span>(x, cutoff_date))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="ger_regionalliga-bayern_2023-2024.rds" class="level1">
-<h1>ger_regionalliga-bayern_2023-2024.rds</h1>
+<section id="sui_promotion-league_2023-2024.rds" class="level1">
+<h1>sui_promotion-league_2023-2024.rds</h1>
 <section id="changes" class="level2">
 <h2 class="anchored" data-anchor-id="changes">Changes</h2>
 <table class="table">
@@ -147,118 +147,99 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="header">
 <th style="text-align: left;">team</th>
 <th style="text-align: right;">x1</th>
-<th style="text-align: right;">x14</th>
 <th style="text-align: right;">x16</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Würzburger Kickers</td>
-<td style="text-align: right;">-178</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">DJK Vilzing</td>
-<td style="text-align: right;">157</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Türkgücü München</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: left;">Etoile Carouge FC</td>
+<td style="text-align: right;">49</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">TSV Aubstadt</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Bayern München II</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">1. FC Schweinfurt 05</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: left;">FC Paradiso</td>
+<td style="text-align: right;">-42</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">1. FC Nürnberg II</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: left;">SC Brühl</td>
 <td style="text-align: right;">-4</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">FV Illertissen</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: left;">FC Zürich II</td>
+<td style="text-align: right;">-21</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FC Biel/Bienne</td>
+<td style="text-align: right;">9</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">FC Augsburg II</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">-3</td>
-<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Viktoria Aschaffenburg</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: left;">SC Cham</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">SpVgg Bayreuth</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">33</td>
-<td style="text-align: right;">3</td>
+<td style="text-align: left;">FC Bavois</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">9</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">SpVgg Greuther Fürth II</td>
+<td style="text-align: left;">FC Breitenrain Bern</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">-34</td>
-<td style="text-align: right;">-6</td>
+<td style="text-align: right;">-2</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Wacker Burghausen</td>
+<td style="text-align: left;">FC Luzern II</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">107</td>
-<td style="text-align: right;">43</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">SpVgg Ansbach</td>
+<td style="text-align: left;">SR Delémont</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">-143</td>
-<td style="text-align: right;">-43</td>
+<td style="text-align: right;">-94</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">FC Memmingen</td>
+<td style="text-align: left;">FC Rapperswil-Jona</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">-88</td>
-<td style="text-align: right;">-85</td>
+<td style="text-align: right;">6</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">SV Schalding-Heining</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">158</td>
-<td style="text-align: right;">114</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Eintracht Bamberg</td>
+<td style="text-align: left;">BSC Young Boys II</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">-10</td>
-<td style="text-align: right;">18</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FC Bulle</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-16</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">TSV Buchbach</td>
+<td style="text-align: left;">FC St.&nbsp;Gallen II</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">-20</td>
-<td style="text-align: right;">-44</td>
+<td style="text-align: right;">-110</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SC Kriens</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">129</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FC Lugano II</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-177</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Servette FC U21</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-175</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FC Basel II</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">440</td>
 </tr>
 </tbody>
 </table>
@@ -266,12 +247,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="games" class="level2">
 <h2 class="anchored" data-anchor-id="games">Games</h2>
 <table class="table">
-<colgroup>
-<col style="width: 28%">
-<col style="width: 32%">
-<col style="width: 30%">
-<col style="width: 8%">
-</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">ko</th>
@@ -282,52 +257,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">2023-10-17 09:30:00</td>
-<td style="text-align: left;">1. FC Nürnberg II</td>
-<td style="text-align: left;">SpVgg Bayreuth</td>
-<td style="text-align: left;">2 - 2</td>
+<td style="text-align: left;">2023-10-18 12:00:00</td>
+<td style="text-align: left;">FC Paradiso</td>
+<td style="text-align: left;">FC Rapperswil-Jona</td>
+<td style="text-align: left;">1 - 2</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">2023-10-17 12:30:00</td>
-<td style="text-align: left;">Würzburger Kickers</td>
-<td style="text-align: left;">SV Schalding-Heining</td>
-<td style="text-align: left;">2 - 2</td>
+<td style="text-align: left;">2023-10-18 13:30:00</td>
+<td style="text-align: left;">FC Bavois</td>
+<td style="text-align: left;">FC Zürich II</td>
+<td style="text-align: left;">4 - 1</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">2023-10-17 13:00:00</td>
-<td style="text-align: left;">1. FC Schweinfurt 05</td>
-<td style="text-align: left;">SpVgg Ansbach</td>
-<td style="text-align: left;">2 - 0</td>
+<td style="text-align: left;">2023-10-18 13:30:00</td>
+<td style="text-align: left;">SC Cham</td>
+<td style="text-align: left;">FC Luzern II</td>
+<td style="text-align: left;">3 - 2</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">2023-10-17 13:00:00</td>
-<td style="text-align: left;">Eintracht Bamberg</td>
-<td style="text-align: left;">FC Augsburg II</td>
-<td style="text-align: left;">0 - 0</td>
+<td style="text-align: left;">2023-10-18 13:30:00</td>
+<td style="text-align: left;">SC Kriens</td>
+<td style="text-align: left;">FC St.&nbsp;Gallen II</td>
+<td style="text-align: left;">3 - 2</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">2023-10-17 13:00:00</td>
-<td style="text-align: left;">TSV Buchbach</td>
-<td style="text-align: left;">FV Illertissen</td>
-<td style="text-align: left;">2 - 3</td>
+<td style="text-align: left;">2023-10-18 13:30:00</td>
+<td style="text-align: left;">SR Delémont</td>
+<td style="text-align: left;">FC Basel II</td>
+<td style="text-align: left;">0 - 4</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">2023-10-17 13:00:00</td>
-<td style="text-align: left;">Türkgücü München</td>
-<td style="text-align: left;">DJK Vilzing</td>
-<td style="text-align: left;">1 - 1</td>
+<td style="text-align: left;">2023-10-18 14:00:00</td>
+<td style="text-align: left;">Etoile Carouge FC</td>
+<td style="text-align: left;">FC Breitenrain Bern</td>
+<td style="text-align: left;">3 - 1</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">2023-10-17 13:00:00</td>
-<td style="text-align: left;">Viktoria Aschaffenburg</td>
-<td style="text-align: left;">TSV Aubstadt</td>
-<td style="text-align: left;">0 - 0</td>
+<td style="text-align: left;">2023-10-18 14:00:00</td>
+<td style="text-align: left;">SC Brühl</td>
+<td style="text-align: left;">FC Lugano II</td>
+<td style="text-align: left;">1 - 0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">2023-10-17 13:00:00</td>
-<td style="text-align: left;">Wacker Burghausen</td>
-<td style="text-align: left;">FC Memmingen</td>
-<td style="text-align: left;">5 - 3</td>
+<td style="text-align: left;">2023-10-18 14:00:00</td>
+<td style="text-align: left;">FC Bulle</td>
+<td style="text-align: left;">BSC Young Boys II</td>
+<td style="text-align: left;">3 - 3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023-10-18 14:30:00</td>
+<td style="text-align: left;">Servette FC U21</td>
+<td style="text-align: left;">FC Biel/Bienne</td>
+<td style="text-align: left;">1 - 2</td>
 </tr>
 </tbody>
 </table>
@@ -344,208 +325,450 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th style="text-align: right;">pt</th>
 <th style="text-align: right;">gd</th>
 <th style="text-align: right;">1</th>
-<th style="text-align: right;">14</th>
 <th style="text-align: right;">16</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Würzburger Kickers</td>
-<td style="text-align: right;">1.514</td>
+<td style="text-align: left;">Etoile Carouge FC</td>
+<td style="text-align: right;">1.112</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">40</td>
-<td style="text-align: right;">21</td>
-<td style="text-align: right;">631</td>
-<td style="text-align: right;">1000</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">918</td>
 <td style="text-align: right;">1000</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">DJK Vilzing</td>
-<td style="text-align: right;">2.063</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">40</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">305</td>
-<td style="text-align: right;">1000</td>
-<td style="text-align: right;">1000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Türkgücü München</td>
-<td style="text-align: right;">3.274</td>
+<td style="text-align: left;">SC Brühl</td>
+<td style="text-align: right;">3.873</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">31</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">38</td>
-<td style="text-align: right;">1000</td>
-<td style="text-align: right;">1000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">TSV Aubstadt</td>
-<td style="text-align: right;">3.479</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">31</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">26</td>
-<td style="text-align: right;">1000</td>
-<td style="text-align: right;">1000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Bayern München II</td>
-<td style="text-align: right;">6.696</td>
-<td style="text-align: right;">10</td>
 <td style="text-align: right;">12</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1000</td>
-<td style="text-align: right;">1000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">1. FC Schweinfurt 05</td>
-<td style="text-align: right;">6.845</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">27</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1000</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">34</td>
 <td style="text-align: right;">1000</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">FV Illertissen</td>
-<td style="text-align: right;">7.046</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">27</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1000</td>
-<td style="text-align: right;">1000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">1. FC Nürnberg II</td>
-<td style="text-align: right;">8.067</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">16</td>
+<td style="text-align: left;">FC Biel/Bienne</td>
+<td style="text-align: right;">4.494</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">12</td>
 <td style="text-align: right;">21</td>
 <td style="text-align: right;">5</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FC Paradiso</td>
+<td style="text-align: right;">4.819</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FC Bavois</td>
+<td style="text-align: right;">6.166</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FC Zürich II</td>
+<td style="text-align: right;">6.368</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">999</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SC Cham</td>
+<td style="text-align: right;">6.636</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FC Rapperswil-Jona</td>
+<td style="text-align: right;">8.085</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">996</td>
-<td style="text-align: right;">1000</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">FC Augsburg II</td>
-<td style="text-align: right;">8.616</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">15</td>
+<td style="text-align: left;">FC Breitenrain Bern</td>
+<td style="text-align: right;">8.871</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">12</td>
 <td style="text-align: right;">19</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">997</td>
-<td style="text-align: right;">1000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Viktoria Aschaffenburg</td>
-<td style="text-align: right;">9.272</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">21</td>
-<td style="text-align: right;">-1</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">997</td>
-<td style="text-align: right;">1000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">SpVgg Bayreuth</td>
-<td style="text-align: right;">10.853</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">-2</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">979</td>
+<td style="text-align: right;">-4</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">997</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">SpVgg Greuther Fürth II</td>
-<td style="text-align: right;">12.146</td>
+<td style="text-align: left;">FC Luzern II</td>
+<td style="text-align: right;">10.144</td>
+<td style="text-align: right;">12</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">15</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: right;">-5</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">887</td>
-<td style="text-align: right;">988</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">978</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Wacker Burghausen</td>
-<td style="text-align: right;">12.748</td>
-<td style="text-align: right;">13</td>
+<td style="text-align: left;">BSC Young Boys II</td>
+<td style="text-align: right;">10.811</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">12</td>
 <td style="text-align: right;">16</td>
-<td style="text-align: right;">17</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">969</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FC Bulle</td>
+<td style="text-align: right;">11.914</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">-4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">938</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SR Delémont</td>
+<td style="text-align: right;">12.996</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">16</td>
 <td style="text-align: right;">-6</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">842</td>
-<td style="text-align: right;">981</td>
+<td style="text-align: right;">896</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">SpVgg Ansbach</td>
+<td style="text-align: left;">SC Kriens</td>
+<td style="text-align: right;">13.203</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">896</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FC St.&nbsp;Gallen II</td>
 <td style="text-align: right;">14.440</td>
 <td style="text-align: right;">15</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">-13</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-4</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">486</td>
-<td style="text-align: right;">888</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">SV Schalding-Heining</td>
-<td style="text-align: right;">14.505</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">-12</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">465</td>
-<td style="text-align: right;">885</td>
+<td style="text-align: right;">767</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">FC Memmingen</td>
-<td style="text-align: right;">15.612</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">-16</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">235</td>
-<td style="text-align: right;">674</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Eintracht Bamberg</td>
-<td style="text-align: right;">16.446</td>
+<td style="text-align: left;">FC Basel II</td>
+<td style="text-align: right;">14.777</td>
 <td style="text-align: right;">17</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">-20</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">-7</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">91</td>
-<td style="text-align: right;">435</td>
+<td style="text-align: right;">694</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FC Lugano II</td>
+<td style="text-align: right;">15.472</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">-9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">576</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">TSV Buchbach</td>
-<td style="text-align: right;">17.378</td>
+<td style="text-align: left;">Servette FC U21</td>
+<td style="text-align: right;">16.819</td>
 <td style="text-align: right;">18</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">7</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">294</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="wal_premier-league_2023-2024.rds" class="level1">
+<h1>wal_premier-league_2023-2024.rds</h1>
+<section id="changes-1" class="level2">
+<h2 class="anchored" data-anchor-id="changes-1">Changes</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">team</th>
+<th style="text-align: right;">x1</th>
+<th style="text-align: right;">x6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">The New Saints</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Connah’s Quay Nomads</td>
 <td style="text-align: right;">-13</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">25</td>
-<td style="text-align: right;">152</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Newtown AFC</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Caernarfon Town</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Penybont FC</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-286</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bala Town</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">59</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cardiff Metropolitan</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">255</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pontypridd United</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-61</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Haverfordwest County</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Colwyn Bay FC</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Barry Town United</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Aberystwyth Town</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="games-1" class="level2">
+<h2 class="anchored" data-anchor-id="games-1">Games</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">ko</th>
+<th style="text-align: left;">t1</th>
+<th style="text-align: left;">t2</th>
+<th style="text-align: left;">score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2023-10-17 14:45:00</td>
+<td style="text-align: left;">Barry Town United</td>
+<td style="text-align: left;">Pontypridd United</td>
+<td style="text-align: left;">2 - 0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023-10-17 14:45:00</td>
+<td style="text-align: left;">Caernarfon Town</td>
+<td style="text-align: left;">Aberystwyth Town</td>
+<td style="text-align: left;">3 - 0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023-10-17 14:45:00</td>
+<td style="text-align: left;">Cardiff Metropolitan</td>
+<td style="text-align: left;">Newtown AFC</td>
+<td style="text-align: left;">2 - 1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023-10-17 14:45:00</td>
+<td style="text-align: left;">Haverfordwest County</td>
+<td style="text-align: left;">Penybont FC</td>
+<td style="text-align: left;">3 - 2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023-10-18 14:45:00</td>
+<td style="text-align: left;">Connah’s Quay Nomads</td>
+<td style="text-align: left;">Bala Town</td>
+<td style="text-align: left;">1 - 1</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="odds-now-1" class="level2">
+<h2 class="anchored" data-anchor-id="odds-now-1">Odds now</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">team</th>
+<th style="text-align: right;">mean_rank</th>
+<th style="text-align: right;">r</th>
+<th style="text-align: right;">g</th>
+<th style="text-align: right;">pt</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">1</th>
+<th style="text-align: right;">6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">The New Saints</td>
+<td style="text-align: right;">1.029</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">971</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Connah’s Quay Nomads</td>
+<td style="text-align: right;">2.074</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Newtown AFC</td>
+<td style="text-align: right;">3.424</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">993</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Caernarfon Town</td>
+<td style="text-align: right;">4.318</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">945</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bala Town</td>
+<td style="text-align: right;">5.574</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">763</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cardiff Metropolitan</td>
+<td style="text-align: right;">5.880</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">-3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">661</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Penybont FC</td>
+<td style="text-align: right;">6.259</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">552</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Haverfordwest County</td>
+<td style="text-align: right;">8.857</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">-9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pontypridd United</td>
+<td style="text-align: right;">9.241</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Barry Town United</td>
+<td style="text-align: right;">9.628</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Colwyn Bay FC</td>
+<td style="text-align: right;">9.890</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Aberystwyth Town</td>
+<td style="text-align: right;">11.826</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">-22</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 </tr>
 </tbody>
 </table>
