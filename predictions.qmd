@@ -80,7 +80,8 @@ league_df %>%
   rowwise() %>% 
   mutate(preds = list(get_league_preds(ptf, rdsname, sess))) %>% 
   unnest(preds) %>% 
-  select(lg, name_1, name_2, opt_pred) %>% 
+  select(lg, name_1, name_2, opt_pred) -> d
+d %>% 
   View()
 ```
 

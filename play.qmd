@@ -36,7 +36,7 @@ download just these ones
 
 ```{r}
 #| warning: false
-leagues %>% slice(54:56) %>% download_these()
+leagues %>% slice(64) %>% download_these()
 ```
 
 ## games that may have finished (or started) since last download
@@ -48,6 +48,8 @@ ggg <- update_leagues(leagues)
 ```
 
 now I need to get the same games from the new download, or look ahead
+
+this needs fixing up for games that have moved since last known
 
 ```{r}
 predictions <- read_rds("predictions.rds")

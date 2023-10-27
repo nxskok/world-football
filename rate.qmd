@@ -14,10 +14,6 @@ source("rate_functions.R")
 source("predictions_functions.R")
 ```
 
-## do more than one
-
-find the ones that need doing and do them (or some of them)
-
 ## next rate thing
 
 I have added first place and team ranks to the display.
@@ -38,7 +34,7 @@ jot: ones I want to do
 # leagues1
 ```
 
-pass the relevant ones from there into here (slice leagues to do just a few / specific ones; DO NOT do them all! Though this might be all right now I fixed the next rate date.)
+## pass the relevant ones from there into here (slice leagues to do just a few / specific ones; DO NOT do them all! Though this might be all right now I fixed the next rate date.)
 
 ```{r}
 leagues1 %>% update_rate() 
@@ -48,6 +44,10 @@ leagues1 %>% update_rate()
 
 ```{r}
 #| warning: false
+
+my_fname <- "predictions.rds"
+my_xname <- str_c("preds", now(), ".rds")
+file.copy(my_fname, my_xname)
 leagues %>% mutate(r = row_number()) %>% 
   rowwise() %>% 
   mutate(fname = make_fname(country, league, season, part, prefix = "")) %>% 
