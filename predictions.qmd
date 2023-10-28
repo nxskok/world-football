@@ -82,6 +82,7 @@ league_df %>%
   unnest(preds) %>% 
   select(lg, name_1, name_2, opt_pred) -> d
 d %>% 
+  arrange(lg) %>% 
   View()
 ```
 
