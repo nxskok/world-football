@@ -1,7 +1,5 @@
 # Using worldfootball.net to get soccer results
 
-This is a sandbox to make things go.
-
 packages
 
 ```{r}
