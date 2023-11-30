@@ -13,6 +13,7 @@ cutoff_date <- now() - hours(6)
 ```
 
 ```{r}
+#| echo: false
 make_report <- function(rdsname, cutoff_date) {
   tables <- tables_for_report(rdsname, cutoff_date)
   if (length(tables) == 0) {

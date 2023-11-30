@@ -7,6 +7,7 @@ format: html
 
 ```{r}
 library(tidyverse)
+library(posterior)
 library(cmdstanr)
 options(mc.cores = 4)
 source("functions.R")
@@ -40,7 +41,40 @@ jot: ones I want to do
 leagues1 %>% update_rate() 
 ```
 
+## rating rank
+
+```{r}
+make_rank_table <- function(fname) {
+  rat <- read_rds(str_c("fit/", fname))
+  rat %>% as_draws_df() %>% 
+    summarise_draws("mean") %>% 
+    filter(str_detect(variable, "^[od]")) %>% 
+    separate_wider_position(variable, widths = c(od = 1, num_txt = 4), too_few = "align_start") %>% 
+    mutate(id = parse_number(num_txt)) %>% 
+    group_by(id) %>% 
+    summarize(rat = sum(mean)) %>% 
+    mutate(rk = rank(-rat)) %>% 
+    select(id, rk) -> rank_table
+  lu <- read_rds(str_c("lu/", fname))
+  lu %>% left_join(rank_table, join_by("id")) %>% 
+    select(team, rk) -> team_ranks
+  team_ranks
+}
+leagues %>% 
+  # slice_sample(n = 5) %>% 
+  rowwise() %>% 
+  mutate(fname = make_fname(country, league, season, part, prefix = "")) %>% 
+  select(fname) %>% 
+  mutate(rank_table = list(make_rank_table(fname))) %>% 
+  unnest(rank_table) -> all_ranks
+all_ranks
+```
+
+\]
+
 ## predictions for upcoming games based on most recent ratings
+
+what happened to rating rank?
 
 ```{r}
 #| warning: false
@@ -59,7 +93,11 @@ leagues %>% mutate(r = row_number()) %>%
   slice_sample(n = 999) %>%
   pull(fname) %>% 
   map(\(x) league_preds(x)) %>% bind_rows() %>% arrange(ko) -> predictions
-write_rds(predictions, "predictions.rds")
+predictions %>% 
+  left_join(all_ranks, join_by(fname, t1 == team)) %>% 
+  left_join(all_ranks, join_by(fname, t2 == team)) %>% 
+  select(fname, ko, t1, r1 = rk.x, r2 = rk.y, t2, `2`, `1`, `0`) -> predictions2
+write_rds(predictions2, "predictions.rds")
 ```
 
 display some of these predictions

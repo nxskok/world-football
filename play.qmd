@@ -33,8 +33,24 @@ download_these(l_to_get)
 download just these ones
 
 ```{r}
+sch <- c("ger")
+leagues %>% mutate(r = row_number()) %>%  filter(country %in% sch) -> dr
+dr
+```
+
+```{r}
 #| warning: false
-leagues %>% slice(64) %>% download_these()
+
+these <- dr$r
+leagues %>% slice(these) %>% download_these()
+right_now <- now()
+enframe(these, name = NULL) %>% 
+  rowwise() %>% 
+  mutate(lg = list(display_league(leagues, value))) %>% 
+  unnest(lg) %>% 
+  mutate(days = time_length(right_now - ko, unit = "days")) %>% 
+  filter(between(days, -3, 7)) %>% 
+  View("games downloaded")
 ```
 
 ## games that may have finished (or started) since last download

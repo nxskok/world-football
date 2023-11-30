@@ -1,0 +1,53 @@
+---
+title: "assess predictions"
+format: html
+---
+
+## ideas
+
+list all prediction files, get their mtimes or pull date out of filename
+or even combine, replacing an earlier prediction by a later one
+
+get all results, filter the ones between desired dates
+place side by side with predictions
+compute log lik
+simulate log lik
+see where on distribution
+
+
+## packages
+
+```{r}
+library(tidyverse)
+source("functions.R")
+source("assess-pred.R")
+```
+
+## get preds
+
+```{r}
+pred_files <- get_prediction_times()
+all_predictions <- get_all_predictions(pred_files)
+# all_predictions
+all_results <- get_all_results(leagues)
+# all_results
+```
+
+
+## combine and simulate
+
+```{r}
+res_prob <- combine_resprob(all_predictions, all_results)
+res_prob
+# res_prob %>% slice_sample(n = 1000) -> res_prob
+# summary(res_prob)
+obs_ll <- calc_loglik(res_prob)
+obs_ll
+sim_loglik(1000, res_prob) %>% 
+  ggplot(aes(x = loglik)) + geom_density() + geom_vline(xintercept = obs_ll)
+```
+
+observed ll is off the bottom of the distribution from the sims, so the things that happened are too unlikely
+maybe that suggests using a neg bin rather than a poisson, or using a stronger equality prior
+
+

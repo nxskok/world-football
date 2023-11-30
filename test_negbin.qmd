@@ -1,0 +1,30 @@
+## packages
+
+```{r}
+library(tidyverse)
+library(cmdstanr)
+```
+
+compile
+
+```{r}
+mod <- cmdstan_model("negbin.stan")
+mod
+```
+
+run
+
+```{r}
+data <- list(N = 5, y = c(1,2,3, 5,9))
+fit <- mod$sample(data = data)
+```
+
+```{r}
+fit
+```
+
+```{r}
+fit$draws(format = "df") %>% 
+  ggplot(aes(x = y_draw)) + geom_bar()
+```
+

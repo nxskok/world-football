@@ -47,8 +47,9 @@ id, lg, rdsname, ptf
 6, ita, ita_serie-a_2023-2024.rds, https://seriea.predictthefootball.com
 7, sco, sco_premiership_2023-2024.rds, https://scottish-premier.predictthefootball.com
 8, esp, esp_primera-division_2023-2024.rds, https://laliga.predictthefootball.com
-9, swe, swe_allsvenskan_2023.rds, https://allsvenskan.predictthefootball.com
 "
+
+# 9, swe, swe_allsvenskan_2023.rds, https://allsvenskan.predictthefootball.com
 
 league_df <- read_csv(leagues_txt)
 ```
@@ -78,7 +79,6 @@ get_league_preds <- function(league_url, fname, sess) {
 league_df %>% 
   # slice(1:3) %>% 
   rowwise() %>% 
-  mutate(preds = list(get_league_preds(ptf, rdsname, sess))) %>% 
   unnest(preds) %>% 
   select(lg, name_1, name_2, opt_pred) -> d
 d %>% 
