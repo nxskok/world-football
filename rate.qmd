@@ -74,8 +74,6 @@ all_ranks
 
 ## predictions for upcoming games based on most recent ratings
 
-what happened to rating rank?
-
 ```{r}
 #| warning: false
 
