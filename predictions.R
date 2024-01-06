@@ -7,5 +7,5 @@ now <- now()
 read_rds("predictions.rds") %>%
   filter(between(ko, now - minutes(args_num[1]),
                  now + minutes(args_num[2]))) %>%
-  arrange(fname) %>%
+  arrange(ko) %>%
   knitr::kable()

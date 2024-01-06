@@ -1,0 +1,23 @@
+get rid of old pred grabs (say, more than a week old)
+
+## packages
+
+```{r}
+library(tidyverse)
+```
+
+## start here
+
+grab files
+
+```{r}
+list.files(path = ".", pattern = "preds.+\\.rds") %>% 
+  enframe(value = "fname", name = NULL) %>% 
+  mutate(mtime = file.mtime(fname)) %>% 
+  mutate(days_old = (now() - mtime) / ddays(1)) %>% 
+  filter(days_old > 7) %>% 
+  pull(fname) -> deletables
+deletables
+file.remove(deletables)
+```
+

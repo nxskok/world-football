@@ -67,7 +67,7 @@ max_ept <- function(ppd, results, scores) {
     rowwise() %>%
     mutate(my_ept = ept(psc, ppd, results, scores)) %>%
     ungroup() %>%
-    slice_max(my_ept, n = 1) %>%
+    slice_max(my_ept, n = 1, with_ties = FALSE) %>%
     pull(psc)
 }
 # max_ept(ppd, my_res, my_scores)
@@ -92,6 +92,19 @@ make_result_probs <- function(fname, t1, t2) {
     deframe()
 }
 
+pop_scores <- function(fname, t1, t2) {
+  name_vec <- paste0("s", 1:2)
+  if (is.na(t1) || is.na(t2)) {
+    nas <-rep(NA, 2L)
+    names(nas) <- name_vec
+    return(nas)
+  }
+  d <- make_ppd(fname, t1, t2)
+  v <- d$score[1:2]
+  names(v) <- name_vec
+  v
+}
+
 league_preds <- function(fname) {
   print(fname)
   lu_name <- str_c("lu/", fname)
@@ -106,9 +119,11 @@ league_preds <- function(fname) {
     left_join(lu, by = c("t2" = "team")) %>%
     rowwise() %>%
     mutate(pr = list(make_result_probs(fname, id.x, id.y))) %>%
+    mutate(pop = list(pop_scores(fname, id.x, id.y))) %>%
     unnest_wider(pr) %>%
+    unnest_wider(pop) %>%
     mutate(fname = fname) %>%
-    select(fname, ko, t1, t2, `2`, `1`, `0`)
+    select(fname, ko, t1, t2, `2`, `1`, `0`, s1, s2)
 }
 #
 #

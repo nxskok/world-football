@@ -1,0 +1,73 @@
+# rate neg-binomial
+
+```{r}
+nb <- cmdstan_model("rate_nb.stan")
+write_rds(nb, "nb.rds")
+```
+
+
+function
+
+```{r}
+rate_nb <- function(fname) { # rds filename with results in it, no folder
+  if (file.exists("nb.rds")) {
+    pp <- read_rds("nb.rds")
+  } else {
+    pp <- cmdstan_model("rate_nb.stan")
+    write_rds(pp, "nb.rds")
+  }
+  my_fname <- str_c("rds/", fname)
+  games <- read_rds(my_fname)
+  # lookup table
+  with(games, enframe(c(t1, t2), name = NULL, value = "team")) %>%
+    count(team) %>%
+    select(-n) %>%
+    mutate(id = row_number()) -> lookup_table
+  # save lookup table
+  my_lname <- str_c("lu/", fname)
+  write_rds(lookup_table, my_lname)
+  # keep only actual games
+  games %>% drop_na(score) %>%
+    separate(score, into = c("s1", "s2"), convert = TRUE) -> games
+  if (nrow(games)==0) {
+    fit = NA
+    write_rds(fit, str_c("fit/", fname))
+    return(list(fit = fit, teams = lookup_table))
+  }
+  # otherwise continue
+  games %>% left_join(lookup_table, by = c("t1" = "team")) %>%
+    left_join(lookup_table, by = c("t2" = "team")) -> ingredients
+  stan_data <- with(ingredients, list(
+    nt = nrow(lookup_table),
+    ng = nrow(games),
+    x = cbind(id.x, id.y),
+    y = cbind(s1, s2)))
+  fit <- pp$sample(data = stan_data)
+  fit$save_object(str_c("fit_nb/", fname))
+  ll <- list(fit = fit, teams = lookup_table)
+  ll
+}
+
+```
+
+
+try it out
+
+
+```{r}
+fname <- "sco_championship_2023-2024.rds"
+ans <- rate_nb(fname)
+```
+
+investigate results
+
+```{r}
+fitname <- str_c("fit_nb/", fname)
+fitname
+ans <- read_rds(fitname)
+ans %>% as_draws_df() %>% 
+  pivot_longer(everything()) %>% 
+  group_by(name) %>% 
+  summarize(mean = mean(value), sd = sd(value))
+```
+

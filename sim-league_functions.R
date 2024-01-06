@@ -44,9 +44,9 @@ get_league_table <- function(my_url) {
     mutate(team = str_remove(team, "^\\n")) %>%
     mutate(team = str_remove(team, "\\n.*$")) %>%
     mutate(team = str_remove(team, "\\n$")) -> table
-  table %>% mutate(r = row_number()) %>%
-    select(r, everything()) -> table
-  # return(table)
+  # table %>% # mutate(r = row_number()) %>%
+  #   select(r, everything()) -> table
+  # # return(table)
   enframe(colours, name = NULL) %>%
     mutate(row = gl(nt, 10)) %>%
     mutate(col = gl(10, 1, nt*10)) %>%
@@ -63,7 +63,7 @@ league_table_from_rdsname <- function(rdsname) {
   lt <- get_league_table(lt_url)
   if (1 %in% lt$ranks) {} else {lt$ranks = c(1, lt$ranks)}
   lt$table %>%
-    select(r, team, g = played, pt = pts, gd) %>%
+    select(team, g = played, pt = pts, gd) %>%
     mutate(across(g:gd, \(x) as.numeric(x))) -> ltt
   list(table = ltt, ranks = lt$ranks)
 }
@@ -135,7 +135,8 @@ sample_many_from_ppd <- function(with_ppd, lt, n_sim = 1000) {
   dd %>%
     group_by(team) %>%
     summarize(mean_rank = mean(rank)) %>%
-    arrange(mean_rank) -> mean_ranks
+    arrange(mean_rank) %>%
+    mutate(r = row_number())-> mean_ranks
 
   dd %>%
     rowwise() %>%

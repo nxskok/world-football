@@ -1,6 +1,5 @@
 ---
 title: "rate"
-format: html
 ---
 
 ## Packages
@@ -17,9 +16,6 @@ source("predictions_functions.R")
 
 ## next rate thing
 
-I have added first place and team ranks to the display.
-Catch up on it during next week or two (as in, does it seem to be working?)
-
 ```{r}
 all_next_rate_date(leagues) -> leagues0
 leagues0 %>% select(fname, next_rate, dow) 
@@ -35,7 +31,7 @@ jot: ones I want to do
 # leagues1
 ```
 
-## pass the relevant ones from there into here (slice leagues to do just a few / specific ones; DO NOT do them all! Though this might be all right now I fixed the next rate date.)
+## pass the relevant ones from there into here
 
 ```{r}
 leagues1 %>% update_rate() 
@@ -67,6 +63,8 @@ leagues %>%
   select(fname) %>% 
   mutate(rank_table = list(make_rank_table(fname))) %>% 
   unnest(rank_table) -> all_ranks
+# save all_ranks (used below)
+write_rds(all_ranks, "all_ranks.rds")
 all_ranks
 ```
 
@@ -91,10 +89,12 @@ leagues %>% mutate(r = row_number()) %>%
   slice_sample(n = 999) %>%
   pull(fname) %>% 
   map(\(x) league_preds(x)) %>% bind_rows() %>% arrange(ko) -> predictions
+# read all_ranks
+all_ranks <- read_rds("all_ranks.rds")
 predictions %>% 
   left_join(all_ranks, join_by(fname, t1 == team)) %>% 
   left_join(all_ranks, join_by(fname, t2 == team)) %>% 
-  select(fname, ko, t1, r1 = rk.x, r2 = rk.y, t2, `2`, `1`, `0`) -> predictions2
+  select(fname, ko, t1, r1 = rk.x, r2 = rk.y, t2, `2`, `1`, `0`, s1, s2) -> predictions2
 write_rds(predictions2, "predictions.rds")
 ```
 
@@ -107,3 +107,45 @@ read_rds("predictions.rds") %>%
   arrange(fname) %>% 
   View()
 ```
+
+try out the next rate stuff
+
+```{r}
+until_next_rate <- function(leagues0) {
+  leagues0 %>% select(fname, next_rate, dow) %>% 
+    ungroup() %>% 
+    slice_sample(n = 1) %>% 
+    select(fname, next_rate) -> d
+  last_rate <- file.mtime(str_c("fit/", d$fname))
+  games_in_league <- read_rds(str_c("rds/", d$fname))
+  games_in_league %>% select(ko, t1, t2) %>% 
+    filter(between(ko, last_rate, d$next_rate)) %>% 
+    pivot_longer(-ko) %>% 
+    count(value) %>% 
+    summarize(mx = max(n)) %>% pull(mx) -> mxx
+  names(mxx) <- d$fname
+  mxx
+}
+```
+
+```{r}
+until_next_rate_1 <- function(fname, next_rate) {
+  last_rate <- file.mtime(str_c("fit/", fname))
+  games_in_league <- read_rds(str_c("rds/", fname))
+  games_in_league %>% select(ko, t1, t2) %>% 
+    filter(between(ko, last_rate, next_rate)) %>% 
+    pivot_longer(-ko) %>% 
+    count(value) %>% 
+    summarize(mx = max(n)) %>% pull(mx) -> mxx
+  mxx
+}
+```
+
+```{r}
+leagues0 %>% 
+  select(fname, next_rate) %>% 
+  rowwise() %>% 
+  mutate(mxxx = until_next_rate_1(fname, next_rate))
+```
+
+can't see any problems now.

@@ -45,5 +45,6 @@ tables_for_report <- function(rdsname, cutoff_date) {
   filenames %>% file.mtime() -> mtimes
   games %>% filter(between(ko, mtimes[1]-hours(3), now())) -> games
   tab_recent <- read_rds(filenames[2])
+  tab_recent %>% select(r, everything()) -> tab_recent
   return(list(changes = changes, games = games, recent = tab_recent, mtimes = mtimes))
 }
