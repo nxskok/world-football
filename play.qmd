@@ -24,7 +24,8 @@ get leagues I don't have any of yet (currently works for everything but Australi
 leagues %>% 
   rowwise() %>% 
   mutate(fname = make_fname(country, league, season, part)) %>% 
-  mutate(mtime = file.mtime(fname)) %>% 
+  mutate(mtime = file.mtime(fname)) 
+%>% 
   filter(is.na(mtime)) -> l_to_get
 l_to_get
 download_these(l_to_get)
@@ -33,7 +34,7 @@ download_these(l_to_get)
 download just these ones
 
 ```{r}
-sch <- c("ita")
+sch <- c("isr")
 leagues %>% mutate(r = row_number()) %>%  filter(country %in% sch) -> dr
 dr
 ```
@@ -85,7 +86,7 @@ ggg %>% left_join(all_games, by = c("ko", "t1", "t2")) %>%
   select(country, league, ko:score.y) %>% 
   arrange(ko) %>% 
   left_join(predictions, by = c("t1", "t2")) %>% 
-  select(country, league, ko = ko.x, t1, t2, score.x, score.y, `2`, `1`, `0`, s1, s2) %>% View(str_c("at: ", now()))
+  select(country, league, ko = ko.x, t1, t2, score.x, score.y, `2`, `1`, `0`) %>% View(str_c("at: ", now()))
 ```
 
 or, just grab the predictions
@@ -93,3 +94,15 @@ or, just grab the predictions
 ```{r}
 predictions %>% arrange(ko) %>% View()
 ```
+
+ratings
+
+method 1: update ratings each time each league is updated (extra computation) method 2: do it like 25, have a target date for the next rate and rerate the ones that have reached the target date
+
+next task
+
+rate a league
+
+after that
+
+sim-league

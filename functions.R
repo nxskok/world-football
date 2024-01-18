@@ -20,7 +20,10 @@ get_schedule <- function(country_name, league_name, season, part) {
   print(glue::glue("Getting {fname}."))
   h <- read_html(my_url)
   h %>% html_node(xpath = '//*[@id="site"]/div[2]/div[1]/div[1]/div[3]/div/table') -> hh
-  if (class(hh) == "xml_missing") return(fname) # don't process and save
+  if (class(hh) == "xml_missing") {
+    cat(str_c(fname, " missing.\n"))
+    return(fname) # don't process and save
+  }
   hh %>%
     html_table(header = FALSE) %>%
     filter(!str_detect(X1, "Round")) %>%

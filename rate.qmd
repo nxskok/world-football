@@ -68,8 +68,6 @@ write_rds(all_ranks, "all_ranks.rds")
 all_ranks
 ```
 
-\]
-
 ## predictions for upcoming games based on most recent ratings
 
 ```{r}
