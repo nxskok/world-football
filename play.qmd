@@ -17,24 +17,23 @@ download all leagues
 # download_these(leagues)
 ```
 
-get leagues I don't have any of yet (currently works for everything but Australia)
+get leagues I don't have any of yet
 
 ```{r}
 #| warning: false
 leagues %>% 
   rowwise() %>% 
   mutate(fname = make_fname(country, league, season, part)) %>% 
-  mutate(mtime = file.mtime(fname)) 
-%>% 
+  mutate(mtime = file.mtime(fname)) %>% 
   filter(is.na(mtime)) -> l_to_get
 l_to_get
 download_these(l_to_get)
 ```
 
-download just these ones
+download just these ones (use play.R instead)
 
 ```{r}
-sch <- c("isr")
+sch <- c("bih")
 leagues %>% mutate(r = row_number()) %>%  filter(country %in% sch) -> dr
 dr
 ```

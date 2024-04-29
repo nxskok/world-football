@@ -100,19 +100,40 @@ next_rate_date <- function(rdsname) {
   }
   games <- read_rds(str_c("rds/", rdsname))
   games %>% filter(ko > rat_mtime) -> d
+  # d contains all games with kickoff since last rating time
   if (nrow(d) == 0) return(no_rate_date)
   d %>%
     arrange(ko) %>%
-    pivot_longer(t1:t2) %>%
-    mutate(dup = duplicated(value)) -> dd
-  dd %>% filter(dup) %>% summarize(min_ko = min(ko)) %>%
-    pull(min_ko) -> first_dup
-  if (is.na(first_dup)) return(max(d$ko) + hours(2))
-  dd %>% filter(ko < first_dup) -> ddd
-  if (nrow(ddd) == 0) return(first_dup + hours(2))
-  ddd %>%
-    summarize(max_ko = max(ko) + hours(2)) %>%
-    pull(max_ko)
+    pluck("ko", 1) -> first_ko
+  first_ko + hours(2)
+#
+#   %>%
+#     pivot_longer(t1:t2) %>%
+#     mutate(dup = duplicated(value)) -> dd
+#   # dd is d made long with an extra column indicating if duplicate
+#   dd %>% filter(dup) -> dd2
+#   if (nrow(dd2) == 0) return(max(d$ko) + hours(2))
+#   dd2 %>% summarize(min_ko = min(ko)) %>%
+#     pull(min_ko) -> first_dup
+#   # first_dup is kickoff time of first game with duplicate team
+#   if (is.na(first_dup)) return(max(d$ko) + hours(2))
+#   dd %>% filter(ko < first_dup) -> ddd
+#   ### ddd is all games with kickoff before the first duplicated one
+#   if (nrow(ddd) == 0) return(first_dup + hours(2))
+#   # I want: 5pm on day before first duplicate (might be late, but should reliably work)
+#   ddd %>%
+#     summarize(max_ko = max(ko) + hours(2)) %>%
+#     pull(max_ko) -> max_ko
+#   if (hour(first_dup) > 17) {
+#     hour(first_dup) <- 17
+#     minute(first_dup) <- 2
+#   } else {
+#     hour(first_dup) <- 17
+#     minute(first_dup) <- 2
+#     first_dup <- first_dup - days(1)
+#   }
+#   # earlier of first_dup and max_ko
+#   min(first_dup, max_ko)
 }
 
 all_next_rate_date <- function(leagues) {

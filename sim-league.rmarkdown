@@ -1,0 +1,28 @@
+---
+title: "simleague"
+format: html
+editor: visual
+---
+
+
+## packages
+
+
+```{r}
+library(tidyverse)
+library(rvest)
+source("functions.R")
+source("predictions_functions.R")
+source("sim-league_functions.R")
+source("report_functions.R")
+```
+
+```{r}
+#| warning: false
+#| message: false
+sim_as_needed(leagues)
+```
+
+
+report: see report.qmd
+
