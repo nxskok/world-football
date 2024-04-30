@@ -4,10 +4,11 @@ library(rvest)
 library(conflicted)
 conflicts_prefer(dplyr::filter)
 source("functions.R")
+source("predictions_functions.R")
 
 #' download leagues from just this country
 
-sch <- c("kos")
+sch <- c("svn")
 leagues %>% mutate(r = row_number()) %>%  filter(country %in% sch) -> dr
 dr
 
@@ -25,3 +26,4 @@ enframe(these, name = NULL) %>%
   filter(between(days, -3, 7)) %>%
   View("games downloaded")
 
+update_predictions(leagues)

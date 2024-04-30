@@ -134,3 +134,27 @@ league_preds <- function(fname) {
 }
 #
 #
+
+update_predictions <- function(leagues) {
+  my_fname <- "predictions.rds"
+  my_xname <- str_c("preds", now(), ".rds")
+  file.copy(my_fname, my_xname)
+  leagues %>% mutate(r = row_number()) %>%
+    rowwise() %>%
+    mutate(fname = make_fname(country, league, season, part, prefix = "")) %>%
+    mutate(mtime = file.mtime(str_c("fit/", fname))) %>%
+    mutate(size = file.size(str_c("fit/", fname))) %>%
+    filter(!is.na(mtime)) %>%
+    filter(size > 100) %>%
+    ungroup() %>%
+    slice_sample(n = 999) %>%
+    pull(fname) %>%
+    map(\(x) league_preds(x)) %>% bind_rows() %>% arrange(ko) -> predictions
+  # read all_ranks
+  all_ranks <- read_rds("all_ranks.rds")
+  predictions %>%
+    left_join(all_ranks, join_by(fname, t1 == team)) %>%
+    left_join(all_ranks, join_by(fname, t2 == team)) %>%
+    select(fname, ko, t1, r1 = rk.x, r2 = rk.y, t2, `2`, `1`, `0`, ppd) -> predictions2
+  write_rds(predictions2, "predictions.rds")
+}

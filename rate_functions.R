@@ -144,3 +144,37 @@ all_next_rate_date <- function(leagues) {
     mutate(next_rate = next_rate_date(fname), dow = weekdays(next_rate)) %>%
     arrange(next_rate)
 }
+
+make_rank_table <- function(fname) {
+  fitname <- str_c("fit/", fname)
+  rat <- read_rds(fitname)
+  if (length(rat) == 1 && is.na(rat)) return(NULL)
+  rat %>% as_draws_df() %>%
+    summarise_draws("mean") %>%
+    filter(str_detect(variable, "^[od]")) %>%
+    separate_wider_position(variable, widths = c(od = 1, num_txt = 4), too_few = "align_start") %>%
+    mutate(id = parse_number(num_txt)) %>%
+    group_by(id) %>%
+    summarize(rat = sum(mean)) %>%
+    mutate(rk = rank(-rat)) %>%
+    select(id, rk) -> rank_table
+  lu <- read_rds(str_c("lu/", fname))
+  lu %>% left_join(rank_table, join_by("id")) %>%
+    select(team, rk) -> team_ranks
+  team_ranks
+}
+
+make_all_ranks <- function(leagues) {
+  leagues %>%
+    # slice_sample(n = 5) %>%
+    rowwise() %>%
+    mutate(fname = make_fname(country, league, season, part, prefix = ""))%>%
+    select(fname) %>%
+    mutate(fit_exists = file.exists(str_c("fit/", fname))) %>%
+    filter(fit_exists) %>%
+    mutate(rank_table = list(make_rank_table(fname))) %>%
+    unnest(rank_table) -> all_ranks
+  # save all_ranks (used below)
+  write_rds(all_ranks, "all_ranks.rds")
+  all_ranks
+}

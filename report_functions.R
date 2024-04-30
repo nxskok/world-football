@@ -24,6 +24,15 @@ what_to_do <- function(rdsname, cutoff_date) {
 make_changes <- function(filenames) {
   read_rds(filenames[1]) %>% janitor::clean_names() -> p1
   read_rds(filenames[2]) %>% janitor::clean_names() -> p2
+  # add a column r if there isn't one
+  has_r1 <- ("r" %in% names(p1))
+  has_r2 <- ("r" %in% names(p2))
+  if (!has_r1) {
+    p1 %>% mutate(r = row_number()) -> p1
+  }
+  if (!has_r2) {
+    p2 %>% mutate(r = row_number()) -> p2
+  }
   p1 %>% left_join(p2, by = "team") %>%
     select(team, starts_with("x")) -> dd
   if (ncol(dd) < 2) return(NULL)
