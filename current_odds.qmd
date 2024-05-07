@@ -1,0 +1,40 @@
+
+packages
+
+```{r}
+library(tidyverse)
+library(knitr)
+```
+
+```{r}
+list.files(path = "sim", pattern = "*.rds") %>% 
+  enframe(name = NULL, value = "filename") %>% 
+  separate_wider_delim(filename, delim = "_", names_sep = ".", too_few = "align_start",
+                       cols_remove = FALSE) %>% 
+  mutate(league_name = ifelse(is.na(filename.5), 
+                              str_c(filename.1, "_", filename.2),
+                              str_c(filename.1, "_", filename.2, "_", filename.4))) %>% 
+  rename(file_name = filename.filename) %>% 
+  select(league_name, file_name) %>% 
+  group_by(league_name) %>% 
+  summarize(last_sim = last(file_name)) -> latest
+latest
+```
+
+```{r}
+report_league <- function(rdsname) {
+  x <- read_rds(str_c("sim/", rdsname))
+  a <- knit_expand(text = c("# {{rdsname}}",
+                            "## Odds",
+                            "{{kable(x)}}"))
+  cat(a, sep = "\n")
+}
+```
+
+
+```{r}
+#| output: asis
+latest %>% pull(last_sim) %>% 
+  walk(\(f) report_league(f))
+```
+

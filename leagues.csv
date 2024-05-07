@@ -27,6 +27,9 @@ cyp,first-division,2023-2024,
 cyp,first-division,2023-2024,championship
 cyp,first-division,2023-2024,relegation
 cze,1-fotbalova-liga,2023-2024,
+cze,1-fotbalova-liga,2023-2024,meisterschaft
+cze,1-fotbalova-liga,2023-2024,platzierung
+cze,1-fotbalova-liga,2023-2024,abstieg
 den,superligaen,2023-2024,
 den,superligaen,2023-2024,championship
 den,superligaen,2023-2024,relegation
@@ -112,6 +115,8 @@ srb,super-liga,2023-2024,relegation
 sui,challenge-league,2023-2024,
 sui,promotion-league,2023-2024,
 sui,super-league,2023-2024,
+sui,super-league,2023-2024,championship
+sui,super-league,2023-2024,relegation
 svk,super-liga,2023-2024,
 svk,super-liga,2023-2024,championship
 svk,super-liga,2023-2024,relegation
