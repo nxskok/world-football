@@ -20,7 +20,7 @@ source("report_functions.R")
 #| message: false
 #| error: true
 sim_as_needed_safe <- safely(sim_as_needed) # ones that give an error will be ignored
-for (i in 1:5) { # picking a random 20 right now
+for (i in 1:8) { # picking a random 20 right now
   print(i)
   sim_as_needed_safe(leagues)  
 }
