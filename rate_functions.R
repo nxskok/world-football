@@ -105,7 +105,7 @@ next_rate_date <- function(rdsname) {
   d %>%
     arrange(ko) %>%
     pluck("ko", 1) -> first_ko
-  first_ko + hours(2)
+  with_tz(first_ko + hours(2), "America/Toronto")
 #
 #   %>%
 #     pivot_longer(t1:t2) %>%
@@ -141,7 +141,9 @@ all_next_rate_date <- function(leagues) {
     rowwise() %>%
     mutate(fname = make_fname(country, league, season, part, prefix = "")) %>%
     # select(fname) %>%
-    mutate(next_rate = next_rate_date(fname), dow = weekdays(next_rate)) %>%
+    mutate(next_rate = next_rate_date(fname),
+           next_rate = with_tz(next_rate, "America/Toronto"),
+           dow = weekdays(next_rate)) %>%
     arrange(next_rate)
 }
 

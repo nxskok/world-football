@@ -18,7 +18,8 @@ source("predictions_functions.R")
 
 ```{r}
 all_next_rate_date(leagues) -> leagues0
-leagues0 %>% select(fname, next_rate, dow) %>% View("League rate dates")
+leagues0 %>% 
+  select(fname, next_rate, dow) %>% View("League rate dates")
 leagues0  %>% 
   filter(next_rate < now()) -> leagues1
 ```
