@@ -17,7 +17,7 @@ get_league_table_url <- function(rdsname) {
     fname <- str_replace(fname, "/ger-", "/")
   if (str_detect(rdsname, "rus_1-division"))
     fname <- str_replace(fname, "2023-2024", "2023-24")
-  print(fname)
+  # print(fname)
   fname
 }
 
@@ -147,7 +147,8 @@ sample_many_from_ppd <- function(with_ppd, lt, n_sim = 1000) {
     summarise(total = sum(is_in)) %>%
     pivot_wider(names_from = cutoff, values_from = total) -> d3 # or keep it long for now
 
-  mean_ranks %>% left_join(lt$table) %>% left_join(d3)
+  mean_ranks %>% left_join(lt$table, join_by(team)) %>% left_join(d3, join_by(team))
+  # mean_ranks %>% left_join(lt$table) %>% left_join(d3)
 }
 
 make_no_sim <- function(lt) {
@@ -175,8 +176,8 @@ make_sim_fname <- function(rdsname) {
 }
 
 sample_from_rdsname <- function(rdsname, n_sim = 1000) {
-  print(rdsname)
-  print(now())
+  # print(rdsname)
+  # print(now())
   ltt <- league_table_from_rdsname(rdsname) # has table in table, ranks to sim for in ranks
   games <- get_unplayed(rdsname)
   if (nrow(games) > 0) {
@@ -198,7 +199,7 @@ last_sim <- function(rdsname) {
 }
 
 sim_as_needed <- function(leagues) {
-  print(now())
+  # print(now())
   leagues %>% rowwise() %>%
     mutate(fname = make_fname(country, league, season, part, prefix = "")) %>%
     select(fname) %>%
@@ -216,8 +217,8 @@ sim_as_needed <- function(leagues) {
     ungroup() %>%
     slice_sample(n = 20) %>%
     pull(fname) -> fnames
-  print(fnames)
-  print("")
-  fnames %>% walk(\(x) sample_from_rdsname(x))
+  # print(fnames)
+  # print("")
+  fnames %>% walk(\(x) sample_from_rdsname(x), .progress = TRUE)
   now()
 }

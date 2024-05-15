@@ -13,6 +13,7 @@ source("functions.R")
 source("predictions_functions.R")
 source("sim-league_functions.R")
 source("report_functions.R")
+options(dplyr.summarise.inform = FALSE)
 ```
 
 ```{r}
