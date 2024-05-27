@@ -215,7 +215,7 @@ sim_as_needed <- function(leagues) {
     )) %>%
     filter(needs_doing == "yes") %>%
     ungroup() %>%
-    slice_sample(n = 20) %>%
+    slice_sample(prop = 1) %>%
     pull(fname) -> fnames
   # print(fnames)
   # print("")
