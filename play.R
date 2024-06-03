@@ -8,7 +8,7 @@ source("predictions_functions.R")
 
 #' download leagues from just this country
 
-sch <- c("tur", "bih")
+sch <- c("irl")
 leagues %>% mutate(r = row_number()) %>%  filter(country %in% sch) -> dr
 dr
 

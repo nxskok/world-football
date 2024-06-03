@@ -77,11 +77,14 @@ get_unplayed <- function(rdsname) {
 get_with_ppd <- function(rdsname, games) {
   read_rds(str_c("lu/", rdsname)) -> lu_table
   # lu_table
-  games %>%
-    left_join(lu_table, by = c("t1" = "team")) %>%
-    left_join(lu_table, by = c("t2" = "team")) %>%
-    rowwise() %>%
-    mutate(ppd = list(make_ppd(rdsname, id.x, id.y)))
+  suppressWarnings({
+    games %>%
+      left_join(lu_table, by = c("t1" = "team")) %>%
+      left_join(lu_table, by = c("t2" = "team")) %>%
+      rowwise() %>%
+      mutate(ppd = list(make_ppd(rdsname, id.x, id.y))) -> a
+  })
+  a
 }
 
 gd_from_score <- function(score) {
@@ -166,7 +169,7 @@ make_no_sim <- function(lt) {
     group_by(team, cutoff) %>%
     summarize(total = 1000 * sum(is_in)) %>%
     pivot_wider(names_from = cutoff, values_from = total) -> d3
-  mean_ranks %>% left_join(lt$table) %>% left_join(d3)
+  mean_ranks %>% left_join(lt$table, join_by(team)) %>% left_join(d3, join_by(team))
 }
 
 make_sim_fname <- function(rdsname) {
@@ -178,6 +181,8 @@ make_sim_fname <- function(rdsname) {
 sample_from_rdsname <- function(rdsname, n_sim = 1000) {
   # print(rdsname)
   # print(now())
+  # next line from logr
+  # log_print(rdsname, console = FALSE)
   ltt <- league_table_from_rdsname(rdsname) # has table in table, ranks to sim for in ranks
   games <- get_unplayed(rdsname)
   if (nrow(games) > 0) {
@@ -188,6 +193,7 @@ sample_from_rdsname <- function(rdsname, n_sim = 1000) {
   }
   fname <- make_sim_fname(rdsname)
   write_rds(sim, fname)
+  log_print(glue::glue("Done {rdsname}"), console = FALSE)
   sim
 }
 
@@ -219,6 +225,7 @@ sim_as_needed <- function(leagues) {
     pull(fname) -> fnames
   # print(fnames)
   # print("")
+  log_print(fnames)
   fnames %>% walk(\(x) sample_from_rdsname(x), .progress = TRUE)
   now()
 }

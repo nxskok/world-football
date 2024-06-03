@@ -1,0 +1,22 @@
+run normal stan model
+
+```{r}
+library(cmdstanr)
+```
+
+```{r}
+norm <- cmdstan_model("normal.stan")
+```
+
+```{r}
+norm_data = list(
+  y = c(1, 2, 3, 4),
+  N = 4
+)
+norm_sample <- norm$sample(data = norm_data)
+```
+
+```{r}
+norm_sample
+```
+

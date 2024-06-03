@@ -33,6 +33,7 @@ rate <- function(fname) { # rds filename with results in it, no folder
     ng = nrow(games),
     x = cbind(id.x, id.y),
     y = cbind(s1, s2)))
+  # fit <- pp$sample(data = stan_data, save_cmdstan_config = TRUE, save_metric = TRUE)
   fit <- pp$sample(data = stan_data)
   fit$save_object(str_c("fit/", fname))
   ll <- list(fit = fit, teams = lookup_table)

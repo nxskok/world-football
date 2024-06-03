@@ -18,7 +18,6 @@ bra,serie-a,2024,
 bul,parva-liga,2023-2024,
 bul,parva-liga,2023-2024,championship
 bul,parva-liga,2023-2024,relegation
-bul,parva-liga,2023-2024,conference-league
 can,premier-league,2024,
 chi,primera-division,2024,
 chn,super-league,2024,
@@ -84,7 +83,7 @@ ltu,a-lyga,2024,
 lux,nationaldivision,2023-2024,
 mda,divizia-nationala,2023-2024,phase-i
 mda,divizia-nationala,2023-2024,phase-ii
-mda,relegation,2023-2024
+mda,relegation,2023-2024,
 mkd,1-mfl,2023-2024,
 mlt,premier-league,2023-2024,
 mne,1-cfl,2023-2024,
@@ -100,7 +99,7 @@ rou,liga-1,2023-2024,
 rou,liga-1,2023-2024,championship
 rou,liga-1,2023-2024,relegation
 rus,premier-liga,2023-2024,
-rus,1-division,2023-2024
+rus,1-division,2023-2024,
 sco,championship,2023-2024,
 sco,league-one,2023-2024,
 sco,league-two,2023-2024,
@@ -124,7 +123,7 @@ swe,allsvenskan,2024,
 swe,superettan,2024,
 tur,sueperlig,2023-2024,
 ukr,premyer-liga,2023-2024,
-usa,major-league-soccer,2024
+usa,major-league-soccer,2024,
 wal,premier-league,2023-2024,
 wal,premier-league,2023-2024,championship
 wal,premier-league,2023-2024,relegation

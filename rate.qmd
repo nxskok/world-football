@@ -24,18 +24,14 @@ leagues0  %>%
   filter(next_rate < now()) -> leagues1
 ```
 
-## pass the relevant ones from there into here
-
-```{r}
-leagues1 %>% update_rate() 
-```
-
-## rating rank and update predictions
+## rate, rating rank, and update predictions
 
 ```{r}
 #| warning: false
-
+leagues1 %>% update_rate() 
 xxx <- make_all_ranks(leagues)
 nrow(xxx)
 update_predictions(leagues)
 ```
+
+## 
