@@ -1,0 +1,24 @@
+
+```{r}
+library(tidyverse)
+source("functions.R")
+
+```
+
+```{r}
+predictions <- read_rds("predictions.rds")
+predictions %>% 
+  mutate(hour = hour(ko),
+         min = minute(ko)) %>% 
+  select(fname, hour, min) %>% 
+  filter(hour == 19, min == 0) %>% 
+  separate_wider_delim(fname, delim = "_", names = c("country", "league", "season", "part"), 
+                       too_few = "align_start", too_many = "merge") %>% 
+  group_by(country, league, season, part) %>% 
+  mutate(r = row_number()) %>% 
+  filter(r == 1) %>% 
+  pull(country) -> no_time
+no_time
+```
+
+then run play.R

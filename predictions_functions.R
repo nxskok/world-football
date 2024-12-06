@@ -114,7 +114,7 @@ ppd_scores <- function(fname, t1, t2) {
 
 
 league_preds <- function(fname) {
-  print(fname)
+  # print(fname)
   lu_name <- str_c("lu/", fname)
   rds_name <- str_c("rds/", fname)
   lu <- read_rds(lu_name)
@@ -149,7 +149,7 @@ update_predictions <- function(leagues) {
     ungroup() %>%
     slice_sample(n = 999) %>%
     pull(fname) %>%
-    map(\(x) league_preds(x)) %>% bind_rows() %>% arrange(ko) -> predictions
+    map(\(x) league_preds(x), .progress = TRUE) %>% bind_rows() %>% arrange(ko) -> predictions
   # read all_ranks
   all_ranks <- read_rds("all_ranks.rds")
   predictions %>%
@@ -157,4 +157,30 @@ update_predictions <- function(leagues) {
     left_join(all_ranks, join_by(fname, t2 == team)) %>%
     select(fname, ko, t1, r1 = rk.x, r2 = rk.y, t2, `2`, `1`, `0`, ppd) -> predictions2
   write_rds(predictions2, "predictions.rds")
+}
+
+
+update_predictions_url <- function(leagues) {
+  my_fname <- "predictions.rds"
+  my_xname <- str_c("preds/preds", now(), ".rds")
+  file.copy(my_fname, my_xname)
+  leagues %>% mutate(r = row_number()) %>%
+    rowwise() %>%
+    mutate(mtime = file.mtime(str_c("fit/", rds_name))) %>%
+    mutate(size = file.size(str_c("fit/", rds_name))) %>%
+    filter(!is.na(mtime)) %>%
+    filter(size > 100) %>%
+    ungroup() %>%
+    # slice_sample(n = 5) %>%
+    pull(rds_name) %>%
+    map(\(x) league_preds(x), .progress = TRUE) %>% bind_rows() %>% arrange(ko) -> predictions
+  # return(predictions)
+  # read all_ranks
+  all_ranks <- read_rds("all_ranks.rds")
+  predictions %>%
+    left_join(all_ranks, join_by(fname == rds_name, t1 == team)) %>%
+    left_join(all_ranks, join_by(fname == rds_name, t2 == team)) %>%
+    select(fname, ko, t1, r1 = rk.x, r2 = rk.y, t2, `2`, `1`, `0`, ppd) -> predictions2
+  write_rds(predictions2, "predictions.rds")
+  predictions2
 }

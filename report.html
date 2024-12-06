@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -96,193 +62,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># library(tinytable)</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"report_functions.R"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># cutoff_date &lt;- ymd_hm("2023-08-23 12:00", tz = 'America/Toronto') # remember!</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>cutoff_date <span class="ot">&lt;-</span> <span class="fu">now</span>() <span class="sc">-</span> <span class="fu">hours</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"fit"</span>, <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.rds"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">enframe</span>(<span class="at">name =</span> <span class="cn">NULL</span>, <span class="at">value =</span> <span class="st">"fname"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mtime =</span> <span class="fu">file.mtime</span>(fname)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mtime <span class="sc">&gt;</span> cutoff_date) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fname =</span> <span class="fu">str_remove</span>(fname, <span class="st">"^fit/"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(fname) <span class="ot">-&gt;</span> fnames</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>fnames</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>[1] “bra_serie-a_2024.rds” “bra_serie-b_2024.rds”</p>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">walk</span>(fnames, \(x) <span class="fu">make_report</span>(x, cutoff_date))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="bra_serie-a_2024.rds" class="level1">
-<h1>bra_serie-a_2024.rds</h1>
-<section id="changes" class="level2">
-<h2 class="anchored" data-anchor-id="changes">Changes</h2>
+<p>Cutoff date: 2024-12-05 14:34:10.793743</p>
 <table class="table">
 <thead>
 <tr class="header">
-<th style="text-align: left;">team</th>
-<th style="text-align: right;">x1</th>
-<th style="text-align: right;">x6</th>
-<th style="text-align: right;">x12</th>
-<th style="text-align: right;">x16</th>
+<th style="text-align: right;">name</th>
+<th style="text-align: left;">value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Flamengo RJ</td>
-<td style="text-align: right;">-18</td>
-<td style="text-align: right;">-17</td>
-<td style="text-align: right;">-1</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Botafogo - RJ</td>
-<td style="text-align: right;">-26</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">São Paulo FC</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">31</td>
-<td style="text-align: right;">-1</td>
-<td style="text-align: right;">-1</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Atlético Mineiro</td>
-<td style="text-align: right;">48</td>
-<td style="text-align: right;">112</td>
-<td style="text-align: right;">34</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Bahia - BA</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">-3</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">-1</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Athletico Paranaense</td>
-<td style="text-align: right;">-11</td>
-<td style="text-align: right;">-27</td>
-<td style="text-align: right;">-12</td>
-<td style="text-align: right;">-2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Fortaleza - CE</td>
-<td style="text-align: right;">-6</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">32</td>
-<td style="text-align: right;">4</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Red Bull Bragantino</td>
-<td style="text-align: right;">-12</td>
-<td style="text-align: right;">-131</td>
-<td style="text-align: right;">-76</td>
-<td style="text-align: right;">-11</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Internacional</td>
-<td style="text-align: right;">-7</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">-3</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Cruzeiro</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">62</td>
-<td style="text-align: right;">8</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Palmeiras</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">53</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Juventude - RS</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">-40</td>
-<td style="text-align: right;">-121</td>
-<td style="text-align: right;">-35</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Grêmio Porto Alegre</td>
-<td style="text-align: right;">-1</td>
-<td style="text-align: right;">-2</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">-10</td>
+<td style="text-align: left;">alb_kategoria-superiore_2024-2025.rds</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Criciúma - SC</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">arm_premier-league_2024-2025.rds</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">bul_parva-liga_2024-2025.rds</td>
+</tr>
+<tr class="even">
 <td style="text-align: right;">4</td>
-<td style="text-align: right;">38</td>
-<td style="text-align: right;">28</td>
+<td style="text-align: left;">cze_1-fotbalova-liga_2024-2025.rds</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Corinthians SP</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">-3</td>
-<td style="text-align: right;">-34</td>
-<td style="text-align: right;">-29</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Fluminense RJ</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">-25</td>
-<td style="text-align: right;">2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Atlético Goianiense</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">-2</td>
-<td style="text-align: right;">-8</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Cuiabá - MT</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">27</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Vasco da Gama - RJ</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">11</td>
+<td style="text-align: left;">eng_premier-league_2024-2025.rds</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Vitória - BA</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">20</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">isr_ligat-haal_2024-2025.rds</td>
 </tr>
 </tbody>
 </table>
-</section>
+<section id="alb_kategoria-superiore_2024-2025.rds" class="level1">
+<h1>alb_kategoria-superiore_2024-2025.rds</h1>
 <section id="games" class="level2">
 <h2 class="anchored" data-anchor-id="games">Games</h2>
 <table class="table">
@@ -296,28 +112,120 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">2024-06-11 18:00:00</td>
-<td style="text-align: left;">Atlético Goianiense</td>
-<td style="text-align: left;">Corinthians SP</td>
-<td style="text-align: left;">2 - 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">2024-06-11 18:00:00</td>
-<td style="text-align: left;">Juventude - RS</td>
-<td style="text-align: left;">Vitória - BA</td>
+<td style="text-align: left;">2024-12-04 10:30:00</td>
+<td style="text-align: left;">KF Teuta Durrës</td>
+<td style="text-align: left;">KF Laçi</td>
 <td style="text-align: left;">1 - 1</td>
 </tr>
+<tr class="even">
+<td style="text-align: left;">2024-12-04 10:30:00</td>
+<td style="text-align: left;">AF Elbasani</td>
+<td style="text-align: left;">KF Bylis Ballsh</td>
+<td style="text-align: left;">3 - 1</td>
+</tr>
 <tr class="odd">
-<td style="text-align: left;">2024-06-11 19:00:00</td>
-<td style="text-align: left;">Botafogo - RJ</td>
-<td style="text-align: left;">Fluminense RJ</td>
-<td style="text-align: left;">1 - 0</td>
+<td style="text-align: left;">2024-12-04 13:30:00</td>
+<td style="text-align: left;">FK Vllaznia</td>
+<td style="text-align: left;">FC Dinamo City</td>
+<td style="text-align: left;">2 - 3</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">2024-06-11 20:30:00</td>
-<td style="text-align: left;">Red Bull Bragantino</td>
-<td style="text-align: left;">Atlético Mineiro</td>
-<td style="text-align: left;">1 - 2</td>
+<td style="text-align: left;">2024-12-05 11:00:00</td>
+<td style="text-align: left;">KF Skënderbeu</td>
+<td style="text-align: left;">KF Tiranë</td>
+<td style="text-align: left;">0 - 0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024-12-05 11:00:00</td>
+<td style="text-align: left;">FK Partizani</td>
+<td style="text-align: left;">Egnatia Rrogozhine</td>
+<td style="text-align: left;">1 - 1</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="changes" class="level2">
+<h2 class="anchored" data-anchor-id="changes">Changes</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">team</th>
+<th style="text-align: right;">x1</th>
+<th style="text-align: right;">x4</th>
+<th style="text-align: right;">x7</th>
+<th style="text-align: right;">x8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">FK Partizani</td>
+<td style="text-align: right;">-41</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Egnatia Rrogozhine</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FK Vllaznia</td>
+<td style="text-align: right;">-78</td>
+<td style="text-align: right;">-88</td>
+<td style="text-align: right;">-9</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FC Dinamo City</td>
+<td style="text-align: right;">111</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">KF Tiranë</td>
+<td style="text-align: right;">-2</td>
+<td style="text-align: right;">-39</td>
+<td style="text-align: right;">-20</td>
+<td style="text-align: right;">-8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AF Elbasani</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">144</td>
+<td style="text-align: right;">87</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">KF Laçi</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-11</td>
+<td style="text-align: right;">-41</td>
+<td style="text-align: right;">-9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">KF Teuta Durrës</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-19</td>
+<td style="text-align: right;">-44</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">KF Skënderbeu</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">KF Bylis Ballsh</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-3</td>
+<td style="text-align: right;">-50</td>
+<td style="text-align: right;">-99</td>
 </tr>
 </tbody>
 </table>
@@ -325,402 +233,171 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="odds-now" class="level2">
 <h2 class="anchored" data-anchor-id="odds-now">Odds now</h2>
 <table class="table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 30%">
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 8%">
+<col style="width: 8%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: right;">r</th>
 <th style="text-align: left;">team</th>
-<th style="text-align: right;">mean_rank</th>
-<th style="text-align: right;">g</th>
-<th style="text-align: right;">pt</th>
+<th style="text-align: right;">mn_rk</th>
+<th style="text-align: right;">row</th>
 <th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">pld</th>
 <th style="text-align: right;">1</th>
-<th style="text-align: right;">6</th>
-<th style="text-align: right;">12</th>
-<th style="text-align: right;">16</th>
+<th style="text-align: right;">4</th>
+<th style="text-align: right;">7</th>
+<th style="text-align: right;">8</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1</td>
-<td style="text-align: left;">Flamengo RJ</td>
-<td style="text-align: right;">3.393</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">296</td>
-<td style="text-align: right;">878</td>
-<td style="text-align: right;">996</td>
-<td style="text-align: right;">1000</td>
+<td style="text-align: left;">FK Partizani</td>
+<td style="text-align: right;">1.985</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">425</td>
+<td style="text-align: right;">984</td>
+<td style="text-align: right;">999</td>
+<td style="text-align: right;">999</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">2</td>
-<td style="text-align: left;">Botafogo - RJ</td>
-<td style="text-align: right;">3.586</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">16</td>
+<td style="text-align: left;">Egnatia Rrogozhine</td>
+<td style="text-align: right;">2.511</td>
+<td style="text-align: right;">3</td>
 <td style="text-align: right;">7</td>
-<td style="text-align: right;">242</td>
-<td style="text-align: right;">861</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">265</td>
+<td style="text-align: right;">949</td>
 <td style="text-align: right;">998</td>
 <td style="text-align: right;">1000</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">3</td>
-<td style="text-align: left;">São Paulo FC</td>
-<td style="text-align: right;">4.578</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">153</td>
-<td style="text-align: right;">764</td>
-<td style="text-align: right;">985</td>
-<td style="text-align: right;">999</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">4</td>
-<td style="text-align: left;">Atlético Mineiro</td>
-<td style="text-align: right;">4.736</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">111</td>
-<td style="text-align: right;">734</td>
-<td style="text-align: right;">992</td>
+<td style="text-align: left;">FC Dinamo City</td>
+<td style="text-align: right;">2.565</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">245</td>
+<td style="text-align: right;">919</td>
+<td style="text-align: right;">1000</td>
 <td style="text-align: right;">1000</td>
 </tr>
-<tr class="odd">
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">Bahia - BA</td>
-<td style="text-align: right;">5.926</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">68</td>
-<td style="text-align: right;">586</td>
-<td style="text-align: right;">968</td>
-<td style="text-align: right;">999</td>
-</tr>
 <tr class="even">
-<td style="text-align: right;">6</td>
-<td style="text-align: left;">Athletico Paranaense</td>
-<td style="text-align: right;">6.553</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">43</td>
-<td style="text-align: right;">526</td>
-<td style="text-align: right;">955</td>
-<td style="text-align: right;">997</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">7</td>
-<td style="text-align: left;">Fortaleza - CE</td>
-<td style="text-align: right;">6.961</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">29</td>
-<td style="text-align: right;">473</td>
-<td style="text-align: right;">939</td>
-<td style="text-align: right;">999</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">8</td>
-<td style="text-align: left;">Internacional</td>
-<td style="text-align: right;">7.678</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">26</td>
-<td style="text-align: right;">382</td>
-<td style="text-align: right;">918</td>
-<td style="text-align: right;">992</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">9</td>
-<td style="text-align: left;">Red Bull Bragantino</td>
-<td style="text-align: right;">8.867</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">244</td>
-<td style="text-align: right;">858</td>
-<td style="text-align: right;">989</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">10</td>
-<td style="text-align: left;">Cruzeiro</td>
-<td style="text-align: right;">9.424</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">-1</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">221</td>
-<td style="text-align: right;">806</td>
-<td style="text-align: right;">980</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">11</td>
-<td style="text-align: left;">Palmeiras</td>
-<td style="text-align: right;">9.524</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">195</td>
-<td style="text-align: right;">822</td>
-<td style="text-align: right;">986</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">12</td>
-<td style="text-align: left;">Juventude - RS</td>
-<td style="text-align: right;">12.125</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">-1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">60</td>
-<td style="text-align: right;">503</td>
-<td style="text-align: right;">927</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">13</td>
-<td style="text-align: left;">Criciúma - SC</td>
-<td style="text-align: right;">13.032</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">34</td>
-<td style="text-align: right;">395</td>
-<td style="text-align: right;">857</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">14</td>
-<td style="text-align: left;">Grêmio Porto Alegre</td>
-<td style="text-align: right;">13.234</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">-1</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">27</td>
-<td style="text-align: right;">376</td>
-<td style="text-align: right;">855</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">15</td>
-<td style="text-align: left;">Corinthians SP</td>
-<td style="text-align: right;">14.287</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">-3</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">230</td>
-<td style="text-align: right;">785</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">16</td>
-<td style="text-align: left;">Fluminense RJ</td>
-<td style="text-align: right;">15.230</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">-5</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">136</td>
-<td style="text-align: right;">660</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">17</td>
-<td style="text-align: left;">Atlético Goianiense</td>
-<td style="text-align: right;">15.849</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">-5</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">94</td>
-<td style="text-align: right;">558</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">18</td>
-<td style="text-align: left;">Cuiabá - MT</td>
-<td style="text-align: right;">18.063</td>
-<td style="text-align: right;">7</td>
 <td style="text-align: right;">4</td>
-<td style="text-align: right;">-8</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">173</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">19</td>
-<td style="text-align: left;">Vasco da Gama - RJ</td>
-<td style="text-align: right;">18.245</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">-10</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">155</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">20</td>
-<td style="text-align: left;">Vitória - BA</td>
-<td style="text-align: right;">18.709</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">-8</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">89</td>
-</tr>
-</tbody>
-</table>
-</section>
-</section>
-<section id="bra_serie-b_2024.rds" class="level1">
-<h1>bra_serie-b_2024.rds</h1>
-<section id="changes-1" class="level2">
-<h2 class="anchored" data-anchor-id="changes-1">Changes</h2>
-<table class="table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">team</th>
-<th style="text-align: right;">x1</th>
-<th style="text-align: right;">x4</th>
-<th style="text-align: right;">x16</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Goiás - GO</td>
-<td style="text-align: right;">-143</td>
-<td style="text-align: right;">-68</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Santos FC</td>
+<td style="text-align: left;">FK Vllaznia</td>
+<td style="text-align: right;">3.601</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
 <td style="text-align: right;">25</td>
-<td style="text-align: right;">-36</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">791</td>
+<td style="text-align: right;">990</td>
+<td style="text-align: right;">999</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">América - MG</td>
-<td style="text-align: right;">23</td>
-<td style="text-align: right;">36</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Ceará - CE</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Avaí - SC</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">-12</td>
-<td style="text-align: right;">6</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Sport Recife - PE</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">-53</td>
-<td style="text-align: right;">-2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Mirassol - SP</td>
-<td style="text-align: right;">30</td>
-<td style="text-align: right;">162</td>
-<td style="text-align: right;">11</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Coritiba - PR</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">-20</td>
-<td style="text-align: right;">-7</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Grêmio Novorizontino - SP</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">-13</td>
 <td style="text-align: right;">5</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Operário Ferroviário - PR</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Vila Nova - GO</td>
-<td style="text-align: right;">-3</td>
-<td style="text-align: right;">-11</td>
-<td style="text-align: right;">12</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">CR Brasil - AL</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">-16</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Chapecoense</td>
+<td style="text-align: left;">AF Elbasani</td>
+<td style="text-align: right;">5.726</td>
+<td style="text-align: right;">5</td>
 <td style="text-align: right;">-1</td>
-<td style="text-align: right;">-3</td>
-<td style="text-align: right;">-9</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">170</td>
+<td style="text-align: right;">881</td>
+<td style="text-align: right;">958</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Ponte Preta</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">KF Tiranë</td>
+<td style="text-align: right;">6.219</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">16</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">-13</td>
+<td style="text-align: right;">118</td>
+<td style="text-align: right;">795</td>
+<td style="text-align: right;">913</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Paysandu - PA</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">KF Laçi</td>
+<td style="text-align: right;">7.087</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">601</td>
+<td style="text-align: right;">802</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">KF Teuta Durrës</td>
+<td style="text-align: right;">7.680</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">399</td>
+<td style="text-align: right;">683</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">KF Skënderbeu</td>
+<td style="text-align: right;">8.258</td>
+<td style="text-align: right;">9</td>
 <td style="text-align: right;">-7</td>
 <td style="text-align: right;">14</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">276</td>
+<td style="text-align: right;">483</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Amazonas FC - AM</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">KF Bylis Ballsh</td>
+<td style="text-align: right;">9.368</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">-12</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">16</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">21</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Botafogo - SP</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">-5</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Brusque - SC</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">-1</td>
-<td style="text-align: right;">-14</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Ituano - SP</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">-10</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Guarani - SP</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">6</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">163</td>
 </tr>
 </tbody>
 </table>
 </section>
+</section>
+<section id="arm_premier-league_2024-2025.rds" class="level1">
+<h1>arm_premier-league_2024-2025.rds</h1>
 <section id="games-1" class="level2">
 <h2 class="anchored" data-anchor-id="games-1">Games</h2>
 <table class="table">
@@ -734,16 +411,103 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">2024-06-10 20:30:00</td>
-<td style="text-align: left;">Sport Recife - PE</td>
-<td style="text-align: left;">Paysandu - PA</td>
-<td style="text-align: left;">1 - 0</td>
+<td style="text-align: left;">2024-12-05 08:00:00</td>
+<td style="text-align: left;">BKMA Yerevan</td>
+<td style="text-align: left;">Gandzasar Kapan</td>
+<td style="text-align: left;">2 - 1</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="changes-1" class="level2">
+<h2 class="anchored" data-anchor-id="changes-1">Changes</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">team</th>
+<th style="text-align: right;">x1</th>
+<th style="text-align: right;">x3</th>
+<th style="text-align: right;">x9</th>
+<th style="text-align: right;">x10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">FC Noah</td>
+<td style="text-align: right;">-3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">2024-06-11 18:00:00</td>
-<td style="text-align: left;">Mirassol - SP</td>
-<td style="text-align: left;">Goiás - GO</td>
-<td style="text-align: left;">1 - 0</td>
+<td style="text-align: left;">Pyunik FC</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FC Ararat-Armenia</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FC Urartu</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FK Van</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-32</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Shirak FC</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BKMA Yerevan</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FC West Armenia</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FC Ararat</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-6</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FC Alashkert</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gandzasar Kapan</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-3</td>
 </tr>
 </tbody>
 </table>
@@ -751,239 +515,1834 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="odds-now-1" class="level2">
 <h2 class="anchored" data-anchor-id="odds-now-1">Odds now</h2>
 <table class="table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 28%">
+<col style="width: 11%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: right;">r</th>
 <th style="text-align: left;">team</th>
-<th style="text-align: right;">mean_rank</th>
-<th style="text-align: right;">g</th>
-<th style="text-align: right;">pt</th>
+<th style="text-align: right;">mn_rk</th>
+<th style="text-align: right;">row</th>
 <th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">pld</th>
 <th style="text-align: right;">1</th>
-<th style="text-align: right;">4</th>
-<th style="text-align: right;">16</th>
+<th style="text-align: right;">3</th>
+<th style="text-align: right;">9</th>
+<th style="text-align: right;">10</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1</td>
-<td style="text-align: left;">Goiás - GO</td>
-<td style="text-align: right;">2.223</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">530</td>
-<td style="text-align: right;">887</td>
+<td style="text-align: left;">FC Noah</td>
+<td style="text-align: right;">1.011</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">990</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
 <td style="text-align: right;">1000</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">2</td>
-<td style="text-align: left;">Santos FC</td>
-<td style="text-align: right;">4.816</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">123</td>
-<td style="text-align: right;">540</td>
-<td style="text-align: right;">999</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">América - MG</td>
-<td style="text-align: right;">4.949</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">90</td>
-<td style="text-align: right;">523</td>
-<td style="text-align: right;">1000</td>
-</tr>
-<tr class="even">
+<td style="text-align: left;">Pyunik FC</td>
+<td style="text-align: right;">2.730</td>
 <td style="text-align: right;">4</td>
-<td style="text-align: left;">Ceará - CE</td>
-<td style="text-align: right;">5.529</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">73</td>
-<td style="text-align: right;">441</td>
-<td style="text-align: right;">1000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">Avaí - SC</td>
-<td style="text-align: right;">6.038</td>
-<td style="text-align: right;">9</td>
 <td style="text-align: right;">17</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">51</td>
-<td style="text-align: right;">390</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">806</td>
+<td style="text-align: right;">1000</td>
 <td style="text-align: right;">1000</td>
 </tr>
-<tr class="even">
-<td style="text-align: right;">6</td>
-<td style="text-align: left;">Mirassol - SP</td>
-<td style="text-align: right;">6.187</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">50</td>
-<td style="text-align: right;">374</td>
-<td style="text-align: right;">997</td>
-</tr>
 <tr class="odd">
-<td style="text-align: right;">7</td>
-<td style="text-align: left;">Sport Recife - PE</td>
-<td style="text-align: right;">6.546</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">15</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">55</td>
-<td style="text-align: right;">338</td>
-<td style="text-align: right;">995</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">8</td>
-<td style="text-align: left;">Coritiba - PR</td>
-<td style="text-align: right;">8.636</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">146</td>
-<td style="text-align: right;">981</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">9</td>
-<td style="text-align: left;">Operário Ferroviário - PR</td>
-<td style="text-align: right;">9.748</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">15</td>
+<td style="text-align: left;">FC Ararat-Armenia</td>
+<td style="text-align: right;">3.131</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">91</td>
-<td style="text-align: right;">977</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">664</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">FC Urartu</td>
+<td style="text-align: right;">3.879</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">329</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">FK Van</td>
+<td style="text-align: right;">4.260</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">201</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Shirak FC</td>
+<td style="text-align: right;">6.686</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">-9</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">998</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">BKMA Yerevan</td>
+<td style="text-align: right;">6.925</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">-4</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">998</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">FC West Armenia</td>
+<td style="text-align: right;">8.172</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">-11</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">926</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">FC Ararat</td>
+<td style="text-align: right;">8.447</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">-15</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">888</td>
+<td style="text-align: right;">1000</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">10</td>
-<td style="text-align: left;">Grêmio Novorizontino - SP</td>
-<td style="text-align: right;">9.802</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">14</td>
+<td style="text-align: left;">FC Alashkert</td>
+<td style="text-align: right;">9.759</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">-20</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">17</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">97</td>
-<td style="text-align: right;">973</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">190</td>
+<td style="text-align: right;">1000</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">11</td>
-<td style="text-align: left;">Vila Nova - GO</td>
-<td style="text-align: right;">10.771</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">14</td>
+<td style="text-align: left;">Gandzasar Kapan</td>
+<td style="text-align: right;">11.000</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">-36</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">16</td>
 <td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="bul_parva-liga_2024-2025.rds" class="level1">
+<h1>bul_parva-liga_2024-2025.rds</h1>
+<section id="games-2" class="level2">
+<h2 class="anchored" data-anchor-id="games-2">Games</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">ko</th>
+<th style="text-align: left;">t1</th>
+<th style="text-align: left;">t2</th>
+<th style="text-align: left;">score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2024-12-03 05:30:00</td>
+<td style="text-align: left;">CSKA 1948 Sofia</td>
+<td style="text-align: left;">Septemvri Sofia</td>
+<td style="text-align: left;">2 - 0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024-12-03 08:00:00</td>
+<td style="text-align: left;">Cherno More Varna</td>
+<td style="text-align: left;">Lokomotiv Sofia</td>
+<td style="text-align: left;">4 - 0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024-12-03 10:30:00</td>
+<td style="text-align: left;">CSKA Sofia</td>
+<td style="text-align: left;">Spartak Varna</td>
+<td style="text-align: left;">3 - 1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024-12-04 05:30:00</td>
+<td style="text-align: left;">PFC Beroe</td>
+<td style="text-align: left;">Botev Vratsa</td>
+<td style="text-align: left;">5 - 1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024-12-04 08:00:00</td>
+<td style="text-align: left;">Arda Kardzhali</td>
+<td style="text-align: left;">PFC Ludogorets Razgrad</td>
+<td style="text-align: left;">0 - 4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024-12-04 10:30:00</td>
+<td style="text-align: left;">Levski Sofia</td>
+<td style="text-align: left;">Lokomotiv Plovdiv</td>
+<td style="text-align: left;">2 - 1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024-12-05 08:00:00</td>
+<td style="text-align: left;">Slavia Sofia</td>
+<td style="text-align: left;">Hebar Pazardzhik</td>
+<td style="text-align: left;">3 - 2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024-12-05 10:30:00</td>
+<td style="text-align: left;">Botev Plovdiv</td>
+<td style="text-align: left;">FK Krumovgrad</td>
+<td style="text-align: left;">1 - 0</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="changes-2" class="level2">
+<h2 class="anchored" data-anchor-id="changes-2">Changes</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">team</th>
+<th style="text-align: right;">x1</th>
+<th style="text-align: right;">x4</th>
+<th style="text-align: right;">x8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">PFC Ludogorets Razgrad</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Botev Plovdiv</td>
+<td style="text-align: right;">-3</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Levski Sofia</td>
+<td style="text-align: right;">-3</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cherno More Varna</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Arda Kardzhali</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-99</td>
+<td style="text-align: right;">-13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Spartak Varna</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-100</td>
+<td style="text-align: right;">-17</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CSKA Sofia</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">130</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PFC Beroe</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">94</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FK Krumovgrad</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-142</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CSKA 1948 Sofia</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Slavia Sofia</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Septemvri Sofia</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-16</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lokomotiv Plovdiv</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lokomotiv Sofia</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Botev Vratsa</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hebar Pazardzhik</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="odds-now-2" class="level2">
+<h2 class="anchored" data-anchor-id="odds-now-2">Odds now</h2>
+<table class="table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 36%">
+<col style="width: 11%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: right;">mn_rk</th>
+<th style="text-align: right;">row</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">pld</th>
+<th style="text-align: right;">1</th>
+<th style="text-align: right;">4</th>
+<th style="text-align: right;">8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">57</td>
-<td style="text-align: right;">954</td>
+<td style="text-align: left;">PFC Ludogorets Razgrad</td>
+<td style="text-align: right;">1.013</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">988</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Botev Plovdiv</td>
+<td style="text-align: right;">2.822</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">951</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Cherno More Varna</td>
+<td style="text-align: right;">3.163</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">933</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Levski Sofia</td>
+<td style="text-align: right;">3.329</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">892</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Arda Kardzhali</td>
+<td style="text-align: right;">5.816</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">981</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Spartak Varna</td>
+<td style="text-align: right;">5.938</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">975</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">CSKA Sofia</td>
+<td style="text-align: right;">7.169</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">871</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">PFC Beroe</td>
+<td style="text-align: right;">7.368</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">828</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">CSKA 1948 Sofia</td>
+<td style="text-align: right;">10.003</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">-4</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">126</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Slavia Sofia</td>
+<td style="text-align: right;">10.182</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">-5</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">112</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">FK Krumovgrad</td>
+<td style="text-align: right;">10.307</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">-5</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">93</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">12</td>
-<td style="text-align: left;">CR Brasil - AL</td>
-<td style="text-align: right;">11.213</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">-1</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">61</td>
-<td style="text-align: right;">914</td>
+<td style="text-align: left;">Lokomotiv Plovdiv</td>
+<td style="text-align: right;">12.464</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">-10</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">9</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">13</td>
-<td style="text-align: left;">Chapecoense</td>
-<td style="text-align: right;">12.277</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: left;">Septemvri Sofia</td>
+<td style="text-align: right;">12.552</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-13</td>
 <td style="text-align: right;">16</td>
-<td style="text-align: right;">881</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">14</td>
-<td style="text-align: left;">Paysandu - PA</td>
-<td style="text-align: right;">13.145</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">-2</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">845</td>
+<td style="text-align: left;">Lokomotiv Sofia</td>
+<td style="text-align: right;">13.894</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">-20</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">15</td>
-<td style="text-align: left;">Ponte Preta</td>
-<td style="text-align: right;">13.404</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">-3</td>
+<td style="text-align: left;">Botev Vratsa</td>
+<td style="text-align: right;">14.872</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">-24</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">18</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">796</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">16</td>
-<td style="text-align: left;">Amazonas FC - AM</td>
-<td style="text-align: right;">13.660</td>
+<td style="text-align: left;">Hebar Pazardzhik</td>
+<td style="text-align: right;">15.108</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">-16</td>
 <td style="text-align: right;">9</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cze_1-fotbalova-liga_2024-2025.rds" class="level1">
+<h1>cze_1-fotbalova-liga_2024-2025.rds</h1>
+<section id="games-3" class="level2">
+<h2 class="anchored" data-anchor-id="games-3">Games</h2>
+<table class="table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 29%">
+<col style="width: 33%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">ko</th>
+<th style="text-align: left;">t1</th>
+<th style="text-align: left;">t2</th>
+<th style="text-align: left;">score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2024-12-03 13:00:00</td>
+<td style="text-align: left;">AC Sparta Praha</td>
+<td style="text-align: left;">MFK Karviná</td>
+<td style="text-align: left;">4 - 1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024-12-04 11:30:00</td>
+<td style="text-align: left;">FK Pardubice</td>
+<td style="text-align: left;">Sigma Olomouc</td>
+<td style="text-align: left;">2 - 2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024-12-04 11:30:00</td>
+<td style="text-align: left;">FK Dukla Praha</td>
+<td style="text-align: left;">1. FC Slovácko</td>
+<td style="text-align: left;">1 - 2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024-12-04 11:30:00</td>
+<td style="text-align: left;">FK Jablonec</td>
+<td style="text-align: left;">Dynamo České Budějovice</td>
+<td style="text-align: left;">5 - 0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024-12-04 14:00:00</td>
+<td style="text-align: left;">Bohemians Praha 1905</td>
+<td style="text-align: left;">FC Hradec Králové</td>
+<td style="text-align: left;">0 - 3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024-12-05 11:30:00</td>
+<td style="text-align: left;">FK Mladá Boleslav</td>
+<td style="text-align: left;">Slovan Liberec</td>
+<td style="text-align: left;">1 - 0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024-12-05 11:30:00</td>
+<td style="text-align: left;">Baník Ostrava</td>
+<td style="text-align: left;">Slavia Praha</td>
+<td style="text-align: left;">0 - 1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024-12-05 14:00:00</td>
+<td style="text-align: left;">Viktoria Plzeň</td>
+<td style="text-align: left;">FK Teplice</td>
+<td style="text-align: left;">1 - 1</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="changes-3" class="level2">
+<h2 class="anchored" data-anchor-id="changes-3">Changes</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">team</th>
+<th style="text-align: right;">x1</th>
+<th style="text-align: right;">x6</th>
+<th style="text-align: right;">x10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Slavia Praha</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Viktoria Plzeň</td>
+<td style="text-align: right;">-35</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Baník Ostrava</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-13</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FK Jablonec</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AC Sparta Praha</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FK Mladá Boleslav</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Slovan Liberec</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-104</td>
+<td style="text-align: right;">-50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sigma Olomouc</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-39</td>
+<td style="text-align: right;">-40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bohemians Praha 1905</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-52</td>
+<td style="text-align: right;">-207</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1. FC Slovácko</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">119</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FC Hradec Králové</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">227</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MFK Karviná</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-49</td>
+<td style="text-align: right;">-143</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FK Teplice</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FK Pardubice</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FK Dukla Praha</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dynamo České Budějovice</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="odds-now-3" class="level2">
+<h2 class="anchored" data-anchor-id="odds-now-3">Odds now</h2>
+<table class="table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 37%">
+<col style="width: 10%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: right;">mn_rk</th>
+<th style="text-align: right;">row</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">pld</th>
+<th style="text-align: right;">1</th>
+<th style="text-align: right;">6</th>
+<th style="text-align: right;">10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Slavia Praha</td>
+<td style="text-align: right;">1.009</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">991</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Viktoria Plzeň</td>
+<td style="text-align: right;">2.225</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">FK Jablonec</td>
+<td style="text-align: right;">4.142</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">956</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Baník Ostrava</td>
+<td style="text-align: right;">4.148</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">951</td>
+<td style="text-align: right;">999</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">AC Sparta Praha</td>
+<td style="text-align: right;">4.308</td>
+<td style="text-align: right;">3</td>
 <td style="text-align: right;">11</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">947</td>
+<td style="text-align: right;">999</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">FK Mladá Boleslav</td>
+<td style="text-align: right;">6.702</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">510</td>
+<td style="text-align: right;">972</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Slovan Liberec</td>
+<td style="text-align: right;">8.316</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">209</td>
+<td style="text-align: right;">826</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">FC Hradec Králové</td>
+<td style="text-align: right;">8.584</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">164</td>
+<td style="text-align: right;">803</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Sigma Olomouc</td>
+<td style="text-align: right;">9.126</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">-3</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">121</td>
+<td style="text-align: right;">724</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">1. FC Slovácko</td>
+<td style="text-align: right;">9.338</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">-6</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">688</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">MFK Karviná</td>
+<td style="text-align: right;">10.694</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">406</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">Bohemians Praha 1905</td>
+<td style="text-align: right;">10.883</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">-5</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">380</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">FK Teplice</td>
+<td style="text-align: right;">11.833</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">-6</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">196</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">FK Pardubice</td>
+<td style="text-align: right;">14.088</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">-9</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">FK Dukla Praha</td>
+<td style="text-align: right;">14.607</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">-19</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">Dynamo České Budějovice</td>
+<td style="text-align: right;">15.997</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">-40</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="eng_premier-league_2024-2025.rds" class="level1">
+<h1>eng_premier-league_2024-2025.rds</h1>
+<section id="games-4" class="level2">
+<h2 class="anchored" data-anchor-id="games-4">Games</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">ko</th>
+<th style="text-align: left;">t1</th>
+<th style="text-align: left;">t2</th>
+<th style="text-align: left;">score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2024-12-03 14:30:00</td>
+<td style="text-align: left;">Ipswich Town</td>
+<td style="text-align: left;">Crystal Palace</td>
+<td style="text-align: left;">0 - 1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024-12-03 15:15:00</td>
+<td style="text-align: left;">Leicester City</td>
+<td style="text-align: left;">West Ham United</td>
+<td style="text-align: left;">3 - 1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024-12-04 14:30:00</td>
+<td style="text-align: left;">Everton FC</td>
+<td style="text-align: left;">Wolverhampton Wanderers</td>
+<td style="text-align: left;">4 - 0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024-12-04 14:30:00</td>
+<td style="text-align: left;">Manchester City</td>
+<td style="text-align: left;">Nottingham Forest</td>
+<td style="text-align: left;">3 - 0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024-12-04 14:30:00</td>
+<td style="text-align: left;">Newcastle United</td>
+<td style="text-align: left;">Liverpool FC</td>
+<td style="text-align: left;">3 - 3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024-12-04 14:30:00</td>
+<td style="text-align: left;">Southampton FC</td>
+<td style="text-align: left;">Chelsea FC</td>
+<td style="text-align: left;">1 - 5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024-12-04 15:15:00</td>
+<td style="text-align: left;">Arsenal FC</td>
+<td style="text-align: left;">Manchester United</td>
+<td style="text-align: left;">2 - 0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024-12-04 15:15:00</td>
+<td style="text-align: left;">Aston Villa</td>
+<td style="text-align: left;">Brentford FC</td>
+<td style="text-align: left;">3 - 1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024-12-05 14:30:00</td>
+<td style="text-align: left;">Fulham FC</td>
+<td style="text-align: left;">Brighton &amp; Hove Albion</td>
+<td style="text-align: left;">3 - 1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024-12-05 15:15:00</td>
+<td style="text-align: left;">AFC Bournemouth</td>
+<td style="text-align: left;">Tottenham Hotspur</td>
+<td style="text-align: left;">1 - 0</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="changes-4" class="level2">
+<h2 class="anchored" data-anchor-id="changes-4">Changes</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">team</th>
+<th style="text-align: right;">x1</th>
+<th style="text-align: right;">x4</th>
+<th style="text-align: right;">x5</th>
+<th style="text-align: right;">x17</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Liverpool FC</td>
+<td style="text-align: right;">-132</td>
 <td style="text-align: right;">-3</td>
 <td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Arsenal FC</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: right;">69</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chelsea FC</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tottenham Hotspur</td>
+<td style="text-align: right;">-5</td>
+<td style="text-align: right;">-98</td>
+<td style="text-align: right;">-114</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brighton &amp; Hove Albion</td>
+<td style="text-align: right;">-9</td>
+<td style="text-align: right;">-191</td>
+<td style="text-align: right;">-216</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Manchester City</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">144</td>
+<td style="text-align: right;">199</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Nottingham Forest</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-65</td>
+<td style="text-align: right;">-116</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Manchester United</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-17</td>
+<td style="text-align: right;">-47</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AFC Bournemouth</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">101</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Newcastle United</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brentford FC</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-20</td>
+<td style="text-align: right;">-41</td>
+<td style="text-align: right;">-5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Aston Villa</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fulham FC</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">West Ham United</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-56</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wolverhampton Wanderers</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-253</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Crystal Palace</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">106</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Leicester City</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">189</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ipswich Town</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-207</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Everton FC</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">275</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Southampton FC</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-57</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="odds-now-4" class="level2">
+<h2 class="anchored" data-anchor-id="odds-now-4">Odds now</h2>
+<table class="table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 35%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: right;">mn_rk</th>
+<th style="text-align: right;">row</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">pld</th>
+<th style="text-align: right;">1</th>
+<th style="text-align: right;">4</th>
+<th style="text-align: right;">5</th>
+<th style="text-align: right;">17</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Liverpool FC</td>
+<td style="text-align: right;">1.400</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">714</td>
+<td style="text-align: right;">996</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Chelsea FC</td>
+<td style="text-align: right;">2.780</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">912</td>
+<td style="text-align: right;">962</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Arsenal FC</td>
+<td style="text-align: right;">2.804</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">140</td>
+<td style="text-align: right;">906</td>
+<td style="text-align: right;">950</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Manchester City</td>
+<td style="text-align: right;">5.111</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">457</td>
+<td style="text-align: right;">669</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Tottenham Hotspur</td>
+<td style="text-align: right;">5.951</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">316</td>
+<td style="text-align: right;">495</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Brighton &amp; Hove Albion</td>
+<td style="text-align: right;">7.127</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">157</td>
+<td style="text-align: right;">307</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">AFC Bournemouth</td>
+<td style="text-align: right;">8.034</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">186</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
 <td style="text-align: right;">8</td>
-<td style="text-align: right;">800</td>
+<td style="text-align: left;">Newcastle United</td>
+<td style="text-align: right;">9.402</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">88</td>
+<td style="text-align: right;">998</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Nottingham Forest</td>
+<td style="text-align: right;">9.446</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Aston Villa</td>
+<td style="text-align: right;">9.499</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">102</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">Fulham FC</td>
+<td style="text-align: right;">9.967</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">68</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">Manchester United</td>
+<td style="text-align: right;">10.026</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">999</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">Brentford FC</td>
+<td style="text-align: right;">11.085</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">993</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">West Ham United</td>
+<td style="text-align: right;">14.797</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">-9</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">894</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">Crystal Palace</td>
+<td style="text-align: right;">15.593</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">-6</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">822</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">Leicester City</td>
+<td style="text-align: right;">16.133</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">-9</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">718</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">17</td>
-<td style="text-align: left;">Botafogo - SP</td>
-<td style="text-align: right;">16.476</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">-6</td>
+<td style="text-align: left;">Everton FC</td>
+<td style="text-align: right;">16.187</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">14</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">415</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">720</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">18</td>
-<td style="text-align: left;">Brusque - SC</td>
-<td style="text-align: right;">17.102</td>
+<td style="text-align: left;">Wolverhampton Wanderers</td>
+<td style="text-align: right;">17.095</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">-14</td>
 <td style="text-align: right;">9</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">-9</td>
+<td style="text-align: right;">14</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">299</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">522</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">19</td>
-<td style="text-align: left;">Ituano - SP</td>
-<td style="text-align: right;">18.362</td>
+<td style="text-align: left;">Ipswich Town</td>
+<td style="text-align: right;">18.043</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">-12</td>
 <td style="text-align: right;">9</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">-10</td>
+<td style="text-align: right;">14</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">124</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">289</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">20</td>
-<td style="text-align: left;">Guarani - SP</td>
-<td style="text-align: right;">19.116</td>
-<td style="text-align: right;">9</td>
+<td style="text-align: left;">Southampton FC</td>
+<td style="text-align: right;">19.520</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">-19</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">45</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="isr_ligat-haal_2024-2025.rds" class="level1">
+<h1>isr_ligat-haal_2024-2025.rds</h1>
+<section id="games-5" class="level2">
+<h2 class="anchored" data-anchor-id="games-5">Games</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">ko</th>
+<th style="text-align: left;">t1</th>
+<th style="text-align: left;">t2</th>
+<th style="text-align: left;">score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2024-12-03 12:45:00</td>
+<td style="text-align: left;">Bnei Sachnin FC</td>
+<td style="text-align: left;">Hapoel Haifa</td>
+<td style="text-align: left;">0 - 2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024-12-03 13:00:00</td>
+<td style="text-align: left;">Maccabi Netanya</td>
+<td style="text-align: left;">FC Ashdod</td>
+<td style="text-align: left;">2 - 2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024-12-04 12:45:00</td>
+<td style="text-align: left;">Ironi Kiryat Shmona</td>
+<td style="text-align: left;">Hapoel Jerusalem</td>
+<td style="text-align: left;">2 - 0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024-12-04 13:00:00</td>
+<td style="text-align: left;">Beitar Jerusalem</td>
+<td style="text-align: left;">Maccabi Petach-Tikva</td>
+<td style="text-align: left;">5 - 0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024-12-04 13:30:00</td>
+<td style="text-align: left;">Maccabi Haifa</td>
+<td style="text-align: left;">Hapoel Be’er Sheva</td>
+<td style="text-align: left;">0 - 2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024-12-05 12:45:00</td>
+<td style="text-align: left;">Maccabi Bnei Raina</td>
+<td style="text-align: left;">Ironi Tiberias</td>
+<td style="text-align: left;">1 - 0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024-12-05 13:00:00</td>
+<td style="text-align: left;">Maccabi Tel Aviv</td>
+<td style="text-align: left;">Hapoel Hadera</td>
+<td style="text-align: left;">2 - 2</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="changes-5" class="level2">
+<h2 class="anchored" data-anchor-id="changes-5">Changes</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">team</th>
+<th style="text-align: right;">x1</th>
+<th style="text-align: right;">x6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Maccabi Tel Aviv</td>
+<td style="text-align: right;">-181</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Maccabi Haifa</td>
+<td style="text-align: right;">-199</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hapoel Be’er Sheva</td>
+<td style="text-align: right;">264</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Beitar Jerusalem</td>
+<td style="text-align: right;">111</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Maccabi Bnei Raina</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">31</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hapoel Haifa</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">172</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ironi Kiryat Shmona</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">171</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bnei Sachnin FC</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-157</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hapoel Jerusalem</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-128</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FC Ashdod</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Maccabi Petach-Tikva</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-25</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Maccabi Netanya</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ironi Tiberias</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hapoel Hadera</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-1</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="odds-now-5" class="level2">
+<h2 class="anchored" data-anchor-id="odds-now-5">Odds now</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: right;">mn_rk</th>
+<th style="text-align: right;">row</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">pld</th>
+<th style="text-align: right;">1</th>
+<th style="text-align: right;">6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Hapoel Be’er Sheva</td>
+<td style="text-align: right;">1.836</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">514</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Beitar Jerusalem</td>
+<td style="text-align: right;">2.564</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">221</td>
+<td style="text-align: right;">998</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Maccabi Tel Aviv</td>
+<td style="text-align: right;">2.841</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">152</td>
+<td style="text-align: right;">999</td>
+</tr>
+<tr class="even">
 <td style="text-align: right;">4</td>
-<td style="text-align: right;">-10</td>
+<td style="text-align: left;">Maccabi Haifa</td>
+<td style="text-align: right;">3.059</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">108</td>
+<td style="text-align: right;">998</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Maccabi Bnei Raina</td>
+<td style="text-align: right;">5.491</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">829</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Hapoel Haifa</td>
+<td style="text-align: right;">6.695</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">509</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Ironi Kiryat Shmona</td>
+<td style="text-align: right;">6.930</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">-2</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">433</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Bnei Sachnin FC</td>
+<td style="text-align: right;">8.708</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">-6</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">120</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Hapoel Jerusalem</td>
+<td style="text-align: right;">9.505</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">-5</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">53</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">FC Ashdod</td>
+<td style="text-align: right;">9.536</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">-3</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">Maccabi Petach-Tikva</td>
+<td style="text-align: right;">11.471</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">-14</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">Maccabi Netanya</td>
+<td style="text-align: right;">11.542</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">-9</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">Ironi Tiberias</td>
+<td style="text-align: right;">12.019</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-11</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">Hapoel Hadera</td>
+<td style="text-align: right;">12.803</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">-11</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">12</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">50</td>
 </tr>
 </tbody>
 </table>

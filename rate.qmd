@@ -10,16 +10,42 @@ library(posterior)
 library(cmdstanr)
 options(mc.cores = 4)
 source("functions.R")
+source("functions2.R")
 source("rate_functions.R")
 source("predictions_functions.R")
 ```
+
+## new for league_urls.csv (seems to work)
+
+## next rate date
+
+```{r}
+source("functions2.R")
+all_next_rate_date_url(league_urls) -> l0
+l0 %>% select(name, next_rate_after, next_rate_before, dow_before, star) %>% 
+  View("League rate dates")
+l0  %>% 
+  filter(next_rate_after < now()) -> l1
+l1
+```
+
+## new ratings
+
+```{r}
+#| warning: false
+l1 %>% update_rate_url()
+xxx <- make_all_ranks_url(league_urls)
+update_predictions_url(league_urls)
+```
+
+## OLD
 
 ## next rate thing
 
 ```{r}
 all_next_rate_date(leagues) -> leagues0
 leagues0 %>% 
-  select(fname, next_rate, dow) %>% View("League rate dates")
+  select(name, next_rate, dow) %>% View("League rate dates")
 leagues0  %>% 
   filter(next_rate < now()) -> leagues1
 ```

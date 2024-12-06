@@ -1,0 +1,39 @@
+```{r}
+library(tidyverse)
+source("functions.R")
+source("sim-league_functions.R")
+```
+
+do I have leagues?
+
+```{r}
+leagues
+```
+
+how do I get from here to urls?
+
+```{r}
+i <- 91
+lgrds <- with(leagues[i,], make_fname(country, league, season, part, prefix = ""))
+lgrds
+the_url <- make_url(lgrds)
+the_url
+```
+
+```{r}
+get_league_table_url(lgrds)
+```
+
+maybe what I need is a spreadsheet that has the schedule url and the league table url for each league
+which I can presumably make from the leagues df and then edit
+
+```{r}
+leagues %>% 
+  rowwise() %>% 
+  mutate(rds_name = make_fname(country, league, season, part, prefix = "")) %>% 
+  mutate(schedule_url = make_url(rds_name)) %>% 
+  mutate(table_url = get_league_table_url(rds_name)) %>% 
+  select(rds_name:table_url) %>% 
+  write_csv("league_urls.csv")
+```
+

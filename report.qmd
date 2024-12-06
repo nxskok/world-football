@@ -5,13 +5,18 @@ editor: visual
 ---
 
 ```{r}
+#| echo: false
+#| message: false
 library(tidyverse)
 library(knitr)
 # library(tinytable)
 source("report_functions.R")
 # cutoff_date <- ymd_hm("2023-08-23 12:00", tz = 'America/Toronto') # remember!
 cutoff_date <- now() - hours(4)
+
 ```
+
+Cutoff date: `r cutoff_date`
 
 ```{r}
 #| echo: false
@@ -22,16 +27,18 @@ make_report <- function(rdsname, cutoff_date) {
                          "Nothing to say.\n"))
   } else {
     a <- knit_expand(text = c("# {{rdsname}}",
-                         # "## M-times", {{as.POSIXct(tables[[4]])}},     
-                         "## Changes", "{{kable(tables[[1]])}}",
+                         # "## M-times", {{as.POSIXct(tables[[4]])}},
                          "## Games", "{{kable(tables[[2]])}}",
-                         "## Odds now", "{{kable(tables[[3]])}}"))
+                         "## Changes", "{{kable(tables[[1]])}}",
+                         "## Odds now", "{{kable(tables[[3]])}}"
+                         ))
   }
   cat(a, sep = "\n")
 }
 ```
 
 ```{r}
+#| echo: false
 #| output: asis
 list.files(path = "fit", pattern = "\\.rds", full.names = TRUE) %>% 
   enframe(name = NULL, value = "fname") %>% 
@@ -39,6 +46,13 @@ list.files(path = "fit", pattern = "\\.rds", full.names = TRUE) %>%
   filter(mtime > cutoff_date) %>% 
   mutate(fname = str_remove(fname, "^fit/")) %>% 
   pull(fname) -> fnames
-fnames
+fnames %>% enframe() %>% kable()
+
+```
+
+```{r}
+#| echo: false
+#| output: asis
+
 walk(fnames, \(x) make_report(x, cutoff_date))
 ```

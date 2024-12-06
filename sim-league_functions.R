@@ -41,12 +41,16 @@ get_league_table <- function(my_url) {
     filter(col %in% c(3, 4, 9, 10)) %>%
     pivot_wider(names_from = col, values_from = text) %>%
     rename(team = "3", played = "4", gd = "9", pts = "10") %>%
+    mutate(team = str_remove_all(team, "\\t")) %>%
     mutate(team = str_remove(team, "^\\n")) %>%
     mutate(team = str_remove(team, "\\n.*$")) %>%
     mutate(team = str_remove(team, "\\n$")) -> table
-  # table %>% # mutate(r = row_number()) %>%
-  #   select(r, everything()) -> table
-  # # return(table)
+  table %>% mutate(
+    row = as.double(row),
+    pld = as.double(played),
+    pts = as.double(pts),
+    gd = as.double(gd)
+  ) -> table
   enframe(colours, name = NULL) %>%
     mutate(row = gl(nt, 10)) %>%
     mutate(col = gl(10, 1, nt*10)) %>%
@@ -129,10 +133,79 @@ sample_from_ppd <- function(with_ppd, lt) {
     arrange(desc(pt), desc(gd)) %>% mutate(rank = row_number())
 }
 
+sample_from_ppd <- function(with_ppd, lt) {
+  with_ppd %>% mutate(score = with(ppd, sample(score, 1, prob = p))) %>%
+    mutate(points = list(points_from_score(score))) %>%
+    unnest_wider(points, names_sep = "_") %>%
+    rowwise() %>%
+    mutate(gd = list(gd_from_score(score))) %>%
+    unnest_wider(gd, names_sep = "_") %>%
+    select(t1, t2, points_1, points_2, gd_1, gd_2) -> sim
+  sim %>% select(ends_with("1")) -> sim1
+  sim %>% select(ends_with("2")) -> sim2
+  sim1 %>% group_by(team = t1) %>%
+    summarize(g = n(), pt = sum(points_1), gd = sum(gd_1)) -> sum1
+  sim2 %>% group_by(team = t2) %>%
+    summarize(g = n(), pt = sum(points_2), gd = sum(gd_2)) -> sum2
+  bind_rows(lt$table, sum1, sum2) %>%
+    group_by(team) %>%
+    summarize(across(g:gd, \(x) sum(x))) %>%
+    arrange(desc(pt), desc(gd)) %>% mutate(rank = row_number())
+}
+
+sample_from_ppd_url <- function(with_ppd, lt) {
+  with_ppd %>% mutate(score = with(ppd, sample(score, 1, prob = p))) %>%
+    mutate(points = list(points_from_score(score))) %>%
+    unnest_wider(points, names_sep = "_") %>%
+    rowwise() %>%
+    mutate(gd = list(gd_from_score(score))) %>%
+    unnest_wider(gd, names_sep = "_") %>%
+    select(t1, t2, points_1, points_2, gd_1, gd_2) -> sim
+  sim %>% select(ends_with("1")) -> sim1
+  sim %>% select(ends_with("2")) -> sim2
+  sim1 %>% group_by(team = t1) %>%
+    summarize(g = n(), pt = sum(points_1), gd = sum(gd_1)) -> sum1
+  sim2 %>% group_by(team = t2) %>%
+    summarize(g = n(), pt = sum(points_2), gd = sum(gd_2)) -> sum2
+  lt$table %>%
+    rename(g = pld,
+           pt = pts) %>%
+    bind_rows(sum1, sum2) %>%
+    group_by(team) %>%
+    summarize(across(gd:g, \(x) sum(x))) %>%
+    arrange(desc(pt), desc(gd)) %>% mutate(rank = row_number())
+}
+
+
 sample_many_from_ppd <- function(with_ppd, lt, n_sim = 1000) {
   tibble(sim_count = 1:n_sim) %>%
     rowwise() %>%
     mutate(sim = list(sample_from_ppd(with_ppd, lt))) %>%
+    pull(sim) %>% bind_rows() -> dd
+
+  dd %>%
+    group_by(team) %>%
+    summarize(mean_rank = mean(rank)) %>%
+    arrange(mean_rank) %>%
+    mutate(r = row_number())-> mean_ranks
+
+  dd %>%
+    rowwise() %>%
+    mutate(cutoff = list(lt$ranks)) %>%
+    unnest(cutoff) %>%
+    mutate(is_in = rank <= cutoff) %>%
+    group_by(team, cutoff) %>%
+    summarise(total = sum(is_in)) %>%
+    pivot_wider(names_from = cutoff, values_from = total) -> d3 # or keep it long for now
+
+  mean_ranks %>% left_join(lt$table, join_by(team)) %>% left_join(d3, join_by(team))
+  # mean_ranks %>% left_join(lt$table) %>% left_join(d3)
+}
+
+sample_many_from_ppd_url <- function(with_ppd, lt, n_sim = 1000) {
+  tibble(sim_count = 1:n_sim) %>%
+    rowwise() %>%
+    mutate(sim = list(sample_from_ppd_url(with_ppd, lt))) %>%
     pull(sim) %>% bind_rows() -> dd
 
   dd %>%
@@ -184,6 +257,7 @@ sample_from_rdsname <- function(rdsname, n_sim = 1000) {
   # next line from logr
   # log_print(rdsname, console = FALSE)
   ltt <- league_table_from_rdsname(rdsname) # has table in table, ranks to sim for in ranks
+  if (1 %in% ltt$ranks) {} else {ltt$ranks = c(1, ltt$ranks)} # this got missed out
   games <- get_unplayed(rdsname)
   if (nrow(games) > 0) {
     with_ppd <- get_with_ppd(rdsname, games)
@@ -196,6 +270,31 @@ sample_from_rdsname <- function(rdsname, n_sim = 1000) {
   log_print(glue::glue("Done {rdsname}"), console = FALSE)
   sim
 }
+
+# below, get league table url from league_urls
+
+sample_from_rdsname_url <- function(input_list, n_sim = 1000) {
+  # input list: 1st is table url, second is rds file
+  # print(rdsname)
+  # print(now())
+  # next line from logr
+  # log_print(rdsname, console = FALSE)
+  ltt <- get_league_table(input_list[[1]]) # has table in table, ranks to sim for in ranks
+  if (1 %in% ltt$ranks) {} else {ltt$ranks = c(1, ltt$ranks)}
+  rdsname <- input_list[[2]]
+  games <- get_unplayed(rdsname)
+  if (nrow(games) > 0) {
+    with_ppd <- get_with_ppd(rdsname, games)
+    sample_many_from_ppd_url(with_ppd, ltt, n_sim) -> sim
+  } else {
+    sim <- make_no_sim(ltt)
+  }
+  fname <- make_sim_fname(rdsname)
+  write_rds(sim, fname)
+  log_print(glue::glue("Done {rdsname}"), console = FALSE)
+  sim
+}
+
 
 last_sim <- function(rdsname) {
   fname <- str_replace(rdsname, "\\.rds$", "")
@@ -227,5 +326,33 @@ sim_as_needed <- function(leagues) {
   # print("")
   log_print(fnames)
   fnames %>% walk(\(x) sample_from_rdsname(x), .progress = TRUE)
+  now()
+}
+
+sim_as_needed_url <- function(leagues) {
+  # print(now())
+  leagues %>% rowwise() %>%
+    select(name, rds_name, table_url) %>%
+    mutate(last_simul = last_sim(rds_name)) %>%
+    mutate(last_fit = file.mtime(str_c("fit/", rds_name))) %>%
+    mutate(fit_size = file.size(str_c("fit/", rds_name))) %>%
+    mutate(needs_doing = case_when(
+      is.na(last_fit)   ~ "no",
+      fit_size < 100    ~ "no",
+      is.na(last_simul) ~ "yes",
+      last_fit > last_simul ~ "yes",
+      .default = "no"
+    )) %>%
+    filter(needs_doing == "yes") %>%
+    ungroup() %>%
+    slice_sample(prop = 1) -> needed
+  needed %>% pull(rds_name) -> rds_names
+  needed %>% pull(table_url) -> table_urls
+  needed %>% pull(name) -> names
+  # return(list(rds_names, table_urls))
+  # print(fnames)
+  # print("")
+  log_print(names)
+  walk2(table_urls, rds_names, \(x, y) sample_from_rdsname_url(list(x, y)), .progress = TRUE)
   now()
 }

@@ -1,0 +1,36 @@
+what's up with Mexico and sim-league?
+
+```{r}
+library(tidyverse)
+source("sim-league_functions.R")
+fname <- "mex_primera-division_2024-2025_apertura_2.rds"
+mex <- read_rds(str_c("fit/", fname))
+mex
+```
+
+that looks at least vaguely reasonable
+
+```{r}
+sample_from_rdsname(fname)
+```
+
+```{r}
+  ltt <- league_table_from_rdsname(fname) # has table in table, ranks to sim for in ranks
+  games <- get_unplayed(rdsname)
+  if (nrow(games) > 0) {
+    with_ppd <- get_with_ppd(rdsname, games)
+    sample_many_from_ppd(with_ppd, ltt, n_sim) -> sim
+  } else {
+    sim <- make_no_sim(ltt)
+  }
+  fname <- make_sim_fname(rdsname)
+
+```
+
+```{r}
+  lt_url <- get_league_table_url(fname)
+lt_url  
+lt <- get_league_table(lt_url)
+
+```
+

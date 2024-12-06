@@ -1,0 +1,100 @@
+
+# next rate date
+
+```{r}
+league_urls %>% 
+  filter(str_detect(name, "National")) %>% 
+  pull(rds_name) -> rds_name
+rds_name
+```
+
+
+
+```{r}
+x <- read_rds(str_c("rds/", rds_name[1]))
+x %>% arrange(ko) %>% View("results")
+```
+
+```{r}
+file.mtime(str_c("fit/", rds_name[1]))
+```
+
+
+```{r}
+rate_date(rds_name[1])
+```
+
+
+
+
+
+# fix a bug
+
+in sample_from_ppd_url <- function(with_ppd, lt)
+called from 
+sample_from_rdsname_url <- function(input_list, n_sim = 1000) {
+  # input list: 1st is table url, second is rds file
+
+try for bosnia:
+
+```{r}
+league_urls
+i <- 14
+input_list <- list(pluck(league_urls, "table_url", i),
+                   pluck(league_urls, "rds_name", i))
+input_list
+```
+
+```{r}
+ ltt <- get_league_table(input_list[[1]]) # has table in table, ranks to sim for in ranks
+  if (1 %in% ltt$ranks) {} else {ltt$ranks = c(1, ltt$ranks)}
+  rdsname <- input_list[[2]]
+  games <- get_unplayed(rdsname)
+games 
+```
+
+```{r}
+ltt$table
+```
+
+
+so far so good
+
+```{r}
+    with_ppd <- get_with_ppd(rdsname, games)
+```
+
+```{r}
+sample_from_ppd_url(with_ppd, ltt)
+```
+
+this is where it chokes
+
+```{r}
+ with_ppd %>% mutate(score = with(ppd, sample(score, 1, prob = p))) %>%
+    mutate(points = list(points_from_score(score))) %>%
+    unnest_wider(points, names_sep = "_") %>%
+    rowwise() %>%
+    mutate(gd = list(gd_from_score(score))) %>%
+    unnest_wider(gd, names_sep = "_") %>%
+    select(t1, t2, points_1, points_2, gd_1, gd_2) -> sim
+  sim %>% select(ends_with("1")) -> sim1
+  sim %>% select(ends_with("2")) -> sim2
+  sim1 %>% group_by(team = t1) %>%
+    summarize(g = n(), pt = sum(points_1), gd = sum(gd_1)) -> sum1
+  sim2 %>% group_by(team = t2) %>%
+    summarize(g = n(), pt = sum(points_2), gd = sum(gd_2)) -> sum2
+  ltt$table %>%
+    rename(g = pld,
+           pt = pts) %>%
+    bind_rows(sum1, sum2) %>%
+    group_by(team) %>%
+    summarize(across(gd:g, \(x) sum(x))) %>%
+    arrange(desc(pt), desc(gd)) %>% mutate(rank = row_number())
+
+```
+
+```{r}
+
+```
+

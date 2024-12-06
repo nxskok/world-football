@@ -1,0 +1,127 @@
+========================================================================= 
+Log Path: ./log/update-leagues.log 
+Program Path: /home/ken/Documents/r-projects/world-football/play.qmd 
+Working Directory: /home/ken/Documents/r-projects/world-football 
+User Name: ken 
+R Version: 4.4.1 (2024-06-14) 
+Machine: ken-desktop x86_64 
+Operating System: Linux 5.15.0-122-generic #132-Ubuntu SMP Thu Aug 29 13:45:52 UTC 2024 
+Base Packages: stats graphics grDevices datasets utils methods base 
+Other Packages: cmdstanr_0.8.0 posterior_1.5.0 conflicted_1.2.0 logr_1.3.8 common_1.1.3 rvest_1.0.4 lubridate_1.9.3 forcats_1.0.0 stringr_1.5.1 dplyr_1.1.4 purrr_1.0.2 readr_2.1.5 tidyr_1.3.1 tibble_3.2.1 ggplot2_3.5.1 tidyverse_2.0.0 devtools_2.4.5 usethis_3.0.0 
+Log Start Time: 2024-09-18 16:19:22.47538 
+========================================================================= 
+
+* present: rds/arm_premier-league_2024-2025.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:19:24.555394 
+NOTE: Elapsed Time: 2.07959866523743 secs 
+
+* present: rds/bra_serie-b_2024.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:19:26.226902 
+NOTE: Elapsed Time: 1.67150712013245 secs 
+
+* present: rds/bul_parva-liga_2024-2025.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:19:28.397535 
+NOTE: Elapsed Time: 2.17063331604004 secs 
+
+* present: rds/cyp_first-division_2024-2025.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:19:30.197638 
+NOTE: Elapsed Time: 1.80010271072388 secs 
+
+* present: rds/esp_primera-division_2024-2025.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:19:33.734514 
+NOTE: Elapsed Time: 3.53687644004822 secs 
+
+* present: rds/est_meistriliiga_2024.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:19:36.854682 
+NOTE: Elapsed Time: 3.12016844749451 secs 
+
+* present: rds/geo_erovnuli-liga_2024.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:19:39.444947 
+NOTE: Elapsed Time: 2.59026408195496 secs 
+
+* present: rds/ger_regionalliga-nord_2024-2025.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:19:41.739531 
+NOTE: Elapsed Time: 2.29458427429199 secs 
+
+* present: rds/isr_ligat-haal_2024-2025.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:19:43.442156 
+NOTE: Elapsed Time: 1.70262479782104 secs 
+
+* present: rds/ita_serie-c-girone-b_2024-2025.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:19:45.443047 
+NOTE: Elapsed Time: 2.00089120864868 secs 
+
+* present: rds/jpn_j1-league_2024.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:19:47.200106 
+NOTE: Elapsed Time: 1.75705909729004 secs 
+
+* present: rds/kaz_premier-liga_2024.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:19:49.197082 
+NOTE: Elapsed Time: 1.99697589874268 secs 
+
+* present: rds/ned_eredivisie_2024-2025.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:19:51.607864 
+NOTE: Elapsed Time: 2.4107825756073 secs 
+
+* present: rds/nor_eliteserien_2024.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:19:53.269054 
+NOTE: Elapsed Time: 1.66118979454041 secs 
+
+* present: rds/srb_super-liga_2024-2025.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:19:55.374572 
+NOTE: Elapsed Time: 2.10551738739014 secs 
+
+* present: rds/sui_promotion-league_2024-2025.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:19:58.168336 
+NOTE: Elapsed Time: 2.79376435279846 secs 
+
+* present: rds/sui_super-league_2024-2025.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:20:00.789715 
+NOTE: Elapsed Time: 2.62137913703918 secs 
+
+* present: rds/svn_prvaliga_2024-2025.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:20:03.257517 
+NOTE: Elapsed Time: 2.46780157089233 secs 
+
+* present: rds/swe_allsvenskan_2024.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:20:05.154383 
+NOTE: Elapsed Time: 1.89686632156372 secs 
+
+* present: rds/swe_superettan_2024.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:20:07.893928 
+NOTE: Elapsed Time: 2.73954463005066 secs 
+
+* present: rds/tur_sueperlig_2024-2025.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:20:09.799323 
+NOTE: Elapsed Time: 1.90539574623108 secs 
+
+* present: rds/ukr_premyer-liga_2024-2025.rds 
+
+NOTE: Log Print Time:  2024-09-18 16:20:11.690849 
+NOTE: Elapsed Time: 1.89152526855469 secs 
+
+========================================================================= 
+Log End Time: 2024-09-18 16:20:11.840269 
+Log Elapsed Time: 0 00:00:49 
+========================================================================= 

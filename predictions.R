@@ -1,3 +1,7 @@
+# if I am about 4 weeks in, go with optimal predictions
+# if less than that, go with "wisdom of the crowd" with the aim of getting 3 points
+# output of both here
+
 
 library(tidyverse)
 library(rvest)
@@ -36,16 +40,14 @@ id, lg, rdsname, ptf
 6, ita, ita_serie-a_2023-2024.rds, https://seriea.predictthefootball.com
 7, sco, sco_premiership_2023-2024.rds, https://scottish-premier.predictthefootball.com
 8, esp, esp_primera-division_2023-2024.rds, https://laliga.predictthefootball.com
-9, swe, swe_allsvenskan_2024.rds, https://allsvenskan.predictthefootball.com
 "
 
 league_df <- read_csv(leagues_txt)
 
-# remove greece for the moment
+# removals for the moment go here, commented out
 
-# 5a, gre1, gre_super-league_2023-2024_meisterschaft.rds, https://superleague.predictthefootball.com
-# 5b, gre2, gre,super-league_2023-2024_abstieg.rds, https://superleague.predictthefootball.com
 
+# 9, swe, swe_allsvenskan_2024.rds, https://allsvenskan.predictthefootball.com
 
 
 
@@ -55,6 +57,7 @@ get_league_preds <- function(league_url, fname, sess) {
   get_form(league_url, sess) %>%
     filter(is.na(pred_1)) -> ptf_form
   ptf_form %>%
+    separate_wider_delim(scores, ":", names = c("crowd"), too_many = "drop", cols_remove = FALSE) %>%
     mutate(t1 = best_match(name_1, lu),
            t2 = best_match(name_2, lu)) %>%
     left_join(lu, by = c("t1" = "team")) %>%
@@ -62,9 +65,8 @@ get_league_preds <- function(league_url, fname, sess) {
     rowwise() %>%
     mutate(ppd = list(make_ppd(fname, id.x, id.y))) %>%
     mutate(opt_pred = max_ept(ppd, results, scores)) %>%
-    select(name_1, name_2, opt_pred)
+    select(name_1, name_2, opt_pred, crowd)
 }
-
 
 
 suppressWarnings(
@@ -73,7 +75,7 @@ suppressWarnings(
     rowwise() %>%
     mutate(preds = list(get_league_preds(ptf, rdsname, sess))) %>%
     unnest(preds) %>%
-    select(lg, name_1, name_2, opt_pred) -> d
+    select(lg, name_1, name_2, opt_pred, crowd) -> d
 )
 d %>%
   arrange(lg) %>%
@@ -106,6 +108,6 @@ suppressWarnings(
     knitr::kable()
 
 )
-
-
-
+#
+#
+#

@@ -11,6 +11,7 @@ library(tidyverse)
 library(rvest)
 library(logr)
 source("functions.R")
+source("functions2.R")
 source("predictions_functions.R")
 source("sim-league_functions.R")
 source("report_functions.R")
@@ -29,3 +30,12 @@ log_close()
 ```
 
 report: see report.qmd
+
+## new sim
+
+```{r}
+log_open("sim/sim.log")
+sim_as_needed_url(league_urls)  
+log_close()
+
+```

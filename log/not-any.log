@@ -1,0 +1,78 @@
+========================================================================= 
+Log Path: ./log/not-any.log 
+Program Path: /home/ken/Documents/r-projects/world-football/play.qmd 
+Working Directory: /home/ken/Documents/r-projects/world-football 
+User Name: ken 
+R Version: 4.4.1 (2024-06-14) 
+Machine: ken-desktop x86_64 
+Operating System: Linux 5.15.0-122-generic #132-Ubuntu SMP Thu Aug 29 13:45:52 UTC 2024 
+Base Packages: stats graphics grDevices datasets utils methods base 
+Other Packages: conflicted_1.2.0 logr_1.3.8 common_1.1.3 rvest_1.0.4 lubridate_1.9.3 forcats_1.0.0 stringr_1.5.1 dplyr_1.1.4 purrr_1.0.2 readr_2.1.5 tidyr_1.3.1 tibble_3.2.1 ggplot2_3.5.1 tidyverse_2.0.0 devtools_2.4.5 usethis_3.0.0 
+Log Start Time: 2024-09-18 22:57:53.143527 
+========================================================================= 
+
+[1] "Faroe Islands"               "Georgia"                     "Germany 2. Bundesliga"       "Germany 3. Liga"             "Germany"                     "Germany Regionalliga Bayern"
+
+NOTE: Log Print Time:  2024-09-18 22:58:00.046179 
+NOTE: Elapsed Time: 6.90222024917603 secs 
+
+Albania 
+
+NOTE: Log Print Time:  2024-09-18 22:58:00.047131 
+NOTE: Elapsed Time: 0.000951766967773438 secs 
+
+* present: Albania 
+
+NOTE: Log Print Time:  2024-09-18 22:58:01.908702 
+NOTE: Elapsed Time: 1.86157083511353 secs 
+
+Andorra 
+
+NOTE: Log Print Time:  2024-09-18 22:58:01.999891 
+NOTE: Elapsed Time: 0.0911891460418701 secs 
+
+* present: Andorra 
+
+NOTE: Log Print Time:  2024-09-18 22:58:03.97202 
+NOTE: Elapsed Time: 1.97212886810303 secs 
+
+Argentina 
+
+NOTE: Log Print Time:  2024-09-18 22:58:04.025945 
+NOTE: Elapsed Time: 0.0539255142211914 secs 
+
+* present: Argentina 
+
+NOTE: Log Print Time:  2024-09-18 22:58:06.257167 
+NOTE: Elapsed Time: 2.2312216758728 secs 
+
+Armenia 
+
+NOTE: Log Print Time:  2024-09-18 22:58:06.40034 
+NOTE: Elapsed Time: 0.143172979354858 secs 
+
+* present: Armenia 
+
+NOTE: Log Print Time:  2024-09-18 22:58:08.107732 
+NOTE: Elapsed Time: 1.70739245414734 secs 
+
+Australia 
+
+NOTE: Log Print Time:  2024-09-18 22:58:08.188448 
+NOTE: Elapsed Time: 0.0807154178619385 secs 
+
+* present: Australia 
+
+NOTE: Log Print Time:  2024-09-18 22:58:09.746945 
+NOTE: Elapsed Time: 1.55849766731262 secs 
+
+Austria 
+
+NOTE: Log Print Time:  2024-09-18 22:58:09.811473 
+NOTE: Elapsed Time: 0.0645272731781006 secs 
+
+* present: Austria 
+
+NOTE: Log Print Time:  2024-09-18 22:58:11.397793 
+NOTE: Elapsed Time: 1.58632040023804 secs 
+

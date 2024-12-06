@@ -17,18 +17,29 @@ get_schedule <- function(country_name, league_name, season, part) {
                    str_c(my_url, "-", part, "/"))
   my_url <- str_replace(my_url, "/ger-", "/")
   fname <- make_fname(country_name, league_name, season, part)
-  print(glue::glue("Getting {fname}."))
+  # print(glue::glue("Getting {fname}."))
   h <- read_html(my_url)
   h %>% html_node(xpath = '//*[@id="site"]/div[2]/div[1]/div[1]/div[3]/div/table') -> hh
   if (class(hh) == "xml_missing") {
-    cat(str_c(fname, " missing.\n"))
+    # cat(str_c(fname, " missing.\n"))
+    log_print(str_c(" * missing: ", fname), console = FALSE)
     return(fname) # don't process and save
+  } else {
+    log_print(str_c(" * present: ", fname), console = FALSE)
+  }
+  # check whether there is anything in it
+  hh %>%
+    html_table(header = FALSE) -> yyy
+  if (nrow(yyy) == 0) {
+    log_print(str_c(" * empty: ", fname), console = FALSE)
+    return(fname)
   }
   hh %>%
     html_table(header = FALSE) %>%
     filter(!str_detect(X1, "Round")) %>%
     mutate(X1 = ifelse(X1 == "", NA, X1)) %>%
     fill(X1) %>%
+    mutate(X2 = ifelse(X2 == "", "00:00", X2)) %>%
     mutate(kostr = str_c(X1, " ", X2)) %>%
     mutate(ko1 = dmy_hm(kostr, tz = "Europe/London")) %>%  # it looks as if it's UK time
     mutate(ko1 = with_tz(ko1, "America/Toronto")) %>%
@@ -54,7 +65,8 @@ get_schedule_row <- function(n, leagues) {
 download_these <- function(l) {
   nr <- nrow(l)
   if (nr == 0) stop("no leagues to download")
-  walk(1:nr, \(i) get_schedule_row(i, l))
+  safely_get_schedule_row <- safely(get_schedule_row)
+  walk(1:nr, \(i) safely_get_schedule_row(i, l), .progress = TRUE)
 }
 
 

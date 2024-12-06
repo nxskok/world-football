@@ -36,7 +36,7 @@ make_changes <- function(filenames) {
   p1 %>% left_join(p2, by = "team") %>%
     select(team, starts_with("x")) -> dd
   if (ncol(dd) < 2) return(NULL)
-  if (ncol(p1) != ncol(p2)) return(NULL)
+  # if (ncol(p1) != ncol(p2)) return(NULL)
   dd %>%
     pivot_longer(-team, names_to = c("rank", ".value"), names_sep = "\\.") %>%
     mutate(change = y - x) %>%
@@ -55,6 +55,6 @@ tables_for_report <- function(rdsname, cutoff_date) {
   games %>% filter(between(ko, mtimes[1]-hours(3), now())) -> games
   tab_recent <- read_rds(filenames[2])
   tab_recent %>% mutate(r = row_number()) -> tab_recent
-  tab_recent %>% select(r, everything()) -> tab_recent
+  tab_recent %>% select(r, everything()) %>% select(-played) %>% rename(mn_rk = mean_rank) -> tab_recent
   return(list(changes = changes, games = games, recent = tab_recent, mtimes = mtimes))
 }

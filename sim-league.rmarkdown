@@ -11,18 +11,36 @@ editor: visual
 ```{r}
 library(tidyverse)
 library(rvest)
+library(logr)
 source("functions.R")
+source("functions2.R")
 source("predictions_functions.R")
 source("sim-league_functions.R")
 source("report_functions.R")
+options(dplyr.summarise.inform = FALSE)
 ```
 
 ```{r}
 #| warning: false
 #| message: false
-sim_as_needed(leagues)
+#| error: true
+sim_as_needed_safe <- safely(sim_as_needed) # ones that give an error will be ignored
+log_open("sim/sim.log")
+sim_as_needed_safe(leagues)  
+log_close()
+
 ```
 
 
 report: see report.qmd
+
+## new sim
+
+
+```{r}
+log_open("sim/sim.log")
+sim_as_needed_url(league_urls)  
+log_close()
+
+```
 

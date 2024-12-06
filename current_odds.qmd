@@ -21,9 +21,12 @@ list.files(path = "sim", pattern = "*.rds") %>%
 latest
 ```
 
+
 ```{r}
 report_league <- function(rdsname) {
   x <- read_rds(str_c("sim/", rdsname))
+  if ("played" %in% names(x)) x %>% select(-played) -> x
+  x %>% rename(mn_rk = mean_rank) -> x
   a <- knit_expand(text = c("# {{rdsname}}",
                             "## Odds",
                             "{{kable(x)}}"))

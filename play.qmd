@@ -5,103 +5,70 @@ packages
 ```{r}
 library(tidyverse)
 library(rvest)
+library(logr)
 library(conflicted)
 conflicts_prefer(dplyr::filter)
-source("functions.R")
+source("functions2.R")
+source("predictions_functions.R")
 ```
 
-download all leagues
+## New
+
+new: use the league_urls.csv with columns `rds_name`, `schedule_url, table_url`
+
+```{r}
+# source("functions2.R")
+# league_urls
+```
+
+## get leagues that need getting, and show changes
+
+```{r}
+when_got <- now()
+when_got
+ggg <- update_the_leagues(league_urls)
+show_the_changes(ggg, league_urls) %>% View(str_c("at: ", when_got))
+```
+
+## games by request
 
 ```{r}
 #| warning: false
-# download_these(leagues)
+request <- c("swi")
+pat <- str_flatten(request, "|")
+pat
+league_urls %>% 
+  filter(str_detect(name, regex(pat, ignore_case = TRUE))) -> get_these
+get_these
+log_open("not_any.log")
+download_these_ones(get_these)
+log_close()
+update_predictions_url(league_urls)
 ```
 
-get leagues I don't have any of yet
+## which leagues do I not have at all?
 
 ```{r}
-#| warning: false
-leagues %>% 
+log_open("not_any.log")
+league_urls %>% 
   rowwise() %>% 
-  mutate(fname = make_fname(country, league, season, part)) %>% 
-  mutate(mtime = file.mtime(fname)) %>% 
+  mutate(mtime = file.mtime(paste0("rds/", rds_name))) %>% 
   filter(is.na(mtime)) -> l_to_get
 l_to_get
-download_these(l_to_get)
+download_these_ones(l_to_get)
+log_close()
 ```
 
-download just these ones (use play.R instead)
+## testing report (league tables)
 
 ```{r}
-sch <- c("bih")
-leagues %>% mutate(r = row_number()) %>%  filter(country %in% sch) -> dr
-dr
+source("report_functions.R")
 ```
 
 ```{r}
-#| warning: false
-
-these <- dr$r
-leagues %>% slice(these) %>% download_these()
-right_now <- now()
-enframe(these, name = NULL) %>% 
-  rowwise() %>% 
-  mutate(lg = list(display_league(leagues, value))) %>% 
-  unnest(lg) %>% 
-  mutate(days = time_length(right_now - ko, unit = "days")) %>% 
-  filter(between(days, -3, 7)) %>% 
-  View("games downloaded")
+rdsname <- "ger_regionalliga-suedwest_2024-2025.rds"
+cutoff_date <- as.Date("2024-10-24")
+league_table_from_rdsname(rdsname)
 ```
 
-## games that may have finished (or started) since last download
-
-```{r}
-#| warning: false
-now()
-ggg <- update_leagues(leagues)
-```
-
-now I need to get the same games from the new download, or look ahead
-
-this needs fixing up for games that have moved since last known
-
-```{r}
-predictions <- read_rds("predictions.rds")
-# ggg <- .Last.value # for row
-# ggg
-ggg %>% count(r) %>% pull(r) -> r
-# r
-map(r, \(r) display_league(leagues, r)) %>% bind_rows() -> all_games
-# all_games
-ggg %>% left_join(all_games, by = c("ko", "t1", "t2")) %>% 
-  mutate(show = case_when(
-    is.na(score.y) ~ "yes",
-    is.na(score.x) ~ "yes",
-    score.x == score.y ~ "no",
-    .default = "yes"
-  )) %>% 
-  filter(show == "yes") %>% 
-  select(-tibbly) %>% 
-  select(country, league, ko:score.y) %>% 
-  arrange(ko) %>% 
-  left_join(predictions, by = c("t1", "t2")) %>% 
-  select(country, league, ko = ko.x, t1, t2, score.x, score.y, `2`, `1`, `0`) %>% View(str_c("at: ", now()))
-```
-
-or, just grab the predictions
-
-```{r}
-predictions %>% arrange(ko) %>% View()
-```
-
-ratings
-
-method 1: update ratings each time each league is updated (extra computation) method 2: do it like 25, have a target date for the next rate and rerate the ones that have reached the target date
-
-next task
-
-rate a league
-
-after that
-
-sim-league
+there are extra tabs and newlines

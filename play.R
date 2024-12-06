@@ -8,7 +8,8 @@ source("predictions_functions.R")
 
 #' download leagues from just this country
 
-sch <- c("blr")
+sch <- c("kos")
+# sch <- no_time
 leagues %>% mutate(r = row_number()) %>%  filter(country %in% sch) -> dr
 dr
 
@@ -21,9 +22,12 @@ right_now <- now()
 enframe(these, name = NULL) %>%
   rowwise() %>%
   mutate(lg = list(display_league(leagues, value))) %>%
+  mutate(lg_len = length(lg)) %>%
+  filter(lg_len > 0) %>%
+  select(-lg_len) %>%
   unnest(lg) %>%
   mutate(days = time_length(right_now - ko, unit = "days")) %>%
-  filter(between(days, -3, 7)) %>%
+  filter(between(days, -70, 7)) %>%
   View("games downloaded")
 
 update_predictions(leagues)

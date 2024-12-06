@@ -87,6 +87,29 @@ update_rate <- function(leagues) {
     walk(\(x) rate(x))
 }
 
+update_rate_url <- function(leagues) {
+  leagues %>% rowwise() %>%
+    mutate(fname1 = str_c("rds/", rds_name),
+           fname2 = str_c("fit/", rds_name)) %>%
+    mutate(fit_size = file.size(fname2)) %>%
+    mutate(across(starts_with("fname"), \(f) file.mtime(f), .names = "mtime_{.col}")) %>%
+    mutate(needs_update = case_when(
+      is.na(mtime_fname1) ~ "no",
+      is.na(mtime_fname2) ~ "yes",
+      mtime_fname1 > mtime_fname2 ~ "yes",
+      .default = "no"
+    )) %>%
+    filter(needs_update == "yes") -> nn
+  # print(glue::glue("Needing update: {nrow(nn)}"))
+  nn %>%
+    ungroup() %>%
+    # slice_sample(n = 2) %>%
+    pull(rds_name) -> todos
+  if (length(todos) == 0) stop("Nothing to do")
+  print(todos)
+  todos %>%
+    walk(\(x) rate(x))
+}
 
 
 next_rate_date <- function(rdsname) {
@@ -137,16 +160,74 @@ next_rate_date <- function(rdsname) {
 #   min(first_dup, max_ko)
 }
 
-all_next_rate_date <- function(leagues) {
+rate_date <- function(rdsname) {
+  last_fit_date <-file.mtime(str_c("fit/", rdsname))
+  if (is.na(last_fit_date)) last_fit_date <- ymd_hms("1900-01-01 02:03:04") # fake date in past
+  rds_filename <- str_c("rds/", rdsname)
+  if (!file.exists(rds_filename)) return(c("after" = ymd_hms("2100-01-01 01:02:03"), "before" = NA)) # fake date way in the future
+  games <- read_rds(rds_filename)
+  games %>% arrange(ko) -> games
+  games %>% filter(ko > last_fit_date - hours(2)) -> games  # these are the games that determine when the next rating is
+  games %>% pivot_longer(starts_with("t"), names_to = "venue", values_to = "team") %>%
+    arrange(ko) %>%
+    group_by(team) %>%
+    mutate(count = row_number())  -> games # from https://stackoverflow.com/questions/10029235/cumulative-count-of-each-value
+  # find the first row where count = 2
+  games %>% filter(count > 1) %>%
+    pluck("ko", 1) -> late_date
+  # this is NULL if there are no games to rate, or if there are games to rate and this is the end of the season
+  if (is.null(late_date)) {
+    n <- nrow(games)
+    if (n == 0) {
+      return(c("after" = ymd_hms("2100-01-01 01:02:03"), "before" = NA)) # fake date way in the future
+    } else {
+      games %>%
+        ungroup() %>%
+        summarize(mx = max(ko) + hours(2)) %>% # after the last game in the fixture list remaining
+        pull(mx) -> mxx
+      return(c("after" = mxx, "before" = late_date))
+    }
+  }
+  games %>%
+    ungroup() %>%
+    group_by(ko) %>%
+    summarize(mc = max(count)) %>%
+    mutate(gt1 = (mc > 1)) %>%
+    mutate(lgt1 = lead(gt1)) %>%
+    filter(lgt1) %>%
+    slice(1) %>%
+    mutate(mend = ko + hours(2)) %>%
+    pull(mend) -> mxx
+  c("after" = mxx, "before" = late_date)
+
+  # I want the last ko before the first >1
+
+  # games %>% filter(count == 1) %>% # grab the latest time from the previous games
+  #   ungroup() %>%
+  #   summarize(mxxx = max(ko) + hours(2)) %>%
+  #   pull(mxxx)
+}
+
+
+all_next_rate_date_url <- function(leagues) {
   leagues %>%
     rowwise() %>%
-    mutate(fname = make_fname(country, league, season, part, prefix = "")) %>%
-    # select(fname) %>%
-    mutate(next_rate = next_rate_date(fname),
-           next_rate = with_tz(next_rate, "America/Toronto"),
-           dow = weekdays(next_rate)) %>%
-    arrange(next_rate)
+    mutate(next_rate = list(rate_date(rds_name))) %>%
+    unnest_longer(next_rate) %>%
+    mutate(next_rate = with_tz(next_rate, "America/Toronto")) %>%
+    mutate(dow = weekdays(next_rate)) %>%
+    pivot_wider(names_from = next_rate_id, values_from = (c(next_rate, dow))) %>%
+    # mutate(star = ifelse((next_rate_before - next_rate_after) < days(1), "*", "")) %>%
+    mutate(star = case_when(
+      is.na(next_rate_before)                       ~ "",
+      next_rate_before - next_rate_after < days(1)  ~ "*",
+      .default                                      = ""
+    )) %>%
+    mutate(next_rate_after = ifelse(star == "*", next_rate_before - days(1), next_rate_after)) %>%
+    mutate(next_rate_after = strftime(next_rate_after, format = "%Y-%m-%d %H:%M %A")) %>%
+    arrange(next_rate_after, next_rate_before)
 }
+
 
 make_rank_table <- function(fname) {
   fitname <- str_c("fit/", fname)
@@ -176,6 +257,21 @@ make_all_ranks <- function(leagues) {
     mutate(fit_exists = file.exists(str_c("fit/", fname))) %>%
     filter(fit_exists) %>%
     mutate(rank_table = list(make_rank_table(fname))) %>%
+    unnest(rank_table) -> all_ranks
+  # save all_ranks (used below)
+  write_rds(all_ranks, "all_ranks.rds")
+  all_ranks
+}
+
+make_all_ranks_url <- function(leagues) {
+  leagues %>%
+    # slice_sample(n = 5) %>%
+    rowwise() %>%
+    # mutate(fname = make_fname(country, league, season, part, prefix = "")) %>%
+    select(rds_name) %>%
+    mutate(fit_exists = file.exists(str_c("fit/", rds_name))) %>%
+    filter(fit_exists) %>%
+    mutate(rank_table = list(make_rank_table(rds_name))) %>%
     unnest(rank_table) -> all_ranks
   # save all_ranks (used below)
   write_rds(all_ranks, "all_ranks.rds")
