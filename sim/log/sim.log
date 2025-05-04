@@ -1,52 +1,60 @@
 =========================================================================
 Log Path: sim/log/sim.log
-Program Path: /home/ken/Documents/r-projects/world-football/sim-league.qmd
-Working Directory: /home/ken/Documents/r-projects/world-football
+Program Path: /home/ken/r-projects/world-football/sim-league.qmd
+Working Directory: /home/ken/r-projects/world-football
 User Name: ken
-R Version: 4.4.2 (2024-10-31)
+R Version: 4.5.0 (2025-04-11)
 Machine: ken-desktop x86_64
-Operating System: Linux 5.15.0-126-generic #136-Ubuntu SMP Wed Nov 6 10:38:22 UTC 2024
+Operating System: Linux 6.8.0-58-generic #60-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 14 18:29:48 UTC 2025
 Base Packages: stats graphics grDevices datasets utils methods base
-Other Packages: knitr_1.49 cmdstanr_0.8.0 posterior_1.5.0 conflicted_1.2.0 logr_1.3.8 common_1.1.3 rvest_1.0.4 lubridate_1.9.3 forcats_1.0.0 stringr_1.5.1 dplyr_1.1.4 purrr_1.0.2 readr_2.1.5 tidyr_1.3.1 tibble_3.2.1 ggplot2_3.5.1 tidyverse_2.0.0 devtools_2.4.5 usethis_3.1.0
-Log Start Time: 2024-12-05 17:24:03.570395
+Other Packages: conflicted_1.2.0 logr_1.3.9 common_1.1.3 rvest_1.0.4 cmdstanr_0.9.0 posterior_1.6.1 lubridate_1.9.4 forcats_1.0.0 stringr_1.5.1 dplyr_1.1.4 purrr_1.0.4 readr_2.1.5 tidyr_1.3.1 tibble_3.2.1 ggplot2_3.5.2 tidyverse_2.0.0
+Log Start Time: 2025-05-03 16:50:16.85565
 =========================================================================
 
-[1] "Armenia"        "Israel"         "Bulgaria"       "Czech Republic" "Albania"        "England"
+ [1] "Ireland First"               "Israel relegation"           "Norway"                      "Iceland 1 Deild"             "Greece ECL playoff"         
+ [6] "Georgia"                     "Czech Republic championship" "Czech Republic relegation"   "Belgium championship"        "Slovenia"
+[11] "Malta Closing B6"            "Malta Closing T6"
 
-NOTE: Log Print Time:  2024-12-05 17:24:05.593553
-NOTE: Elapsed Time: 2.02273201942444 secs
+NOTE: Log Print Time:  2025-05-03 16:50:19.737295
+NOTE: Elapsed Time: 2.8812243938446 secs
 
-Done arm_premier-league_2024-2025.rds
+Done irl_first-division_2025.rds
 
-NOTE: Log Print Time:  2024-12-05 17:25:09.085753
-NOTE: Elapsed Time: 1.05820332368215 mins
+NOTE: Log Print Time:  2025-05-03 16:51:46.995155
+NOTE: Elapsed Time: 1.45429766575495 mins
 
-Done isr_ligat-haal_2024-2025.rds
+Done isr_ligat-haal_2024-2025_relegation.rds
 
-NOTE: Log Print Time:  2024-12-05 17:26:22.799886
-NOTE: Elapsed Time: 1.22856889168421 mins
+NOTE: Log Print Time:  2025-05-03 16:52:26.118698
+NOTE: Elapsed Time: 39.1235430240631 secs
 
-Done bul_parva-liga_2024-2025.rds
+Done nor_eliteserien_2025.rds
 
-NOTE: Log Print Time:  2024-12-05 17:27:36.831833
-NOTE: Elapsed Time: 1.23386577367783 mins
+NOTE: Log Print Time:  2025-05-03 16:54:37.58026
+NOTE: Elapsed Time: 2.19102602005005 mins
 
-Done cze_1-fotbalova-liga_2024-2025.rds
+Done isl_1-deild_2025.rds
 
-NOTE: Log Print Time:  2024-12-05 17:28:52.111296
-NOTE: Elapsed Time: 1.25465772151947 mins
+NOTE: Log Print Time:  2025-05-03 16:56:13.427777
+NOTE: Elapsed Time: 1.59745862086614 mins
 
-Done alb_kategoria-superiore_2024-2025.rds
+Done gre_super-league_2024-2025_ecl-playoffs
 
-NOTE: Log Print Time:  2024-12-05 17:30:07.546052
-NOTE: Elapsed Time: 1.25724593400955 mins
+NOTE: Log Print Time:  2025-05-03 16:56:50.194602
+NOTE: Elapsed Time: 36.76682472229 secs
 
-Done eng_premier-league_2024-2025.rds
+Done geo_erovnuli-liga_2025.rds
 
-NOTE: Log Print Time:  2024-12-05 17:32:34.682556
-NOTE: Elapsed Time: 2.45227506160736 mins
+NOTE: Log Print Time:  2025-05-03 16:58:19.73444
+NOTE: Elapsed Time: 1.49233063856761 mins
 
-=========================================================================
-Log End Time: 2024-12-05 17:32:34.777393
-Log Elapsed Time: 0 00:08:31
-=========================================================================
+Done cze-1-fotbalova-liga_2024-2025_relegation.rds
+
+NOTE: Log Print Time:  2025-05-03 16:59:39.049927
+NOTE: Elapsed Time: 39.7701988220215 secs
+
+Done bel_pro-league_2024-2025_championship
+
+NOTE: Log Print Time:  2025-05-03 17:00:18.513644
+NOTE: Elapsed Time: 39.4637167453766 secs
+

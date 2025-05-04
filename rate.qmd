@@ -33,6 +33,7 @@ l1
 
 ```{r}
 #| warning: false
+previous_rate_url(league_urls) # creates previous_rate.rds
 l1 %>% update_rate_url()
 xxx <- make_all_ranks_url(league_urls)
 update_predictions_url(league_urls)

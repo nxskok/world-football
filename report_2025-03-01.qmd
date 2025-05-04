@@ -1,0 +1,73 @@
+---
+title: "Report"
+format: html
+editor: visual
+---
+
+```{r}
+#| echo: false
+#| message: false
+library(tidyverse)
+library(knitr)
+# library(tinytable)
+source("report_functions.R")
+# cutoff_date <- ymd_hm("2023-08-23 12:00", tz = 'America/Toronto') # remember!
+cutoff_date <- now() - hours(4)
+prev <- read_rds("previous_rate.rds")
+```
+
+Cutoff date: `r cutoff_date`
+
+```{r}
+#| echo: false
+gpt <- function(rdsname) {
+  fname <- str_c("rds/", rdsname)
+  x <- read_rds(fname)
+  x %>% pivot_longer(starts_with("t"), names_to = "t12", values_to = "team") %>% 
+    count(team) %>% nrow() -> n_team  
+  x %>% filter(is.na(score)) %>% nrow() -> n_game
+  round(2 * n_game / n_team, digits = 1)
+}
+```
+
+```{r}
+#| echo: false
+make_report <- function(rdsname, cutoff_date, prev) {
+  prev %>% filter(rds_name == rdsname) %>% pull(rate_date) -> this_prev
+  tables <- tables_for_report(rdsname, cutoff_date)
+  if (length(tables) == 0) {
+    a <- knit_expand(text = c("# {{rdsname}}",
+                         "Nothing to say.\n"))
+  } else {
+    a <- knit_expand(text = c("# {{rdsname}}",
+                          # "## M-times", {{as.POSIXct(tables[[4]])}},
+                          "Previous rate: ", "{{this_prev}}\n",
+                          "Games left per team: ", "{{gpt(rdsname)}}\n",
+                         "## Games", "{{kable(tables[[2]])}}",
+                         "## Changes", "{{kable(tables[[1]])}}",
+                         "## Odds now", "{{kable(tables[[3]])}}"
+                         ))
+  }
+  cat(a, sep = "\n")
+}
+```
+
+```{r}
+#| echo: false
+#| output: asis
+list.files(path = "fit", pattern = "\\.rds", full.names = TRUE) %>% 
+  enframe(name = NULL, value = "fname") %>% 
+  mutate(mtime = file.mtime(fname)) %>%
+  filter(mtime > cutoff_date) %>% 
+  mutate(fname = str_remove(fname, "^fit/")) %>% 
+  pull(fname) -> fnames
+fnames %>% enframe() %>% kable()
+
+```
+
+```{r}
+#| echo: false
+#| output: asis
+
+walk(fnames, \(x) make_report(x, cutoff_date, prev))
+```

@@ -97,4 +97,3 @@ get_form <- function(base_url, session) {
     select(-row, -stats_url)
 }
 
-

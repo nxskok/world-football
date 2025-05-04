@@ -1,60 +1,56 @@
 name,rds_name,schedule_url,table_url
 Albania,alb_kategoria-superiore_2024-2025.rds,https://www.worldfootball.net/all_matches/alb-kategoria-superiore-2024-2025/,https://www.worldfootball.net/schedule/alb-kategoria-superiore-2024-2025-spieltag/99/
 Andorra,and_1a-divisio_2024-2025.rds,https://www.worldfootball.net/all_matches/and-1a-divisio-2024-2025/,https://www.worldfootball.net/schedule/and-1a-divisio-2024-2025-spieltag/99/
-Argentina,arg_primera-division_2024.rds,https://www.worldfootball.net/all_matches/arg-primera-division-2024/,https://www.worldfootball.net/schedule/arg-primera-division-2024-spieltag/99/
+Argentina,arg_primera-division_2025.rds,https://www.worldfootball.net/all_matches/arg-primera-division-2025-1-semestre/,https://www.worldfootball.net/schedule/arg-copa-de-la-liga-profesional-2025-1-semestre-spieltag/99/
 Armenia,arm_premier-league_2024-2025.rds,https://www.worldfootball.net/all_matches/arm-premier-league-2024-2025/,https://www.worldfootball.net/schedule/arm-premier-league-2024-2025-spieltag/99/
 Australia,aus_a-league_2024-2025.rds,https://www.worldfootball.net/all_matches/aus-a-league-2024-2025/,https://www.worldfootball.net/schedule/aus-a-league-2024-2025-spieltag/99/
 Austria,aut_bundesliga_2024-2025.rds,https://www.worldfootball.net/all_matches/aut-bundesliga-2024-2025/,https://www.worldfootball.net/schedule/aut-bundesliga-2024-2025-spieltag/99/
 Austria championship,aut_bundesliga_2024-2025_meistergruppe.rds,https://www.worldfootball.net/all_matches/aut-bundesliga-2024-2025-meistergruppe/,https://www.worldfootball.net/schedule/aut-bundesliga-2024-2025-meistergruppe-spieltag/99/
 Austria relegation,aut_bundesliga_2024-2025_qualifikationsgruppe.rds,https://www.worldfootball.net/all_matches/aut-bundesliga-2024-2025-qualifikationsgruppe/,https://www.worldfootball.net/schedule/aut-bundesliga-2024-2025-qualifikationsgruppe-spieltag/99/
 Azerbaijan,aze_premyer-liqasi_2024-2025.rds,https://www.worldfootball.net/all_matches/aze-premyer-liqasi-2024-2025/,https://www.worldfootball.net/schedule/aze-premyer-liqasi-2024-2025-spieltag/99/
+Belarus,blr_cempionat_2025.rds,https://www.worldfootball.net/all_matches/blr-cempionat-2025/,https://www.worldfootball.net/schedule/blr-cempionat-2025-spieltag/99/
 Belgium,bel_eerste-klasse-a_2024-2025.rds,https://www.worldfootball.net/all_matches/bel-eerste-klasse-a-2024-2025/,https://www.worldfootball.net/schedule/bel-eerste-klasse-a-2024-2025-spieltag/99/
-Belgium championship,bel_eerste-klasse-a_2024-2025_championship.rds,https://www.worldfootball.net/all_matches/bel-eerste-klasse-a-2024-2025-championship/,https://www.worldfootball.net/schedule/bel-eerste-klasse-a-2024-2025-championship-spieltag/99/
-Belgium Europe,bel_eerste-klasse-a_2024-2025_europe.rds,https://www.worldfootball.net/all_matches/bel-eerste-klasse-a-2024-2025-europe/,https://www.worldfootball.net/schedule/bel-eerste-klasse-a-2024-2025-europe-spieltag/99/
-Belgium relegation,bel_eerste-klasse-a_2024-2025_relegation.rds,https://www.worldfootball.net/all_matches/bel-eerste-klasse-a-2024-2025-relegation/,https://www.worldfootball.net/schedule/bel-eerste-klasse-a-2024-2025-relegation-spieltag/99/
+Belgium Europe,bel_pro-league_2024-2025_europe,https://www.worldfootball.net/all_matches/bel-pro-league-2024-2025-europe/,https://www.worldfootball.net/schedule/bel-pro-league-2024-2025-europe-spieltag/99/
+Belgium championship,bel_pro-league_2024-2025_championship,https://www.worldfootball.net/all_matches/bel-pro-league-2024-2025-championship/,https://www.worldfootball.net/schedule/bel-pro-league-2024-2025-championship-spieltag/99/
+Belgium relegation,bel_pro-league_2024-2025_relegation,https://www.worldfootball.net/all_matches/bel-pro-league-2024-2025-relegation/,https://www.worldfootball.net/schedule/bel-pro-league-2024-2025-relegation-spieltag/99/
 Bosnia,bih_premier-liga_2024-2025.rds,https://www.worldfootball.net/all_matches/bih-premier-liga-2024-2025/,https://www.worldfootball.net/schedule/bih-premier-liga-2024-2025-spieltag/99/
-Belarus,blr_cempionat_2024.rds,https://www.worldfootball.net/all_matches/blr-cempionat-2024/,https://www.worldfootball.net/schedule/blr-cempionat-2024-spieltag/99/
-Brazil,bra_serie-a_2024.rds,https://www.worldfootball.net/all_matches/bra-serie-a-2024/,https://www.worldfootball.net/schedule/bra-serie-a-2024-spieltag/99/
-Brazil Serie B,bra_serie-b_2024.rds,https://www.worldfootball.net/all_matches/bra-serie-b-2024/,https://www.worldfootball.net/schedule/bra-serie-b-2024-spieltag/99/
+Brazil,bra_serie-a_2025.rds,https://www.worldfootball.net/all_matches/bra-serie-a-2025/,https://www.worldfootball.net/schedule/bra-serie-a-2025-spieltag/99/
+Brazil Serie B,bra_serie-b_2025.rds,https://www.worldfootball.net/all_matches/bra-serie-b-2025/,https://www.worldfootball.net/schedule/bra-serie-b-2025-spieltag/99/
 Bulgaria,bul_parva-liga_2024-2025.rds,https://www.worldfootball.net/all_matches/bul-parva-liga-2024-2025/,https://www.worldfootball.net/schedule/bul-parva-liga-2024-2025-spieltag/99/
 Bulgaria championship,bul_parva-liga_2024-2025_championship.rds,https://www.worldfootball.net/all_matches/bul-parva-liga-2024-2025-championship/,https://www.worldfootball.net/schedule/bul-parva-liga-2024-2025-championship-spieltag/99/
 Bulgaria relegation,bul_parva-liga_2024-2025_relegation.rds,https://www.worldfootball.net/all_matches/bul-parva-liga-2024-2025-relegation/,https://www.worldfootball.net/schedule/bul-parva-liga-2024-2025-relegation-spieltag/99/
-Canada,can_premier-league_2024.rds,https://www.worldfootball.net/all_matches/can-premier-league-2024/,https://www.worldfootball.net/schedule/can-premier-league-2024-spieltag/99/
-Chile,chi_primera-division_2024.rds,https://www.worldfootball.net/all_matches/chi-primera-division-2024/,https://www.worldfootball.net/schedule/chi-primera-division-2024-spieltag/99/
-China,chn_super-league_2024.rds,https://www.worldfootball.net/all_matches/chn-super-league-2024/,https://www.worldfootball.net/schedule/chn-super-league-2024-spieltag/99/
+Canada,can_premier-league_2025.rds,https://www.worldfootball.net/all_matches/can-premier-league-2025/,https://www.worldfootball.net/schedule/can-premier-league-2025-spieltag/99/
+Chile,chi_primera-division_2025.rds,https://www.worldfootball.net/all_matches/chi-primera-division-2025/,https://www.worldfootball.net/schedule/chi-primera-division-2025-spieltag/99/
+China,chn_super-league_2025.rds,https://www.worldfootball.net/all_matches/chn-super-league-2025/,https://www.worldfootball.net/schedule/chn-super-league-2025-spieltag/99/
 Croatia,cro_1-hnl_2024-2025.rds,https://www.worldfootball.net/all_matches/cro-1-hnl-2024-2025/,https://www.worldfootball.net/schedule/cro-1-hnl-2024-2025-spieltag/99/
 Cyprus,cyp_first-division_2024-2025.rds,https://www.worldfootball.net/all_matches/cyp-first-division-2024-2025/,https://www.worldfootball.net/schedule/cyp-first-division-2024-2025-spieltag/99/
 Cyprus championship,cyp_first-division_2024-2025_championship.rds,https://www.worldfootball.net/all_matches/cyp-first-division-2024-2025-championship/,https://www.worldfootball.net/schedule/cyp-first-division-2024-2025-championship-spieltag/99/
 Cyprus relegation,cyp_first-division_2024-2025_relegation.rds,https://www.worldfootball.net/all_matches/cyp-first-division-2024-2025-relegation/,https://www.worldfootball.net/schedule/cyp-first-division-2024-2025-relegation-spieltag/99/
 Czech Republic,cze_1-fotbalova-liga_2024-2025.rds,https://www.worldfootball.net/all_matches/cze-1-fotbalova-liga-2024-2025/,https://www.worldfootball.net/schedule/cze-1-fotbalova-liga-2024-2025-spieltag/99/
-Czech Republic championship,cze_1-fotbalova-liga_2024-2025_meisterschaft.rds,https://www.worldfootball.net/all_matches/cze-1-fotbalova-liga-2024-2025-meisterschaft/,https://www.worldfootball.net/schedule/cze-1-fotbalova-liga-2024-2025-meisterschaft-spieltag/99/
-Czech Republic relegation,cze_1-fotbalova-liga_2024-2025_abstieg.rds,https://www.worldfootball.net/all_matches/cze-1-fotbalova-liga-2024-2025-abstieg/,https://www.worldfootball.net/schedule/cze-1-fotbalova-liga-2024-2025-abstieg-spieltag/99/
+Czech Republic championship,cze-1-fotbalova-liga_2024-2025_championship.rds,https://www.worldfootball.net/all_matches/cze-1-fotbalova-liga-2024-2025-championship/,https://www.worldfootball.net/schedule/cze-1-fotbalova-liga-2024-2025-championship-spieltag/99/
+Czech Republic relegation,cze-1-fotbalova-liga_2024-2025_relegation.rds,https://www.worldfootball.net/all_matches/cze-1-fotbalova-liga-2024-2025-relegation/,https://www.worldfootball.net/schedule/cze-1-fotbalova-liga-2024-2025-relegation-spieltag/99/
 Denmark,den_superliga_2024-2025.rds,https://www.worldfootball.net/all_matches/den-superliga-2024-2025/,https://www.worldfootball.net/schedule/den-superliga-2024-2025-spieltag/99/
 Denmark championship,den_superliga_2024-2025_championship.rds,https://www.worldfootball.net/all_matches/den-superliga-2024-2025-championship/,https://www.worldfootball.net/schedule/den-superliga-2024-2025-championship-spieltag/99/
 Denmark relegation,den_superliga_2024-2025_relegation.rds,https://www.worldfootball.net/all_matches/den-superliga-2024-2025-relegation/,https://www.worldfootball.net/schedule/den-superliga-2024-2025-relegation-spieltag/99/
+England,eng_premier-league_2024-2025.rds,https://www.worldfootball.net/all_matches/eng-premier-league-2024-2025/,https://www.worldfootball.net/schedule/eng-premier-league-2024-2025-spieltag/99/
 England Championship,eng_championship_2024-2025.rds,https://www.worldfootball.net/all_matches/eng-championship-2024-2025/,https://www.worldfootball.net/schedule/eng-championship-2024-2025-spieltag/99/
 England League One,eng_league-one_2024-2025.rds,https://www.worldfootball.net/all_matches/eng-league-one-2024-2025/,https://www.worldfootball.net/schedule/eng-league-one-2024-2025-spieltag/99/
 England League Two,eng_league-two_2024-2025.rds,https://www.worldfootball.net/all_matches/eng-league-two-2024-2025/,https://www.worldfootball.net/schedule/eng-league-two-2024-2025-spieltag/99/
 England National League,eng_national-league_2024-2025.rds,https://www.worldfootball.net/all_matches/eng-national-league-2024-2025/,https://www.worldfootball.net/schedule/eng-national-league-2024-2025-spieltag/99/
 England National North,eng_national-league-north_2024-2025.rds,https://www.worldfootball.net/all_matches/eng-national-league-north-2024-2025/,https://www.worldfootball.net/schedule/eng-national-league-north-2024-2025-spieltag/99/
 England National South,eng_national-league-south_2024-2025.rds,https://www.worldfootball.net/all_matches/eng-national-league-south-2024-2025/,https://www.worldfootball.net/schedule/eng-national-league-south-2024-2025-spieltag/99/
-England,eng_premier-league_2024-2025.rds,https://www.worldfootball.net/all_matches/eng-premier-league-2024-2025/,https://www.worldfootball.net/schedule/eng-premier-league-2024-2025-spieltag/99/
-Spain,esp_primera-division_2024-2025.rds,https://www.worldfootball.net/all_matches/esp-primera-division-2024-2025/,https://www.worldfootball.net/schedule/esp-primera-division-2024-2025-spieltag/99/
-Spain Primera RFEF 1,esp_primera-rfef-grupo-1_2024-2025.rds,https://www.worldfootball.net/all_matches/esp-primera-rfef-grupo-1-2024-2025/,https://www.worldfootball.net/schedule/esp-primera-rfef-grupo-1-2024-2025-spieltag/99/
-Spain Primera RFEF 2,esp_primera-rfef-grupo-2_2024-2025.rds,https://www.worldfootball.net/all_matches/esp-primera-rfef-grupo-2-2024-2025/,https://www.worldfootball.net/schedule/esp-primera-rfef-grupo-2-2024-2025-spieltag/99/
-Spain Segunda División,esp_segunda-division_2024-2025.rds,https://www.worldfootball.net/all_matches/esp-segunda-division-2024-2025/,https://www.worldfootball.net/schedule/esp-segunda-division-2024-2025-spieltag/99/
-Estonia,est_meistriliiga_2024.rds,https://www.worldfootball.net/all_matches/est-meistriliiga-2024/,https://www.worldfootball.net/schedule/est-meistriliiga-2024-spieltag/99/
-Finland,fin_veikkausliiga_2024.rds,https://www.worldfootball.net/all_matches/fin-veikkausliiga-2024/,https://www.worldfootball.net/schedule/fin-veikkausliiga-2024-spieltag/99/
-Finland championship,fin_veikkausliiga_2024_championship.rds,https://www.worldfootball.net/all_matches/fin-veikkausliiga-2024-championship/,https://www.worldfootball.net/schedule/fin-veikkausliiga-2024-championship-spieltag/99/
-Finland relegation,fin_veikkausliiga_2024_relegation.rds,https://www.worldfootball.net/all_matches/fin-veikkausliiga-2024-relegation/,https://www.worldfootball.net/schedule/fin-veikkausliiga-2024-relegation-spieltag/99/
+Estonia,est_meistriliiga_2025.rds,https://www.worldfootball.net/all_matches/est-meistriliiga-2025/,https://www.worldfootball.net/schedule/est-meistriliiga-2025-spieltag/99/
+Faroe Islands,fro_effodeildin_2025.rds,https://www.worldfootball.net/all_matches/fro-effodeildin-2025/,https://www.worldfootball.net/schedule/fro-effodeildin-2025-spieltag/99/
+Finland,fin_veikkausliiga_2025.rds,https://www.worldfootball.net/all_matches/fin-veikkausliiga-2025/,https://www.worldfootball.net/schedule/fin-veikkausliiga-2025-spieltag/99/
+Finland championship,fin_veikkausliiga_2025_championship.rds,https://www.worldfootball.net/all_matches/fin-veikkausliiga-2025-championship/,https://www.worldfootball.net/schedule/fin-veikkausliiga-2025-championship-spieltag/99/
+Finland relegation,fin_veikkausliiga_2025_relegation.rds,https://www.worldfootball.net/all_matches/fin-veikkausliiga-2025-relegation/,https://www.worldfootball.net/schedule/fin-veikkausliiga-2025-relegation-spieltag/99/
 France,fra_ligue-1_2024-2025.rds,https://www.worldfootball.net/all_matches/fra-ligue-1-2024-2025/,https://www.worldfootball.net/schedule/fra-ligue-1-2024-2025-spieltag/99/
 France Ligue 2,fra_ligue-2_2024-2025.rds,https://www.worldfootball.net/all_matches/fra-ligue-2-2024-2025/,https://www.worldfootball.net/schedule/fra-ligue-2-2024-2025-spieltag/99/
 France National,fra_national_2024-2025.rds,https://www.worldfootball.net/all_matches/fra-national-2024-2025/,https://www.worldfootball.net/schedule/fra-national-2024-2025-spieltag/99/
-Faroe Islands,fro_effodeildin_2024.rds,https://www.worldfootball.net/all_matches/fro-effodeildin-2024/,https://www.worldfootball.net/schedule/fro-effodeildin-2024-spieltag/99/
-Georgia,geo_erovnuli-liga_2024.rds,https://www.worldfootball.net/all_matches/geo-erovnuli-liga-2024/,https://www.worldfootball.net/schedule/geo-erovnuli-liga-2024-spieltag/99/
+Georgia,geo_erovnuli-liga_2025.rds,https://www.worldfootball.net/all_matches/geo-erovnuli-liga-2025/,https://www.worldfootball.net/schedule/geo-erovnuli-liga-2025-spieltag/99/
+Germany,ger_bundesliga_2024-2025.rds,https://www.worldfootball.net/all_matches/bundesliga-2024-2025/,https://www.worldfootball.net/schedule/bundesliga-2024-2025-spieltag/99/
 Germany 2. Bundesliga,ger_2-bundesliga_2024-2025.rds,https://www.worldfootball.net/all_matches/2-bundesliga-2024-2025/,https://www.worldfootball.net/schedule/2-bundesliga-2024-2025-spieltag/99/
 Germany 3. Liga,ger_3-liga_2024-2025.rds,https://www.worldfootball.net/all_matches/3-liga-2024-2025/,https://www.worldfootball.net/schedule/3-liga-2024-2025-spieltag/99/
-Germany,ger_bundesliga_2024-2025.rds,https://www.worldfootball.net/all_matches/bundesliga-2024-2025/,https://www.worldfootball.net/schedule/bundesliga-2024-2025-spieltag/99/
 Germany Regionalliga Bayern,ger_regionalliga-bayern_2024-2025.rds,https://www.worldfootball.net/all_matches/regionalliga-bayern-2024-2025/,https://www.worldfootball.net/schedule/regionalliga-bayern-2024-2025-spieltag/99/
 Germany Regionalliga Nord,ger_regionalliga-nord_2024-2025.rds,https://www.worldfootball.net/all_matches/regionalliga-nord-2024-2025/,https://www.worldfootball.net/schedule/regionalliga-nord-2024-2025-spieltag/99/
 Germany Regionalliga Nordost,ger_regionalliga-nordost_2024-2025.rds,https://www.worldfootball.net/all_matches/regionalliga-nordost-2024-2025/,https://www.worldfootball.net/schedule/regionalliga-nordost-2024-2025-spieltag/99/
@@ -63,15 +59,16 @@ Germany Regionalliga West,ger_regionalliga-west_2024-2025.rds,https://www.worldf
 Gibraltar,gib_premier-divison_2024-2025.rds,https://www.worldfootball.net/all_matches/gib-premier-divison-2024-2025/,https://www.worldfootball.net/schedule/gib-premier-divison-2024-2025-spieltag/99/
 Gibraltar championship,gib_premier-divison_2024-2025_championship.rds,https://www.worldfootball.net/all_matches/gib-premier-divison-2024-2025-championship/,https://www.worldfootball.net/schedule/gib-premier-divison-2024-2025-championship-spieltag/99/
 Greece,gre_super-league_2024-2025.rds,https://www.worldfootball.net/all_matches/gre-super-league-2024-2025/,https://www.worldfootball.net/schedule/gre-super-league-2024-2025-spieltag/99/
-Greece championship,gre_super-league_2024-2025_meisterschaft.rds,https://www.worldfootball.net/all_matches/gre-super-league-2024-2025-meisterschaft/,https://www.worldfootball.net/schedule/gre-super-league-2024-2025-meisterschaft-spieltag/99/
-Greece relegation,gre_super-league_2024-2025_abstieg.rds,https://www.worldfootball.net/all_matches/gre-super-league-2024-2025-abstieg/,https://www.worldfootball.net/schedule/gre-super-league-2024-2025-abstieg-spieltag/99/
+Greece championship,gre_super-league_2024-2025_championship,https://www.worldfootball.net/all_matches/gre-super-league-2024-2025-championship/,https://www.worldfootball.net/schedule/gre-super-league-2024-2025-championship-spieltag/99/
+Greece relegation,gre_super-league_2024-2025_relegation,https://www.worldfootball.net/all_matches/gre-super-league-2024-2025-relegation/,https://www.worldfootball.net/schedule/gre-super-league-2024-2025-relegation-spieltag/99/
+Greece ECL playoff,gre_super-league_2024-2025_ecl-playoffs,https://www.worldfootball.net/all_matches/gre-super-league-2024-2025-ecl-playoffs/,https://www.worldfootball.net/schedule/gre-super-league-2024-2025-ecl-playoffs-spieltag/99/
 Hungary,hun_nb-i_2024-2025.rds,https://www.worldfootball.net/all_matches/hun-nb-i-2024-2025/,https://www.worldfootball.net/schedule/hun-nb-i-2024-2025-spieltag/99/
-Ireland,irl_premier-division_2024.rds,https://www.worldfootball.net/all_matches/irl-premier-division-2024/,https://www.worldfootball.net/schedule/irl-premier-division-2024-spieltag/99/
-Ireland First,irl_first-division_2024.rds,https://www.worldfootball.net/all_matches/irl-first-division-2024/,https://www.worldfootball.net/schedule/irl-first-division-2024-spieltag/99/
-Iceland,isl_urvalsdeild_2024.rds,https://www.worldfootball.net/all_matches/isl-urvalsdeild-2024/,https://www.worldfootball.net/schedule/isl-urvalsdeild-2024-spieltag/99/
-Iceland championship,isl_urvalsdeild_2024_championship.rds,https://www.worldfootball.net/all_matches/isl-urvalsdeild-2024-championship/,https://www.worldfootball.net/schedule/isl-urvalsdeild-2024-championship-spieltag/99/
-Iceland relegation,isl_urvalsdeild_2024_relegation.rds,https://www.worldfootball.net/all_matches/isl-urvalsdeild-2024-relegation/,https://www.worldfootball.net/schedule/isl-urvalsdeild-2024-relegation-spieltag/99/
-Iceland 1 Deild,isl_1-deild_2024.rds,https://www.worldfootball.net/all_matches/isl-1-deild-2024/,https://www.worldfootball.net/schedule/isl-1-deild-2024-spieltag/99/
+Iceland,isl_urvalsdeild_2025.rds,https://www.worldfootball.net/all_matches/isl-urvalsdeild-2025/,https://www.worldfootball.net/schedule/isl-urvalsdeild-2025-spieltag/99/
+Iceland 1 Deild,isl_1-deild_2025.rds,https://www.worldfootball.net/all_matches/isl-1-deild-2025/,https://www.worldfootball.net/schedule/isl-1-deild-2025-spieltag/99/
+Iceland championship,isl_urvalsdeild_2025_championship.rds,https://www.worldfootball.net/all_matches/isl-urvalsdeild-2025-championship/,https://www.worldfootball.net/schedule/isl-urvalsdeild-2025-championship-spieltag/99/
+Iceland relegation,isl_urvalsdeild_2025_relegation.rds,https://www.worldfootball.net/all_matches/isl-urvalsdeild-2025-relegation/,https://www.worldfootball.net/schedule/isl-urvalsdeild-2025-relegation-spieltag/99/
+Ireland,irl_premier-division_2025.rds,https://www.worldfootball.net/all_matches/irl-premier-division-2025/,https://www.worldfootball.net/schedule/irl-premier-division-2025-spieltag/99/
+Ireland First,irl_first-division_2025.rds,https://www.worldfootball.net/all_matches/irl-first-division-2025/,https://www.worldfootball.net/schedule/irl-first-division-2025-spieltag/99/
 Israel,isr_ligat-haal_2024-2025.rds,https://www.worldfootball.net/all_matches/isr-ligat-haal-2024-2025/,https://www.worldfootball.net/schedule/isr-ligat-haal-2024-2025-spieltag/99/
 Israel championship,isr_ligat-haal_2024-2025_championship.rds,https://www.worldfootball.net/all_matches/isr-ligat-haal-2024-2025-championship/,https://www.worldfootball.net/schedule/isr-ligat-haal-2024-2025-championship-spieltag/99/
 Israel relegation,isr_ligat-haal_2024-2025_relegation.rds,https://www.worldfootball.net/all_matches/isr-ligat-haal-2024-2025-relegation/,https://www.worldfootball.net/schedule/isr-ligat-haal-2024-2025-relegation-spieltag/99/
@@ -80,27 +77,30 @@ Italy Serie B,ita_serie-b_2024-2025.rds,https://www.worldfootball.net/all_matche
 Italy Serie C/A,ita_serie-c-girone-a_2024-2025.rds,https://www.worldfootball.net/all_matches/ita-serie-c-girone-a-2024-2025/,https://www.worldfootball.net/schedule/ita-serie-c-girone-a-2024-2025-spieltag/99/
 Italy Serie C/B,ita_serie-c-girone-b_2024-2025.rds,https://www.worldfootball.net/all_matches/ita-serie-c-girone-b-2024-2025/,https://www.worldfootball.net/schedule/ita-serie-c-girone-b-2024-2025-spieltag/99/
 Italy Serie C/C,ita_serie-c-girone-c_2024-2025.rds,https://www.worldfootball.net/all_matches/ita-serie-c-girone-c-2024-2025/,https://www.worldfootball.net/schedule/ita-serie-c-girone-c-2024-2025-spieltag/99/
-Japan,jpn_j1-league_2024.rds,https://www.worldfootball.net/all_matches/jpn-j1-league-2024/,https://www.worldfootball.net/schedule/jpn-j1-league-2024-spieltag/99/
-Kazakhstan,kaz_premier-liga_2024.rds,https://www.worldfootball.net/all_matches/kaz-premier-liga-2024/,https://www.worldfootball.net/schedule/kaz-premier-liga-2024-spieltag/99/
+Japan,jpn_j1-league_2025.rds,https://www.worldfootball.net/all_matches/jpn-j1-league-2025/,https://www.worldfootball.net/schedule/jpn-j1-league-2025-spieltag/99/
+Kazakhstan,kaz_premier-liga_2025.rds,https://www.worldfootball.net/all_matches/kaz-premier-liga-2025/,https://www.worldfootball.net/schedule/kaz-premier-liga-2025-spieltag/99/
 Kosovo,kos_superliga_2024-2025.rds,https://www.worldfootball.net/all_matches/kos-superliga-2024-2025/,https://www.worldfootball.net/schedule/kos-superliga-2024-2025-spieltag/99/
-Latvia,lat_virsliga_2024.rds,https://www.worldfootball.net/all_matches/lat-virsliga-2024/,https://www.worldfootball.net/schedule/lat-virsliga-2024-spieltag/99/
-Lithuania,ltu_a-lyga_2024.rds,https://www.worldfootball.net/all_matches/ltu-a-lyga-2024/,https://www.worldfootball.net/schedule/ltu-a-lyga-2024-spieltag/99/
+Latvia,lat_virsliga_2025.rds,https://www.worldfootball.net/all_matches/lat-virsliga-2025/,https://www.worldfootball.net/schedule/lat-virsliga-2025-spieltag/99/
+Lithuania,ltu_a-lyga_2025.rds,https://www.worldfootball.net/all_matches/ltu-a-lyga-2025/,https://www.worldfootball.net/schedule/ltu-a-lyga-2025-spieltag/99/
 Luxembourg,lux_nationaldivision_2024-2025.rds,https://www.worldfootball.net/all_matches/lux-nationaldivision-2024-2025/,https://www.worldfootball.net/schedule/lux-nationaldivision-2024-2025-spieltag/99/
-Malta Opening T6,mlt_premier-league_2024-2025_opening-top-6.rds,https://www.worldfootball.net/all_matches/mlt-premier-league-2024-2025-opening-top-6/,https://www.worldfootball.net/schedule/mlt-premier-league-2024-2025-opening-top-6-spieltag/99/
+Malta Closing,mlt-premier-league_2024-2025_closing,https://www.worldfootball.net/all_matches/mlt-premier-league-2024-2025-closing/,https://www.worldfootball.net/schedule/mlt-premier-league-2024-2025-closing-spieltag/99/
+Malta Closing B6,mlt_premier-league_2024-2025_closing-bottom-6.rds,https://www.worldfootball.net/all_matches/mlt-premier-league-2024-2025-closing-bottom-6/,https://www.worldfootball.net/schedule/mlt-premier-league-2024-2025-closing-bottom-6-spieltag/99/
+Malta Closing T6,mlt_premier-league_2024-2025_closing-top-6.rds,https://www.worldfootball.net/all_matches/mlt-premier-league-2024-2025-closing-top-6/,https://www.worldfootball.net/schedule/mlt-premier-league-2024-2025-closing-top-6-spieltag/99/
+Malta Opening,mlt-premier-league_2024-2025_opening,https://www.worldfootball.net/all_matches/mlt-premier-league-2024-2025-opening/,https://www.worldfootball.net/schedule/mlt-premier-league-2024-2025-opening-spieltag/99/
 Malta Opening B6,mlt_premier-league_2024-2025_opening-bottom-6.rds,https://www.worldfootball.net/all_matches/mlt-premier-league-2024-2025-opening-bottom-6/,https://www.worldfootball.net/schedule/mlt-premier-league-2024-2025-opening-bottom-6-spieltag/99/
+Malta Opening T6,mlt_premier-league_2024-2025_opening-top-6.rds,https://www.worldfootball.net/all_matches/mlt-premier-league-2024-2025-opening-top-6/,https://www.worldfootball.net/schedule/mlt-premier-league-2024-2025-opening-top-6-spieltag/99/
+Mexico Clausura,mex_primera-division_2024-2025-clausura.rds,https://www.worldfootball.net/all_matches/mex-primera-division-2024-2025-clausura/,https://www.worldfootball.net/schedule/mex-primera-division-2024-2025-clausura-spieltag/99/
 Moldova,mda_divizia-nationala_2024-2025_phase-i.rds,https://www.worldfootball.net/all_matches/mda-divizia-nationala-2024-2025-phase-i/,https://www.worldfootball.net/schedule/mda-divizia-nationala-2024-2025-phase-i-spieltag/99/
 Moldova Phase 2,mda_divizia-nationala_2024-2025_phase-ii.rds,https://www.worldfootball.net/all_matches/mda-divizia-nationala-2024-2025-phase-ii/,https://www.worldfootball.net/schedule/mda-divizia-nationala-2024-2025-phase-ii-spieltag/99/
 Moldova relegation,mda_relegation_2024-2025.rds,https://www.worldfootball.net/all_matches/mda-relegation-2024-2025/,https://www.worldfootball.net/schedule/mda-relegation-2024-2025-spieltag/99/
-Mexico,mex_primera-division_2024-2025_apertura_2.rds,https://www.worldfootball.net/all_matches/mex-primera-division-2024-2025-apertura_2/,https://www.worldfootball.net/schedule/mex-primera-division-2024-2025-apertura-spieltag_2/99/
-North Macedonia,mkd_1-mfl_2024-2025.rds,https://www.worldfootball.net/all_matches/mkd-1-mfl-2024-2025/,https://www.worldfootball.net/schedule/mkd-1-mfl-2024-2025-spieltag/99/
-Malta,mlt_premier-league_2024-2025_opening.rds,https://www.worldfootball.net/all_matches/mlt-premier-league-2024-2025-opening/,https://www.worldfootball.net/schedule/mlt-premier-league-2024-2025-opening-spieltag/99/
 Montenegro,mne_1-cfl_2024-2025.rds,https://www.worldfootball.net/all_matches/mne-1-cfl-2024-2025/,https://www.worldfootball.net/schedule/mne-1-cfl-2024-2025-spieltag/99/
-Netherlands Eerste,ned_eerste-divisie_2024-2025.rds,https://www.worldfootball.net/all_matches/ned-eerste-divisie-2024-2025/,https://www.worldfootball.net/schedule/ned-eerste-divisie-2024-2025-spieltag/99/
 Netherlands,ned_eredivisie_2024-2025.rds,https://www.worldfootball.net/all_matches/ned-eredivisie-2024-2025/,https://www.worldfootball.net/schedule/ned-eredivisie-2024-2025-spieltag/99/
+Netherlands Eerste,ned_eerste-divisie_2024-2025.rds,https://www.worldfootball.net/all_matches/ned-eerste-divisie-2024-2025/,https://www.worldfootball.net/schedule/ned-eerste-divisie-2024-2025-spieltag/99/
+North Macedonia,mkd_1-mfl_2024-2025.rds,https://www.worldfootball.net/all_matches/mkd-1-mfl-2024-2025/,https://www.worldfootball.net/schedule/mkd-1-mfl-2024-2025-spieltag/99/
 Northern Ireland,nir_premier-league_2024-2025.rds,https://www.worldfootball.net/all_matches/nir-premier-league-2024-2025/,https://www.worldfootball.net/schedule/nir-premier-league-2024-2025-spieltag/99/
 Northern Ireland championship,nir_premier-league_2024-2025_championship.rds,https://www.worldfootball.net/all_matches/nir-premier-league-2024-2025-championship/,https://www.worldfootball.net/schedule/nir-premier-league-2024-2025-championship-spieltag/99/
 Northern Ireland relegation,nir_premier-league_2024-2025_relegation.rds,https://www.worldfootball.net/all_matches/nir-premier-league-2024-2025-relegation/,https://www.worldfootball.net/schedule/nir-premier-league-2024-2025-relegation-spieltag/99/
-Norway,nor_eliteserien_2024.rds,https://www.worldfootball.net/all_matches/nor-eliteserien-2024/,https://www.worldfootball.net/schedule/nor-eliteserien-2024-spieltag/99/
+Norway,nor_eliteserien_2025.rds,https://www.worldfootball.net/all_matches/nor-eliteserien-2025/,https://www.worldfootball.net/schedule/nor-eliteserien-2025-spieltag/99/
 Poland,pol_ekstraklasa_2024-2025.rds,https://www.worldfootball.net/all_matches/pol-ekstraklasa-2024-2025/,https://www.worldfootball.net/schedule/pol-ekstraklasa-2024-2025-spieltag/99/
 Portugal,por_primeira-liga_2024-2025.rds,https://www.worldfootball.net/all_matches/por-primeira-liga-2024-2025/,https://www.worldfootball.net/schedule/por-primeira-liga-2024-2025-spieltag/99/
 Romania,rou_liga-1_2024-2025.rds,https://www.worldfootball.net/all_matches/rou-liga-1-2024-2025/,https://www.worldfootball.net/schedule/rou-liga-1-2024-2025-spieltag/99/
@@ -108,33 +108,37 @@ Romania championship,rou_liga-1_2024-2025_championship.rds,https://www.worldfoot
 Romania relegation,rou_liga-1_2024-2025_relegation.rds,https://www.worldfootball.net/all_matches/rou-liga-1-2024-2025-relegation/,https://www.worldfootball.net/schedule/rou-liga-1-2024-2025-relegation-spieltag/99/
 Russia,rus_premier-liga_2024-2025.rds,https://www.worldfootball.net/all_matches/rus-premier-liga-2024-2025/,https://www.worldfootball.net/schedule/rus-premier-liga-2024-2025-spieltag/99/
 Russia 1,rus_1-division_2024-2025.rds,https://www.worldfootball.net/all_matches/rus-1-division-2024-2025/,https://www.worldfootball.net/schedule/rus-1-division-2024-2025-spieltag/99/
+San Marino,smr_campionato_2024-2025.rds,https://www.worldfootball.net/all_matches/smr-campionato-2024-2025/,https://www.worldfootball.net/schedule/smr-campionato-2024-2025-spieltag/99/
+Scotland,sco_premiership_2024-2025.rds,https://www.worldfootball.net/all_matches/sco-premiership-2024-2025/,https://www.worldfootball.net/schedule/sco-premiership-2024-2025-spieltag/99/
 Scotland Championship,sco_championship_2024-2025.rds,https://www.worldfootball.net/all_matches/sco-championship-2024-2025/,https://www.worldfootball.net/schedule/sco-championship-2024-2025-spieltag/99/
 Scotland League One,sco_league-one_2024-2025.rds,https://www.worldfootball.net/all_matches/sco-league-one-2024-2025/,https://www.worldfootball.net/schedule/sco-league-one-2024-2025-spieltag/99/
 Scotland League Two,sco_league-two_2024-2025.rds,https://www.worldfootball.net/all_matches/sco-league-two-2024-2025/,https://www.worldfootball.net/schedule/sco-league-two-2024-2025-spieltag/99/
-Scotland,sco_premiership_2024-2025.rds,https://www.worldfootball.net/all_matches/sco-premiership-2024-2025/,https://www.worldfootball.net/schedule/sco-premiership-2024-2025-spieltag/99/
 Scotland championship,sco_premiership_2024-2025_championship.rds,https://www.worldfootball.net/all_matches/sco-premiership-2024-2025-championship/,https://www.worldfootball.net/schedule/sco-premiership-2024-2025-championship-spieltag/99/
 Scotland relegation,sco_premiership_2024-2025_relegation.rds,https://www.worldfootball.net/all_matches/sco-premiership-2024-2025-relegation/,https://www.worldfootball.net/schedule/sco-premiership-2024-2025-relegation-spieltag/99/
-San Marino,smr_campionato_2024-2025.rds,https://www.worldfootball.net/all_matches/smr-campionato-2024-2025/,https://www.worldfootball.net/schedule/smr-campionato-2024-2025-spieltag/99/
 Serbia,srb_super-liga_2024-2025.rds,https://www.worldfootball.net/all_matches/srb-super-liga-2024-2025/,https://www.worldfootball.net/schedule/srb-super-liga-2024-2025-spieltag/99/
 Serbia championship,srb_super-liga_2024-2025_championship.rds,https://www.worldfootball.net/all_matches/srb-super-liga-2024-2025-championship/,https://www.worldfootball.net/schedule/srb-super-liga-2024-2025-championship-spieltag/99/
 Serbia relegation,srb_super-liga_2024-2025_relegation.rds,https://www.worldfootball.net/all_matches/srb-super-liga-2024-2025-relegation/,https://www.worldfootball.net/schedule/srb-super-liga-2024-2025-relegation-spieltag/99/
-Switzerland Challenge,sui_challenge-league_2024-2025.rds,https://www.worldfootball.net/all_matches/sui-challenge-league-2024-2025/,https://www.worldfootball.net/schedule/sui-challenge-league-2024-2025-spieltag/99/
-Switzerland Promotion,sui_promotion-league_2024-2025.rds,https://www.worldfootball.net/all_matches/sui-promotion-league-2024-2025/,https://www.worldfootball.net/schedule/sui-promotion-league-2024-2025-spieltag/99/
-Switzerland,sui_super-league_2024-2025.rds,https://www.worldfootball.net/all_matches/sui-super-league-2024-2025/,https://www.worldfootball.net/schedule/sui-super-league-2024-2025-spieltag/99/
-Switzerland championship,sui_super-league_2024-2025_championship.rds,https://www.worldfootball.net/all_matches/sui-super-league-2024-2025-championship/,https://www.worldfootball.net/schedule/sui-super-league-2024-2025-championship-spieltag/99/
-Switzerland relegation,sui_super-league_2024-2025_relegation.rds,https://www.worldfootball.net/all_matches/sui-super-league-2024-2025-relegation/,https://www.worldfootball.net/schedule/sui-super-league-2024-2025-relegation-spieltag/99/
 Slovakia,svk_super-liga_2024-2025.rds,https://www.worldfootball.net/all_matches/svk-super-liga-2024-2025/,https://www.worldfootball.net/schedule/svk-super-liga-2024-2025-spieltag/99/
 Slovakia championship,svk_super-liga_2024-2025_championship.rds,https://www.worldfootball.net/all_matches/svk-super-liga-2024-2025-championship/,https://www.worldfootball.net/schedule/svk-super-liga-2024-2025-championship-spieltag/99/
 Slovakia relegation,svk_super-liga_2024-2025_relegation.rds,https://www.worldfootball.net/all_matches/svk-super-liga-2024-2025-relegation/,https://www.worldfootball.net/schedule/svk-super-liga-2024-2025-relegation-spieltag/99/
 Slovenia,svn_prvaliga_2024-2025.rds,https://www.worldfootball.net/all_matches/svn-prvaliga-2024-2025/,https://www.worldfootball.net/schedule/svn-prvaliga-2024-2025-spieltag/99/
-Sweden,swe_allsvenskan_2024.rds,https://www.worldfootball.net/all_matches/swe-allsvenskan-2024/,https://www.worldfootball.net/schedule/swe-allsvenskan-2024-spieltag/99/
-Sweden Superettan,swe_superettan_2024.rds,https://www.worldfootball.net/all_matches/swe-superettan-2024/,https://www.worldfootball.net/schedule/swe-superettan-2024-spieltag/99/
+Spain,esp_primera-division_2024-2025.rds,https://www.worldfootball.net/all_matches/esp-primera-division-2024-2025/,https://www.worldfootball.net/schedule/esp-primera-division-2024-2025-spieltag/99/
+Spain Primera RFEF 1,esp_primera-rfef-grupo-1_2024-2025.rds,https://www.worldfootball.net/all_matches/esp-primera-rfef-grupo-1-2024-2025/,https://www.worldfootball.net/schedule/esp-primera-rfef-grupo-1-2024-2025-spieltag/99/
+Spain Primera RFEF 2,esp_primera-rfef-grupo-2_2024-2025.rds,https://www.worldfootball.net/all_matches/esp-primera-rfef-grupo-2-2024-2025/,https://www.worldfootball.net/schedule/esp-primera-rfef-grupo-2-2024-2025-spieltag/99/
+Spain Segunda División,esp_segunda-division_2024-2025.rds,https://www.worldfootball.net/all_matches/esp-segunda-division-2024-2025/,https://www.worldfootball.net/schedule/esp-segunda-division-2024-2025-spieltag/99/
+Sweden,swe_allsvenskan_2025.rds,https://www.worldfootball.net/all_matches/swe-allsvenskan-2025/,https://www.worldfootball.net/schedule/swe-allsvenskan-2025-spieltag/99/
+Sweden Superettan,swe_superettan_2025.rds,https://www.worldfootball.net/all_matches/swe-superettan-2025/,https://www.worldfootball.net/schedule/swe-superettan-2025-spieltag/99/
+Switzerland,sui_super-league_2024-2025.rds,https://www.worldfootball.net/all_matches/sui-super-league-2024-2025/,https://www.worldfootball.net/schedule/sui-super-league-2024-2025-spieltag/99/
+Switzerland Challenge,sui_challenge-league_2024-2025.rds,https://www.worldfootball.net/all_matches/sui-challenge-league-2024-2025/,https://www.worldfootball.net/schedule/sui-challenge-league-2024-2025-spieltag/99/
+Switzerland Promotion,sui_promotion-league_2024-2025.rds,https://www.worldfootball.net/all_matches/sui-promotion-league-2024-2025/,https://www.worldfootball.net/schedule/sui-promotion-league-2024-2025-spieltag/99/
+Switzerland championship,sui_super-league_2024-2025_championship.rds,https://www.worldfootball.net/all_matches/sui-super-league-2024-2025-championship/,https://www.worldfootball.net/schedule/sui-super-league-2024-2025-championship-spieltag/99/
+Switzerland relegation,sui_super-league_2024-2025_relegation.rds,https://www.worldfootball.net/all_matches/sui-super-league-2024-2025-relegation/,https://www.worldfootball.net/schedule/sui-super-league-2024-2025-relegation-spieltag/99/
 Turkey,tur_sueperlig_2024-2025.rds,https://www.worldfootball.net/all_matches/tur-sueperlig-2024-2025/,https://www.worldfootball.net/schedule/tur-sueperlig-2024-2025-spieltag/99/
 UEFA Champions League,uefa_cl_2024-2025.rds,https://www.worldfootball.net/all_matches/champions-league-2024-2025/,https://www.worldfootball.net/schedule/champions-league-2024-2025-ligaphase/99/
-UEFA Europa League,uefa_el_2024-2025.rds,https://www.worldfootball.net/all_matches/europa-league-2024-2025/,https://www.worldfootball.net/schedule/europa-league-2024-2025-ligaphase/99/
 UEFA Conference League,uefa_ecl_2024-2025.rds,https://www.worldfootball.net/all_matches/conference-league-2024-2025/,https://www.worldfootball.net/schedule/conference-league-2024-2025-ligaphase/99/
+UEFA Europa League,uefa_el_2024-2025.rds,https://www.worldfootball.net/all_matches/europa-league-2024-2025/,https://www.worldfootball.net/schedule/europa-league-2024-2025-ligaphase/99/
+USA,usa_major-league-soccer_2025.rds,https://www.worldfootball.net/all_matches/usa-major-league-soccer-2025/,https://www.worldfootball.net/schedule/usa-major-league-soccer-2025-spieltag/99/
 Ukraine,ukr_premyer-liga_2024-2025.rds,https://www.worldfootball.net/all_matches/ukr-premyer-liga-2024-2025/,https://www.worldfootball.net/schedule/ukr-premyer-liga-2024-2025-spieltag/99/
-USA,usa_major-league-soccer_2024.rds,https://www.worldfootball.net/all_matches/usa-major-league-soccer-2024/,https://www.worldfootball.net/schedule/usa-major-league-soccer-2024-spieltag/99/
 Wales,wal_premier-league_2024-2025.rds,https://www.worldfootball.net/all_matches/wal-premier-league-2024-2025/,https://www.worldfootball.net/schedule/wal-premier-league-2024-2025-spieltag/99/
 Wales championship,wal_premier-league_2024-2025_championship.rds,https://www.worldfootball.net/all_matches/wal-premier-league-2024-2025-championship/,https://www.worldfootball.net/schedule/wal-premier-league-2024-2025-championship-spieltag/99/
 Wales relegation,wal_premier-league_2024-2025_relegation.rds,https://www.worldfootball.net/all_matches/wal-premier-league-2024-2025-relegation/,https://www.worldfootball.net/schedule/wal-premier-league-2024-2025-relegation-spieltag/99/

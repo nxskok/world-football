@@ -1,0 +1,4318 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Report</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="report_b_files/libs/clipboard/clipboard.min.js"></script>
+<script src="report_b_files/libs/quarto-html/quarto.js"></script>
+<script src="report_b_files/libs/quarto-html/popper.min.js"></script>
+<script src="report_b_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="report_b_files/libs/quarto-html/anchor.min.js"></script>
+<link href="report_b_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="report_b_files/libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="report_b_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="report_b_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="report_b_files/libs/bootstrap/bootstrap-1182f4fb8b3713a1ccdf4e7f10bad319.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Report</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>new version of report with each rank separately</p>
+<p>also todo:</p>
+<ul>
+<li>remove games for teams expelled from league</li>
+<li>do something about two divisions (these belong in sim or earlier)</li>
+</ul>
+<section id="leagues-to-do" class="level2">
+<h2 class="anchored" data-anchor-id="leagues-to-do">Leagues to do</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">fname</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">eng_championship_2024-2025.rds</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">est_meistriliiga_2025.rds</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">ger_3-liga_2024-2025.rds</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">sui_promotion-league_2024-2025.rds</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">uefa_cl_2024-2025.rds</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="eng_championship_2024-2025.rds" class="level1">
+<h1>eng_championship_2024-2025.rds</h1>
+<section id="top-1" class="level2">
+<h2 class="anchored" data-anchor-id="top-1">Top 1</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 23%">
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: left;">played</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">prob_old</th>
+<th style="text-align: right;">prob</th>
+<th style="text-align: right;">diff</th>
+<th style="text-align: left;">opp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Leeds United</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">379</td>
+<td style="text-align: right;">710</td>
+<td style="text-align: right;">1.39</td>
+<td style="text-align: left;">1 - 0 @ Middlesbrough FC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Burnley FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">450</td>
+<td style="text-align: right;">249</td>
+<td style="text-align: right;">-0.90</td>
+<td style="text-align: left;">0 - 0 @ Derby County</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Sheffield United</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">83</td>
+<td style="text-align: right;">171</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">-1.57</td>
+<td style="text-align: left;">0 - 1 v Millwall FC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Sunderland AFC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">76</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 0 @ Norwich City</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Bristol City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 1 v West Bromwich Albion</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Coventry City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 v Portsmouth FC</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Middlesbrough FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 v Leeds United</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">West Bromwich Albion</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 2 @ Bristol City</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Millwall FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 @ Sheffield United</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Watford FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-4</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 v Hull City</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">Norwich City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 0 v Sunderland AFC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">Blackburn Rovers</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 2 v Sheffield Wednesday</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">Sheffield Wednesday</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 2 @ Blackburn Rovers</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">Swansea City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">3 - 0 v Plymouth Argyle</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">Queens Park Rangers</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-6</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">3 - 1 @ Oxford United</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">Preston North End</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 2 v Cardiff City</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">Portsmouth FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-16</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 @ Coventry City</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">Oxford United</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-18</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 3 v Queens Park Rangers</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: left;">Hull City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-9</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 @ Watford FC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">Stoke City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-12</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 1 v Luton Town</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">21</td>
+<td style="text-align: left;">Derby County</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-10</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 0 v Burnley FC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">22</td>
+<td style="text-align: left;">Cardiff City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-20</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 2 @ Preston North End</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">23</td>
+<td style="text-align: left;">Luton Town</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-25</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 1 @ Stoke City</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">24</td>
+<td style="text-align: left;">Plymouth Argyle</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-39</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 3 @ Swansea City</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="eng_championship_2024-2025.rds-1" class="level1">
+<h1>eng_championship_2024-2025.rds</h1>
+<section id="top-2" class="level2">
+<h2 class="anchored" data-anchor-id="top-2">Top 2</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 23%">
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: left;">played</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">prob_old</th>
+<th style="text-align: right;">prob</th>
+<th style="text-align: right;">diff</th>
+<th style="text-align: left;">opp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Leeds United</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">763</td>
+<td style="text-align: right;">963</td>
+<td style="text-align: right;">2.09</td>
+<td style="text-align: left;">1 - 0 @ Middlesbrough FC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Burnley FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">810</td>
+<td style="text-align: right;">824</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: left;">0 - 0 @ Derby County</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Sheffield United</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">83</td>
+<td style="text-align: right;">426</td>
+<td style="text-align: right;">213</td>
+<td style="text-align: right;">-1.01</td>
+<td style="text-align: left;">0 - 1 v Millwall FC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Sunderland AFC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">76</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-Inf</td>
+<td style="text-align: left;">0 - 0 @ Norwich City</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Bristol City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 1 v West Bromwich Albion</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Coventry City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 v Portsmouth FC</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Middlesbrough FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 v Leeds United</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">West Bromwich Albion</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 2 @ Bristol City</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Millwall FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 @ Sheffield United</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Watford FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-4</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 v Hull City</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">Norwich City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 0 v Sunderland AFC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">Blackburn Rovers</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 2 v Sheffield Wednesday</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">Sheffield Wednesday</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 2 @ Blackburn Rovers</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">Swansea City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">3 - 0 v Plymouth Argyle</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">Queens Park Rangers</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-6</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">3 - 1 @ Oxford United</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">Preston North End</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 2 v Cardiff City</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">Portsmouth FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-16</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 @ Coventry City</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">Oxford United</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-18</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 3 v Queens Park Rangers</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: left;">Hull City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-9</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 @ Watford FC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">Stoke City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-12</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 1 v Luton Town</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">21</td>
+<td style="text-align: left;">Derby County</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-10</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 0 v Burnley FC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">22</td>
+<td style="text-align: left;">Cardiff City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-20</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 2 @ Preston North End</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">23</td>
+<td style="text-align: left;">Luton Town</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-25</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 1 @ Stoke City</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">24</td>
+<td style="text-align: left;">Plymouth Argyle</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-39</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 3 @ Swansea City</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="eng_championship_2024-2025.rds-2" class="level1">
+<h1>eng_championship_2024-2025.rds</h1>
+<section id="top-21" class="level2">
+<h2 class="anchored" data-anchor-id="top-21">Top 21</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 23%">
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: left;">played</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">prob_old</th>
+<th style="text-align: right;">prob</th>
+<th style="text-align: right;">diff</th>
+<th style="text-align: left;">opp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Leeds United</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 @ Middlesbrough FC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Burnley FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 0 @ Derby County</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Sheffield United</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">83</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 v Millwall FC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Sunderland AFC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">76</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 0 @ Norwich City</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Bristol City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 1 v West Bromwich Albion</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Coventry City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 v Portsmouth FC</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Middlesbrough FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 v Leeds United</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">West Bromwich Albion</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 2 @ Bristol City</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Millwall FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 @ Sheffield United</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Watford FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-4</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 v Hull City</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">Norwich City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 0 v Sunderland AFC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">Blackburn Rovers</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 2 v Sheffield Wednesday</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">Sheffield Wednesday</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 2 @ Blackburn Rovers</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">Swansea City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">999</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">Inf</td>
+<td style="text-align: left;">3 - 0 v Plymouth Argyle</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">Queens Park Rangers</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-6</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">978</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">Inf</td>
+<td style="text-align: left;">3 - 1 @ Oxford United</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">Preston North End</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">998</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">Inf</td>
+<td style="text-align: left;">2 - 2 v Cardiff City</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">Portsmouth FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-16</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">958</td>
+<td style="text-align: right;">942</td>
+<td style="text-align: right;">-0.34</td>
+<td style="text-align: left;">0 - 1 @ Coventry City</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">Hull City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-9</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">945</td>
+<td style="text-align: right;">928</td>
+<td style="text-align: right;">-0.29</td>
+<td style="text-align: left;">0 - 1 @ Watford FC</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: left;">Oxford United</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-18</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">915</td>
+<td style="text-align: right;">817</td>
+<td style="text-align: right;">-0.88</td>
+<td style="text-align: left;">1 - 3 v Queens Park Rangers</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">Stoke City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-12</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">815</td>
+<td style="text-align: right;">793</td>
+<td style="text-align: right;">-0.14</td>
+<td style="text-align: left;">1 - 1 v Luton Town</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">21</td>
+<td style="text-align: left;">Derby County</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-10</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">676</td>
+<td style="text-align: right;">770</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: left;">0 - 0 v Burnley FC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">22</td>
+<td style="text-align: left;">Cardiff City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-20</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">497</td>
+<td style="text-align: right;">540</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: left;">2 - 2 @ Preston North End</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">23</td>
+<td style="text-align: left;">Luton Town</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-25</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">204</td>
+<td style="text-align: right;">204</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: left;">1 - 1 @ Stoke City</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">24</td>
+<td style="text-align: left;">Plymouth Argyle</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-39</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">-0.93</td>
+<td style="text-align: left;">0 - 3 @ Swansea City</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="eng_championship_2024-2025.rds-3" class="level1">
+<h1>eng_championship_2024-2025.rds</h1>
+<section id="top-6" class="level2">
+<h2 class="anchored" data-anchor-id="top-6">Top 6</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 23%">
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: left;">played</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">prob_old</th>
+<th style="text-align: right;">prob</th>
+<th style="text-align: right;">diff</th>
+<th style="text-align: left;">opp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Leeds United</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 @ Middlesbrough FC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Burnley FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 0 @ Derby County</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Sheffield United</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">83</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 v Millwall FC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Sunderland AFC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">76</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 0 @ Norwich City</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Bristol City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">450</td>
+<td style="text-align: right;">707</td>
+<td style="text-align: right;">1.08</td>
+<td style="text-align: left;">2 - 1 v West Bromwich Albion</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Coventry City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">530</td>
+<td style="text-align: right;">621</td>
+<td style="text-align: right;">0.37</td>
+<td style="text-align: left;">1 - 0 v Portsmouth FC</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Middlesbrough FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">609</td>
+<td style="text-align: right;">466</td>
+<td style="text-align: right;">-0.58</td>
+<td style="text-align: left;">0 - 1 v Leeds United</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">West Bromwich Albion</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">380</td>
+<td style="text-align: right;">165</td>
+<td style="text-align: right;">-1.13</td>
+<td style="text-align: left;">1 - 2 @ Bristol City</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Millwall FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">0.56</td>
+<td style="text-align: left;">1 - 0 @ Sheffield United</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Watford FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-4</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: left;">1 - 0 v Hull City</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">Norwich City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">-0.70</td>
+<td style="text-align: left;">0 - 0 v Sunderland AFC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">Blackburn Rovers</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: left;">2 - 2 v Sheffield Wednesday</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">Sheffield Wednesday</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">-0.92</td>
+<td style="text-align: left;">2 - 2 @ Blackburn Rovers</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">Swansea City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">3 - 0 v Plymouth Argyle</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">Queens Park Rangers</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-6</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">3 - 1 @ Oxford United</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">Preston North End</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 2 v Cardiff City</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">Portsmouth FC</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-16</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 @ Coventry City</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">Oxford United</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-18</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 3 v Queens Park Rangers</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: left;">Hull City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-9</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 @ Watford FC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">Stoke City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-12</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 1 v Luton Town</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">21</td>
+<td style="text-align: left;">Derby County</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-10</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 0 v Burnley FC</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">22</td>
+<td style="text-align: left;">Cardiff City</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-20</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 2 @ Preston North End</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">23</td>
+<td style="text-align: left;">Luton Town</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-25</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 1 @ Stoke City</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">24</td>
+<td style="text-align: left;">Plymouth Argyle</td>
+<td style="text-align: left;">41</td>
+<td style="text-align: right;">-39</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 3 @ Swansea City</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="est_meistriliiga_2025.rds" class="level1">
+<h1>est_meistriliiga_2025.rds</h1>
+<section id="top-1-1" class="level2">
+<h2 class="anchored" data-anchor-id="top-1-1">Top 1</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 23%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: left;">played</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">prob_old</th>
+<th style="text-align: right;">prob</th>
+<th style="text-align: right;">diff</th>
+<th style="text-align: left;">opp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FCI Levadia</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">644</td>
+<td style="text-align: right;">486</td>
+<td style="text-align: right;">-0.65</td>
+<td style="text-align: left;">2 - 1 v FC Kuressaare</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Paide Linnameeskond</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">208</td>
+<td style="text-align: right;">319</td>
+<td style="text-align: right;">0.58</td>
+<td style="text-align: left;">1 - 0 v Pärnu JK Vaprus</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">FC Flora</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">139</td>
+<td style="text-align: right;">189</td>
+<td style="text-align: right;">0.37</td>
+<td style="text-align: left;">2 - 1 @ JK Tammeka</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">JK Narva Trans</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">-0.51</td>
+<td style="text-align: left;">1 - 0 v JK Tallinna Kalev</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Pärnu JK Vaprus</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">-0.70</td>
+<td style="text-align: left;">0 - 1 @ Paide Linnameeskond</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">JK Nõmme Kalju</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">Inf</td>
+<td style="text-align: left;">3 - 0 v Harju JK</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Harju JK</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 3 @ JK Nõmme Kalju</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">JK Tammeka</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 2 v FC Flora</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">FC Kuressaare</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">-9</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 2 @ FCI Levadia</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">JK Tallinna Kalev</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">-10</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 @ JK Narva Trans</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="est_meistriliiga_2025.rds-1" class="level1">
+<h1>est_meistriliiga_2025.rds</h1>
+<section id="top-3" class="level2">
+<h2 class="anchored" data-anchor-id="top-3">Top 3</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 23%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: left;">played</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">prob_old</th>
+<th style="text-align: right;">prob</th>
+<th style="text-align: right;">diff</th>
+<th style="text-align: left;">opp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FCI Levadia</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">979</td>
+<td style="text-align: right;">967</td>
+<td style="text-align: right;">-0.46</td>
+<td style="text-align: left;">2 - 1 v FC Kuressaare</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Paide Linnameeskond</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">898</td>
+<td style="text-align: right;">942</td>
+<td style="text-align: right;">0.61</td>
+<td style="text-align: left;">1 - 0 v Pärnu JK Vaprus</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">FC Flora</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">823</td>
+<td style="text-align: right;">889</td>
+<td style="text-align: right;">0.54</td>
+<td style="text-align: left;">2 - 1 @ JK Tammeka</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">JK Narva Trans</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">109</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">-0.36</td>
+<td style="text-align: left;">1 - 0 v JK Tallinna Kalev</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Pärnu JK Vaprus</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">155</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">-0.86</td>
+<td style="text-align: left;">0 - 1 @ Paide Linnameeskond</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">JK Nõmme Kalju</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.43</td>
+<td style="text-align: left;">3 - 0 v Harju JK</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">JK Tammeka</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">Inf</td>
+<td style="text-align: left;">1 - 2 v FC Flora</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Harju JK</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-Inf</td>
+<td style="text-align: left;">0 - 3 @ JK Nõmme Kalju</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">FC Kuressaare</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">-9</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 2 @ FCI Levadia</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">JK Tallinna Kalev</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">-10</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 @ JK Narva Trans</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="est_meistriliiga_2025.rds-2" class="level1">
+<h1>est_meistriliiga_2025.rds</h1>
+<section id="top-8" class="level2">
+<h2 class="anchored" data-anchor-id="top-8">Top 8</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 23%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: left;">played</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">prob_old</th>
+<th style="text-align: right;">prob</th>
+<th style="text-align: right;">diff</th>
+<th style="text-align: left;">opp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FCI Levadia</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 1 v FC Kuressaare</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Paide Linnameeskond</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 v Pärnu JK Vaprus</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">FC Flora</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 1 @ JK Tammeka</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">JK Narva Trans</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">998</td>
+<td style="text-align: right;">998</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: left;">1 - 0 v JK Tallinna Kalev</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Pärnu JK Vaprus</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">999</td>
+<td style="text-align: right;">998</td>
+<td style="text-align: right;">-0.69</td>
+<td style="text-align: left;">0 - 1 @ Paide Linnameeskond</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">JK Nõmme Kalju</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">977</td>
+<td style="text-align: right;">996</td>
+<td style="text-align: right;">1.77</td>
+<td style="text-align: left;">3 - 0 v Harju JK</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">JK Tammeka</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">764</td>
+<td style="text-align: right;">775</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: left;">1 - 2 v FC Flora</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Harju JK</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">824</td>
+<td style="text-align: right;">611</td>
+<td style="text-align: right;">-1.09</td>
+<td style="text-align: left;">0 - 3 @ JK Nõmme Kalju</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">FC Kuressaare</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">-9</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">297</td>
+<td style="text-align: right;">469</td>
+<td style="text-align: right;">0.74</td>
+<td style="text-align: left;">1 - 2 @ FCI Levadia</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">JK Tallinna Kalev</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">-10</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: right;">153</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: left;">0 - 1 @ JK Narva Trans</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="est_meistriliiga_2025.rds-3" class="level1">
+<h1>est_meistriliiga_2025.rds</h1>
+<section id="top-9" class="level2">
+<h2 class="anchored" data-anchor-id="top-9">Top 9</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 23%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: left;">played</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">prob_old</th>
+<th style="text-align: right;">prob</th>
+<th style="text-align: right;">diff</th>
+<th style="text-align: left;">opp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FCI Levadia</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 1 v FC Kuressaare</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Paide Linnameeskond</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 v Pärnu JK Vaprus</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">FC Flora</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 1 @ JK Tammeka</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">JK Narva Trans</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 v JK Tallinna Kalev</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Pärnu JK Vaprus</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 @ Paide Linnameeskond</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">JK Nõmme Kalju</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">991</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">Inf</td>
+<td style="text-align: left;">3 - 0 v Harju JK</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">JK Tammeka</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">935</td>
+<td style="text-align: right;">933</td>
+<td style="text-align: right;">-0.03</td>
+<td style="text-align: left;">1 - 2 v FC Flora</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Harju JK</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">960</td>
+<td style="text-align: right;">882</td>
+<td style="text-align: right;">-1.17</td>
+<td style="text-align: left;">0 - 3 @ JK Nõmme Kalju</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">FC Kuressaare</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">-9</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">686</td>
+<td style="text-align: right;">778</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: left;">1 - 2 @ FCI Levadia</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">JK Tallinna Kalev</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">-10</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">428</td>
+<td style="text-align: right;">407</td>
+<td style="text-align: right;">-0.09</td>
+<td style="text-align: left;">0 - 1 @ JK Narva Trans</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="ger_3-liga_2024-2025.rds" class="level1">
+<h1>ger_3-liga_2024-2025.rds</h1>
+<section id="top-1-2" class="level2">
+<h2 class="anchored" data-anchor-id="top-1-2">Top 1</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 23%">
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: left;">played</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">prob_old</th>
+<th style="text-align: right;">prob</th>
+<th style="text-align: right;">diff</th>
+<th style="text-align: left;">opp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Dynamo Dresden</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">838</td>
+<td style="text-align: right;">834</td>
+<td style="text-align: right;">-0.03</td>
+<td style="text-align: left;">2 - 2 v FC Ingolstadt 04</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Arminia Bielefeld</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">78</td>
+<td style="text-align: right;">0.94</td>
+<td style="text-align: left;">4 - 2 v SV Wehen Wiesbaden</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">1. FC Saarbrücken</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">1.45</td>
+<td style="text-align: left;">2 - 0 v Erzgebirge Aue</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Energie Cottbus</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">116</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">-1.20</td>
+<td style="text-align: left;">0 - 1 v Rot-Weiss Essen</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">FC Ingolstadt 04</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: left;">2 - 2 @ Dynamo Dresden</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Viktoria Köln</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 1 @ VfB Stuttgart II</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">SC Verl</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-Inf</td>
+<td style="text-align: left;">0 - 1 v Borussia Dortmund II</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Hansa Rostock</td>
+<td style="text-align: left;">31</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 @ VfL Osnabrück</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">TSV 1860 München</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-5</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 0 v SV Sandhausen</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Rot-Weiss Essen</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-4</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 @ Energie Cottbus</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">Erzgebirge Aue</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 2 @ 1. FC Saarbrücken</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">SV Wehen Wiesbaden</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-6</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 4 @ Arminia Bielefeld</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">Alemannia Aachen</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 1 @ Hannover 96 II</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">Borussia Dortmund II</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 @ SC Verl</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">VfL Osnabrück</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 v Hansa Rostock</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">Waldhof Mannheim</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 2 v SpVgg Unterhaching</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">VfB Stuttgart II</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-12</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 2 v Viktoria Köln</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">SV Sandhausen</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-10</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 2 @ TSV 1860 München</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: left;">Hannover 96 II</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-22</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 1 v Alemannia Aachen</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">SpVgg Unterhaching</td>
+<td style="text-align: left;">31</td>
+<td style="text-align: right;">-23</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 0 @ Waldhof Mannheim</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="ger_3-liga_2024-2025.rds-1" class="level1">
+<h1>ger_3-liga_2024-2025.rds</h1>
+<section id="top-16" class="level2">
+<h2 class="anchored" data-anchor-id="top-16">Top 16</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 23%">
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: left;">played</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">prob_old</th>
+<th style="text-align: right;">prob</th>
+<th style="text-align: right;">diff</th>
+<th style="text-align: left;">opp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Dynamo Dresden</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 2 v FC Ingolstadt 04</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Arminia Bielefeld</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">4 - 2 v SV Wehen Wiesbaden</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Energie Cottbus</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 v Rot-Weiss Essen</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">1. FC Saarbrücken</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 0 v Erzgebirge Aue</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">FC Ingolstadt 04</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 2 @ Dynamo Dresden</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Viktoria Köln</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 1 @ VfB Stuttgart II</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">SC Verl</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 v Borussia Dortmund II</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Hansa Rostock</td>
+<td style="text-align: left;">31</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 @ VfL Osnabrück</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">TSV 1860 München</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-5</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">978</td>
+<td style="text-align: right;">998</td>
+<td style="text-align: right;">2.42</td>
+<td style="text-align: left;">2 - 0 v SV Sandhausen</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Rot-Weiss Essen</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-4</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">919</td>
+<td style="text-align: right;">994</td>
+<td style="text-align: right;">2.68</td>
+<td style="text-align: left;">1 - 0 @ Energie Cottbus</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">Erzgebirge Aue</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">976</td>
+<td style="text-align: right;">977</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: left;">0 - 2 @ 1. FC Saarbrücken</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">SV Wehen Wiesbaden</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-6</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">982</td>
+<td style="text-align: right;">976</td>
+<td style="text-align: right;">-0.29</td>
+<td style="text-align: left;">2 - 4 @ Arminia Bielefeld</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">Alemannia Aachen</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">948</td>
+<td style="text-align: right;">969</td>
+<td style="text-align: right;">0.54</td>
+<td style="text-align: left;">1 - 1 @ Hannover 96 II</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">Borussia Dortmund II</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">762</td>
+<td style="text-align: right;">951</td>
+<td style="text-align: right;">1.80</td>
+<td style="text-align: left;">1 - 0 @ SC Verl</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">Waldhof Mannheim</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">885</td>
+<td style="text-align: right;">778</td>
+<td style="text-align: right;">-0.79</td>
+<td style="text-align: left;">0 - 2 v SpVgg Unterhaching</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">VfL Osnabrück</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">802</td>
+<td style="text-align: right;">745</td>
+<td style="text-align: right;">-0.33</td>
+<td style="text-align: left;">0 - 1 v Hansa Rostock</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">VfB Stuttgart II</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-12</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">644</td>
+<td style="text-align: right;">550</td>
+<td style="text-align: right;">-0.39</td>
+<td style="text-align: left;">1 - 2 v Viktoria Köln</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">SV Sandhausen</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-10</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">102</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">-0.56</td>
+<td style="text-align: left;">0 - 2 @ TSV 1860 München</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: left;">Hannover 96 II</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-22</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-0.69</td>
+<td style="text-align: left;">1 - 1 v Alemannia Aachen</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">SpVgg Unterhaching</td>
+<td style="text-align: left;">31</td>
+<td style="text-align: right;">-23</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 0 @ Waldhof Mannheim</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="ger_3-liga_2024-2025.rds-2" class="level1">
+<h1>ger_3-liga_2024-2025.rds</h1>
+<section id="top-2-1" class="level2">
+<h2 class="anchored" data-anchor-id="top-2-1">Top 2</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 23%">
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: left;">played</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">prob_old</th>
+<th style="text-align: right;">prob</th>
+<th style="text-align: right;">diff</th>
+<th style="text-align: left;">opp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Dynamo Dresden</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">963</td>
+<td style="text-align: right;">946</td>
+<td style="text-align: right;">-0.40</td>
+<td style="text-align: left;">2 - 2 v FC Ingolstadt 04</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Arminia Bielefeld</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">242</td>
+<td style="text-align: right;">438</td>
+<td style="text-align: right;">0.89</td>
+<td style="text-align: left;">4 - 2 v SV Wehen Wiesbaden</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Energie Cottbus</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">603</td>
+<td style="text-align: right;">344</td>
+<td style="text-align: right;">-1.06</td>
+<td style="text-align: left;">0 - 1 v Rot-Weiss Essen</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">1. FC Saarbrücken</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">115</td>
+<td style="text-align: right;">195</td>
+<td style="text-align: right;">0.62</td>
+<td style="text-align: left;">2 - 0 v Erzgebirge Aue</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">FC Ingolstadt 04</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">-0.03</td>
+<td style="text-align: left;">2 - 2 @ Dynamo Dresden</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Viktoria Köln</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">0.93</td>
+<td style="text-align: left;">2 - 1 @ VfB Stuttgart II</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Hansa Rostock</td>
+<td style="text-align: left;">31</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.41</td>
+<td style="text-align: left;">1 - 0 @ VfL Osnabrück</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">SC Verl</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">-1.50</td>
+<td style="text-align: left;">0 - 1 v Borussia Dortmund II</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">TSV 1860 München</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-5</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 0 v SV Sandhausen</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Rot-Weiss Essen</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-4</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 @ Energie Cottbus</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">Erzgebirge Aue</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 2 @ 1. FC Saarbrücken</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">SV Wehen Wiesbaden</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-6</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 4 @ Arminia Bielefeld</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">Alemannia Aachen</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 1 @ Hannover 96 II</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">Borussia Dortmund II</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 @ SC Verl</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">VfL Osnabrück</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 v Hansa Rostock</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">Waldhof Mannheim</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 2 v SpVgg Unterhaching</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">VfB Stuttgart II</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-12</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 2 v Viktoria Köln</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">SV Sandhausen</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-10</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 2 @ TSV 1860 München</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: left;">Hannover 96 II</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-22</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 1 v Alemannia Aachen</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">SpVgg Unterhaching</td>
+<td style="text-align: left;">31</td>
+<td style="text-align: right;">-23</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 0 @ Waldhof Mannheim</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="ger_3-liga_2024-2025.rds-3" class="level1">
+<h1>ger_3-liga_2024-2025.rds</h1>
+<section id="top-3-1" class="level2">
+<h2 class="anchored" data-anchor-id="top-3-1">Top 3</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 23%">
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: left;">played</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">prob_old</th>
+<th style="text-align: right;">prob</th>
+<th style="text-align: right;">diff</th>
+<th style="text-align: left;">opp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Dynamo Dresden</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">994</td>
+<td style="text-align: right;">989</td>
+<td style="text-align: right;">-0.61</td>
+<td style="text-align: left;">2 - 2 v FC Ingolstadt 04</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Arminia Bielefeld</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">586</td>
+<td style="text-align: right;">680</td>
+<td style="text-align: right;">0.41</td>
+<td style="text-align: left;">4 - 2 v SV Wehen Wiesbaden</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Energie Cottbus</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">835</td>
+<td style="text-align: right;">625</td>
+<td style="text-align: right;">-1.11</td>
+<td style="text-align: left;">0 - 1 v Rot-Weiss Essen</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">1. FC Saarbrücken</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">324</td>
+<td style="text-align: right;">463</td>
+<td style="text-align: right;">0.59</td>
+<td style="text-align: left;">2 - 0 v Erzgebirge Aue</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">FC Ingolstadt 04</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">-0.15</td>
+<td style="text-align: left;">2 - 2 @ Dynamo Dresden</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Viktoria Köln</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">0.90</td>
+<td style="text-align: left;">2 - 1 @ VfB Stuttgart II</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Hansa Rostock</td>
+<td style="text-align: left;">31</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: left;">1 - 0 @ VfL Osnabrück</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">SC Verl</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">78</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">-1.42</td>
+<td style="text-align: left;">0 - 1 v Borussia Dortmund II</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">TSV 1860 München</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-5</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 0 v SV Sandhausen</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Rot-Weiss Essen</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-4</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 @ Energie Cottbus</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">Erzgebirge Aue</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 2 @ 1. FC Saarbrücken</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">SV Wehen Wiesbaden</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-6</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 4 @ Arminia Bielefeld</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">Alemannia Aachen</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 1 @ Hannover 96 II</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">Borussia Dortmund II</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 @ SC Verl</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">VfL Osnabrück</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 v Hansa Rostock</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">Waldhof Mannheim</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 2 v SpVgg Unterhaching</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">VfB Stuttgart II</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-12</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 2 v Viktoria Köln</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">SV Sandhausen</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-10</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 2 @ TSV 1860 München</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: left;">Hannover 96 II</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: right;">-22</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 1 v Alemannia Aachen</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">SpVgg Unterhaching</td>
+<td style="text-align: left;">31</td>
+<td style="text-align: right;">-23</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 0 @ Waldhof Mannheim</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="sui_promotion-league_2024-2025.rds" class="level1">
+<h1>sui_promotion-league_2024-2025.rds</h1>
+<section id="top-1-3" class="level2">
+<h2 class="anchored" data-anchor-id="top-1-3">Top 1</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 23%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: left;">played</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">prob_old</th>
+<th style="text-align: right;">prob</th>
+<th style="text-align: right;">diff</th>
+<th style="text-align: left;">opp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">SC Kriens</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">828</td>
+<td style="text-align: right;">604</td>
+<td style="text-align: right;">-1.15</td>
+<td style="text-align: left;">0 - 1 @ SR Delémont</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">FC Biel/Bienne</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: right;">246</td>
+<td style="text-align: right;">1.21</td>
+<td style="text-align: left;">4 - 1 @ FC Zürich II</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">FC Rapperswil-Jona</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: right;">143</td>
+<td style="text-align: right;">0.86</td>
+<td style="text-align: left;">5 - 1 v SC Brühl</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">FC Basel 1893 II</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">-0.63</td>
+<td style="text-align: left;">1 - 1 v FC Bulle</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">FC Breitenrain Bern</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-Inf</td>
+<td style="text-align: left;">2 - 2 @ FC Luzern II</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">SC Brühl</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 5 @ FC Rapperswil-Jona</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">FC Grand-Saconnex</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 2 v FC Baden</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">FC Bulle</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 1 @ FC Basel 1893 II</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">FC Luzern II</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 2 v FC Breitenrain Bern</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">SC Cham</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-3</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 v FC Lugano II</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">Vevey-Sports</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 @ FC Paradiso</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">BSC Young Boys II</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-5</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 @ FC Bavois</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">FC Paradiso</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-11</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 v Vevey-Sports</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">FC Zürich II</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-5</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 4 v FC Biel/Bienne</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">SR Delémont</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 v SC Kriens</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">FC Bavois</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 0 v BSC Young Boys II</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">FC Baden</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-20</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 1 @ FC Grand-Saconnex</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">FC Lugano II</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-14</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 @ SC Cham</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="sui_promotion-league_2024-2025.rds-1" class="level1">
+<h1>sui_promotion-league_2024-2025.rds</h1>
+<section id="top-16-1" class="level2">
+<h2 class="anchored" data-anchor-id="top-16-1">Top 16</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 23%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: left;">played</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">prob_old</th>
+<th style="text-align: right;">prob</th>
+<th style="text-align: right;">diff</th>
+<th style="text-align: left;">opp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">SC Kriens</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">0 - 1 @ SR Delémont</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">FC Biel/Bienne</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">4 - 1 @ FC Zürich II</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">FC Rapperswil-Jona</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">5 - 1 v SC Brühl</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">FC Basel 1893 II</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 1 v FC Bulle</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">FC Breitenrain Bern</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">2 - 2 @ FC Luzern II</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">SC Brühl</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 5 @ FC Rapperswil-Jona</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">FC Grand-Saconnex</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 2 v FC Baden</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">FC Bulle</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">1 - 1 @ FC Basel 1893 II</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">SC Cham</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-3</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">988</td>
+<td style="text-align: right;">997</td>
+<td style="text-align: right;">1.40</td>
+<td style="text-align: left;">1 - 0 v FC Lugano II</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Vevey-Sports</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">998</td>
+<td style="text-align: right;">997</td>
+<td style="text-align: right;">-0.41</td>
+<td style="text-align: left;">0 - 1 @ FC Paradiso</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">BSC Young Boys II</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-5</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">994</td>
+<td style="text-align: right;">-Inf</td>
+<td style="text-align: left;">0 - 1 @ FC Bavois</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">FC Luzern II</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">999</td>
+<td style="text-align: right;">991</td>
+<td style="text-align: right;">-2.21</td>
+<td style="text-align: left;">2 - 2 v FC Breitenrain Bern</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">FC Paradiso</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-11</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">844</td>
+<td style="text-align: right;">892</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: left;">1 - 0 v Vevey-Sports</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">SR Delémont</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-7</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">754</td>
+<td style="text-align: right;">878</td>
+<td style="text-align: right;">0.85</td>
+<td style="text-align: left;">1 - 0 v SC Kriens</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">FC Zürich II</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-5</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">951</td>
+<td style="text-align: right;">825</td>
+<td style="text-align: right;">-1.42</td>
+<td style="text-align: left;">1 - 4 v FC Biel/Bienne</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">FC Bavois</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">659</td>
+<td style="text-align: right;">695</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: left;">1 - 0 v BSC Young Boys II</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">FC Baden</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-20</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">230</td>
+<td style="text-align: right;">399</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: left;">2 - 1 @ FC Grand-Saconnex</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">FC Lugano II</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: right;">-14</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">577</td>
+<td style="text-align: right;">332</td>
+<td style="text-align: right;">-1.01</td>
+<td style="text-align: left;">0 - 1 @ SC Cham</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="sui_promotion-league_2024-2025.rds-2" class="level1">
+<h1>sui_promotion-league_2024-2025.rds</h1>
+<section id="top-2-2" class="level2">
+<h2 class="anchored" data-anchor-id="top-2-2">Top 2</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 23%">
+<col style="width: 8%">
+<col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: left;">played</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">prob_old</th>
+<th style="text-align: right;">prob</th>
+<th style="text-align: right;">diff</th>
+<th style="text-align: left;">opp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">SC Kriens</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">962</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">0 - 1 @ SR Delémont</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">FC Biel/Bienne</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">515</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">4 - 1 @ FC Zürich II</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">FC Rapperswil-Jona</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">384</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">5 - 1 v SC Brühl</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">FC Basel 1893 II</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">1 - 1 v FC Bulle</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">FC Breitenrain Bern</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">2 - 2 @ FC Luzern II</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">FC Grand-Saconnex</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">1 - 2 v FC Baden</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">SC Brühl</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">1 - 5 @ FC Rapperswil-Jona</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">FC Bulle</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">1 - 1 @ FC Basel 1893 II</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Vevey-Sports</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">0 - 1 @ FC Paradiso</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">BSC Young Boys II</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">0 - 1 @ FC Bavois</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">FC Luzern II</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">2 - 2 v FC Breitenrain Bern</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">SC Cham</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">1 - 0 v FC Lugano II</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">FC Zürich II</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">1 - 4 v FC Biel/Bienne</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">FC Paradiso</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">1 - 0 v Vevey-Sports</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">SR Delémont</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">1 - 0 v SC Kriens</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">FC Bavois</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">1 - 0 v BSC Young Boys II</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">FC Lugano II</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">0 - 1 @ SC Cham</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">FC Baden</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">2 - 1 @ FC Grand-Saconnex</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="uefa_cl_2024-2025.rds" class="level1">
+<h1>uefa_cl_2024-2025.rds</h1>
+<section id="top-1-4" class="level2">
+<h2 class="anchored" data-anchor-id="top-1-4">Top 1</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 26%">
+<col style="width: 15%">
+<col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 9%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r</th>
+<th style="text-align: left;">team</th>
+<th style="text-align: left;">played</th>
+<th style="text-align: right;">gd</th>
+<th style="text-align: right;">pts</th>
+<th style="text-align: right;">prob_old</th>
+<th style="text-align: right;">prob</th>
+<th style="text-align: right;">diff</th>
+<th style="text-align: left;">opp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Inter</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">-1.45</td>
+<td style="text-align: left;">2 - 1 @ Bayern München</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Borussia Dortmund</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">-1.91</td>
+<td style="text-align: left;">0 - 4 @ FC Barcelona</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Sieger HF 1</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">Inf</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Paris Saint-Germain</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">240</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">-3.80</td>
+<td style="text-align: left;">3 - 1 v Aston Villa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Sieger HF 2</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">Inf</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Bayern München</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">-2.98</td>
+<td style="text-align: left;">1 - 2 v Inter</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">AC Sparta Praha</td>
+<td style="text-align: left;">Czech Republic</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Atlético Madrid</td>
+<td style="text-align: left;">Spain</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">BSC Young Boys</td>
+<td style="text-align: left;">Switzerland</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">FC Barcelona</td>
+<td style="text-align: left;">Spain</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">4 - 0 v Borussia Dortmund</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">Lille OSC</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">RB Leipzig</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">Slovan Bratislava</td>
+<td style="text-align: left;">Slovakia</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">Final</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">League phase</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">Play-offs</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">Quarter-finals</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">Semi-finals</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: left;">BEN/BAR / BVB/OSC</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">104</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">Eindhoven / Arsenal</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">21</td>
+<td style="text-align: left;">FCB/B04 / FEY/INT</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">22</td>
+<td style="text-align: left;">PSG/LIV / BRU/AVI</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">23</td>
+<td style="text-align: left;">PSV/ARS / RMA/ATM</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">92</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">24</td>
+<td style="text-align: left;">Real Madrid / At. Madrid</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">83</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">Brugge / Aston Villa</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

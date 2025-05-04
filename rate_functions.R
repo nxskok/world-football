@@ -87,6 +87,14 @@ update_rate <- function(leagues) {
     walk(\(x) rate(x))
 }
 
+previous_rate_url <- function(leagues) {
+  leagues %>%
+    select(rds_name) %>%
+    rowwise() %>%
+    mutate(rate_date = file.mtime(str_c("fit/", rds_name))) %>%
+    write_rds("previous_rate.rds")
+}
+
 update_rate_url <- function(leagues) {
   leagues %>% rowwise() %>%
     mutate(fname1 = str_c("rds/", rds_name),
@@ -160,6 +168,10 @@ next_rate_date <- function(rdsname) {
 #   min(first_dup, max_ko)
 }
 
+is_midnight <- function(dt) {
+  h <- hour()
+}
+
 rate_date <- function(rdsname) {
   last_fit_date <-file.mtime(str_c("fit/", rdsname))
   if (is.na(last_fit_date)) last_fit_date <- ymd_hms("1900-01-01 02:03:04") # fake date in past
@@ -183,7 +195,7 @@ rate_date <- function(rdsname) {
     } else {
       games %>%
         ungroup() %>%
-        summarize(mx = max(ko) + hours(2)) %>% # after the last game in the fixture list remaining
+        summarize(mx = max(ko) + 2*60*60) %>% # after the last game in the fixture list remaining: adding seconds avoids problems with midnight
         pull(mx) -> mxx
       return(c("after" = mxx, "before" = late_date))
     }
@@ -196,7 +208,7 @@ rate_date <- function(rdsname) {
     mutate(lgt1 = lead(gt1)) %>%
     filter(lgt1) %>%
     slice(1) %>%
-    mutate(mend = ko + hours(2)) %>%
+    mutate(mend = ko + 2*60*60) %>% # add seconds to avoid midnight/dst problem
     pull(mend) -> mxx
   c("after" = mxx, "before" = late_date)
 
@@ -219,11 +231,12 @@ all_next_rate_date_url <- function(leagues) {
     pivot_wider(names_from = next_rate_id, values_from = (c(next_rate, dow))) %>%
     # mutate(star = ifelse((next_rate_before - next_rate_after) < days(1), "*", "")) %>%
     mutate(star = case_when(
-      is.na(next_rate_before)                       ~ "",
-      next_rate_before - next_rate_after < days(1)  ~ "*",
-      .default                                      = ""
+      is.na(next_rate_before)                         ~ "1",
+      yday(next_rate_before) != yday(next_rate_after) ~ "2",
+      next_rate_before - next_rate_after < days(1)    ~ "***",
+      .default                                        = "3"
     )) %>%
-    mutate(next_rate_after = ifelse(star == "*", next_rate_before - days(1), next_rate_after)) %>%
+    mutate(next_rate_after = ifelse(star == "***", next_rate_before - days(1), next_rate_after)) %>%
     mutate(next_rate_after = strftime(next_rate_after, format = "%Y-%m-%d %H:%M %A")) %>%
     arrange(next_rate_after, next_rate_before)
 }

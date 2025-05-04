@@ -18,6 +18,8 @@ source("report_functions.R")
 options(dplyr.summarise.inform = FALSE)
 ```
 
+## old sim
+
 ```{r}
 #| warning: false
 #| message: false
@@ -37,5 +39,6 @@ report: see report.qmd
 log_open("sim/sim.log")
 sim_as_needed_url(league_urls)  
 log_close()
+beepr::beep(1)
 
 ```

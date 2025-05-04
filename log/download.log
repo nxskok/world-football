@@ -1,42 +1,746 @@
 ========================================================================= 
 Log Path: ./log/download.log 
-Program Path: /home/ken/Documents/r-projects/world-football/play.qmd 
-Working Directory: /home/ken/Documents/r-projects/world-football 
+Program Path: /home/ken/r-projects/world-football/play.qmd 
+Working Directory: /home/ken/r-projects/world-football 
 User Name: ken 
-R Version: 4.4.2 (2024-10-31) 
+R Version: 4.5.0 (2025-04-11) 
 Machine: ken-desktop x86_64 
-Operating System: Linux 5.15.0-126-generic #136-Ubuntu SMP Wed Nov 6 10:38:22 UTC 2024 
+Operating System: Linux 6.8.0-58-generic #60-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 14 18:29:48 UTC 2025 
 Base Packages: stats graphics grDevices datasets utils methods base 
-Other Packages: knitr_1.49 cmdstanr_0.8.0 posterior_1.5.0 conflicted_1.2.0 logr_1.3.8 common_1.1.3 rvest_1.0.4 lubridate_1.9.3 forcats_1.0.0 stringr_1.5.1 dplyr_1.1.4 purrr_1.0.2 readr_2.1.5 tidyr_1.3.1 tibble_3.2.1 ggplot2_3.5.1 tidyverse_2.0.0 devtools_2.4.5 usethis_3.1.0 
-Log Start Time: 2024-12-05 17:22:25.038875 
+Other Packages: conflicted_1.2.0 logr_1.3.9 common_1.1.3 rvest_1.0.4 cmdstanr_0.9.0 posterior_1.6.1 lubridate_1.9.4 forcats_1.0.0 stringr_1.5.1 dplyr_1.1.4 purrr_1.0.4 readr_2.1.5 tidyr_1.3.1 tibble_3.2.1 ggplot2_3.5.2 tidyverse_2.0.0 
+Log Start Time: 2025-05-03 16:45:11.827021 
 ========================================================================= 
 
-[1] "England"  "Portugal"
+ [1] "Andorra"                     "Argentina"                   "Armenia"                     "Austria relegation"          "Azerbaijan"                 
+ [6] "Belarus"                     "Belgium Europe"              "Belgium championship"        "Belgium relegation"          "Bosnia"                     
+[11] "Brazil Serie B"              "Bulgaria championship"       "Canada"                      "Chile"                       "Croatia"                    
+[16] "Cyprus relegation"           "Czech Republic championship" "England"                     "England League One"          "England League Two"         
+[21] "Estonia"                     "Faroe Islands"               "Finland"                     "France"                      "Georgia"                    
+[26] "Germany"                     "Germany 2. Bundesliga"       "Germany 3. Liga"             "Germany Regionalliga Nord"   "Germany Regionalliga West"  
+[31] "Gibraltar championship"      "Greece ECL playoff"          "Hungary"                     "Iceland 1 Deild"             "Ireland First"              
+[36] "Israel championship"         "Israel relegation"           "Italy"                       "Kazakhstan"                  "Kosovo"                     
+[41] "Lithuania"                   "Luxembourg"                  "Malta Closing B6"            "Moldova Phase 2"             "Moldova relegation"         
+[46] "Netherlands"                 "Norway"                      "Poland"                      "Portugal"                    "Romania championship"       
+[51] "Romania relegation"          "Russia"                      "Russia 1"                    "Scotland League One"         "Scotland League Two"        
+[56] "Scotland championship"       "Scotland relegation"         "Serbia championship"         "Serbia relegation"           "Slovakia championship"      
+[61] "Slovakia relegation"         "Slovenia"                    "Spain"                       "Spain Primera RFEF 1"        "Spain Primera RFEF 2"       
+[66] "Spain Segunda División"      "Sweden"                      "Switzerland championship"    "Turkey"                      "USA"                        
+[71] "Ukraine"                    
 
-NOTE: Log Print Time:  2024-12-05 17:22:25.047851 
-NOTE: Elapsed Time: 0.00844073295593262 secs 
+NOTE: Log Print Time:  2025-05-03 16:45:11.833732 
+NOTE: Elapsed Time: 0.00624823570251465 secs 
+
+Andorra 
+
+NOTE: Log Print Time:  2025-05-03 16:45:11.834449 
+NOTE: Elapsed Time: 0.000716686248779297 secs 
+
+* present: Andorra 
+
+NOTE: Log Print Time:  2025-05-03 16:45:14.254333 
+NOTE: Elapsed Time: 2.4198842048645 secs 
+
+Argentina 
+
+NOTE: Log Print Time:  2025-05-03 16:45:14.32659 
+NOTE: Elapsed Time: 0.0722570419311523 secs 
+
+* present: Argentina 
+
+NOTE: Log Print Time:  2025-05-03 16:45:16.462098 
+NOTE: Elapsed Time: 2.13550758361816 secs 
+
+Armenia 
+
+NOTE: Log Print Time:  2025-05-03 16:45:16.625463 
+NOTE: Elapsed Time: 0.163365602493286 secs 
+
+* present: Armenia 
+
+NOTE: Log Print Time:  2025-05-03 16:45:18.951013 
+NOTE: Elapsed Time: 2.32554936408997 secs 
+
+Austria relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:45:19.058713 
+NOTE: Elapsed Time: 0.10770058631897 secs 
+
+* present: Austria relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:45:20.945624 
+NOTE: Elapsed Time: 1.88691020011902 secs 
+
+Azerbaijan 
+
+NOTE: Log Print Time:  2025-05-03 16:45:21.042493 
+NOTE: Elapsed Time: 0.0968697071075439 secs 
+
+* present: Azerbaijan 
+
+NOTE: Log Print Time:  2025-05-03 16:45:23.127138 
+NOTE: Elapsed Time: 2.08464431762695 secs 
+
+Belarus 
+
+NOTE: Log Print Time:  2025-05-03 16:45:23.228926 
+NOTE: Elapsed Time: 0.101788520812988 secs 
+
+* present: Belarus 
+
+NOTE: Log Print Time:  2025-05-03 16:45:24.785294 
+NOTE: Elapsed Time: 1.55636787414551 secs 
+
+Belgium Europe 
+
+NOTE: Log Print Time:  2025-05-03 16:45:24.896726 
+NOTE: Elapsed Time: 0.11143159866333 secs 
+
+* present: Belgium Europe 
+
+NOTE: Log Print Time:  2025-05-03 16:45:26.938635 
+NOTE: Elapsed Time: 2.04190945625305 secs 
+
+Belgium championship 
+
+NOTE: Log Print Time:  2025-05-03 16:45:27.024063 
+NOTE: Elapsed Time: 0.0854275226593018 secs 
+
+* present: Belgium championship 
+
+NOTE: Log Print Time:  2025-05-03 16:45:29.266204 
+NOTE: Elapsed Time: 2.24214148521423 secs 
+
+Belgium relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:45:29.312787 
+NOTE: Elapsed Time: 0.0465824604034424 secs 
+
+* present: Belgium relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:45:31.238811 
+NOTE: Elapsed Time: 1.92602396011353 secs 
+
+Bosnia 
+
+NOTE: Log Print Time:  2025-05-03 16:45:31.334095 
+NOTE: Elapsed Time: 0.0952847003936768 secs 
+
+* present: Bosnia 
+
+NOTE: Log Print Time:  2025-05-03 16:45:32.723557 
+NOTE: Elapsed Time: 1.38946175575256 secs 
+
+Brazil Serie B 
+
+NOTE: Log Print Time:  2025-05-03 16:45:32.835598 
+NOTE: Elapsed Time: 0.112041473388672 secs 
+
+* present: Brazil Serie B 
+
+NOTE: Log Print Time:  2025-05-03 16:45:34.178517 
+NOTE: Elapsed Time: 1.34291863441467 secs 
+
+Bulgaria championship 
+
+NOTE: Log Print Time:  2025-05-03 16:45:34.338398 
+NOTE: Elapsed Time: 0.159881114959717 secs 
+
+* present: Bulgaria championship 
+
+NOTE: Log Print Time:  2025-05-03 16:45:35.903103 
+NOTE: Elapsed Time: 1.56470513343811 secs 
+
+Canada 
+
+NOTE: Log Print Time:  2025-05-03 16:45:35.969116 
+NOTE: Elapsed Time: 0.0660128593444824 secs 
+
+* present: Canada 
+
+NOTE: Log Print Time:  2025-05-03 16:45:38.126615 
+NOTE: Elapsed Time: 2.15749859809875 secs 
+
+Chile 
+
+NOTE: Log Print Time:  2025-05-03 16:45:38.228764 
+NOTE: Elapsed Time: 0.102149248123169 secs 
+
+* present: Chile 
+
+NOTE: Log Print Time:  2025-05-03 16:45:39.670399 
+NOTE: Elapsed Time: 1.44163489341736 secs 
+
+Croatia 
+
+NOTE: Log Print Time:  2025-05-03 16:45:39.770859 
+NOTE: Elapsed Time: 0.100460052490234 secs 
+
+* present: Croatia 
+
+NOTE: Log Print Time:  2025-05-03 16:45:42.043381 
+NOTE: Elapsed Time: 2.27252244949341 secs 
+
+Cyprus relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:45:42.144638 
+NOTE: Elapsed Time: 0.101256847381592 secs 
+
+* present: Cyprus relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:45:43.637511 
+NOTE: Elapsed Time: 1.49287223815918 secs 
+
+Czech Republic championship 
+
+NOTE: Log Print Time:  2025-05-03 16:45:43.703012 
+NOTE: Elapsed Time: 0.0655016899108887 secs 
+
+* present: Czech Republic championship 
+
+NOTE: Log Print Time:  2025-05-03 16:45:45.660626 
+NOTE: Elapsed Time: 1.95761394500732 secs 
 
 England 
 
-NOTE: Log Print Time:  2024-12-05 17:22:25.048599 
-NOTE: Elapsed Time: 0.000748157501220703 secs 
+NOTE: Log Print Time:  2025-05-03 16:45:45.743112 
+NOTE: Elapsed Time: 0.0824854373931885 secs 
 
 * present: England 
 
-NOTE: Log Print Time:  2024-12-05 17:22:26.660669 
-NOTE: Elapsed Time: 1.61206984519958 secs 
+NOTE: Log Print Time:  2025-05-03 16:45:47.870641 
+NOTE: Elapsed Time: 2.12752938270569 secs 
+
+England League One 
+
+NOTE: Log Print Time:  2025-05-03 16:45:47.997705 
+NOTE: Elapsed Time: 0.127063751220703 secs 
+
+* present: England League One 
+
+NOTE: Log Print Time:  2025-05-03 16:45:50.317538 
+NOTE: Elapsed Time: 2.31983375549316 secs 
+
+England League Two 
+
+NOTE: Log Print Time:  2025-05-03 16:45:50.493967 
+NOTE: Elapsed Time: 0.176428079605103 secs 
+
+* present: England League Two 
+
+NOTE: Log Print Time:  2025-05-03 16:45:52.251918 
+NOTE: Elapsed Time: 1.7579517364502 secs 
+
+Estonia 
+
+NOTE: Log Print Time:  2025-05-03 16:45:52.422841 
+NOTE: Elapsed Time: 0.170922756195068 secs 
+
+* present: Estonia 
+
+NOTE: Log Print Time:  2025-05-03 16:45:54.346114 
+NOTE: Elapsed Time: 1.92327260971069 secs 
+
+Faroe Islands 
+
+NOTE: Log Print Time:  2025-05-03 16:45:54.450828 
+NOTE: Elapsed Time: 0.104713916778564 secs 
+
+* present: Faroe Islands 
+
+NOTE: Log Print Time:  2025-05-03 16:45:56.163027 
+NOTE: Elapsed Time: 1.71219897270203 secs 
+
+Finland 
+
+NOTE: Log Print Time:  2025-05-03 16:45:56.245604 
+NOTE: Elapsed Time: 0.0825772285461426 secs 
+
+* present: Finland 
+
+NOTE: Log Print Time:  2025-05-03 16:45:57.983329 
+NOTE: Elapsed Time: 1.73772549629211 secs 
+
+France 
+
+NOTE: Log Print Time:  2025-05-03 16:45:58.100734 
+NOTE: Elapsed Time: 0.117404222488403 secs 
+
+* present: France 
+
+NOTE: Log Print Time:  2025-05-03 16:45:59.684134 
+NOTE: Elapsed Time: 1.58340048789978 secs 
+
+Georgia 
+
+NOTE: Log Print Time:  2025-05-03 16:45:59.819241 
+NOTE: Elapsed Time: 0.135107040405273 secs 
+
+* present: Georgia 
+
+NOTE: Log Print Time:  2025-05-03 16:46:01.592698 
+NOTE: Elapsed Time: 1.77345728874207 secs 
+
+Germany 
+
+NOTE: Log Print Time:  2025-05-03 16:46:01.700249 
+NOTE: Elapsed Time: 0.107550621032715 secs 
+
+* present: Germany 
+
+NOTE: Log Print Time:  2025-05-03 16:46:03.559059 
+NOTE: Elapsed Time: 1.85880970954895 secs 
+
+Germany 2. Bundesliga 
+
+NOTE: Log Print Time:  2025-05-03 16:46:03.674727 
+NOTE: Elapsed Time: 0.115668296813965 secs 
+
+* present: Germany 2. Bundesliga 
+
+NOTE: Log Print Time:  2025-05-03 16:46:05.691338 
+NOTE: Elapsed Time: 2.01661133766174 secs 
+
+Germany 3. Liga 
+
+NOTE: Log Print Time:  2025-05-03 16:46:05.834948 
+NOTE: Elapsed Time: 0.143609285354614 secs 
+
+* present: Germany 3. Liga 
+
+NOTE: Log Print Time:  2025-05-03 16:46:07.772133 
+NOTE: Elapsed Time: 1.93718552589417 secs 
+
+Germany Regionalliga Nord 
+
+NOTE: Log Print Time:  2025-05-03 16:46:07.914073 
+NOTE: Elapsed Time: 0.141939401626587 secs 
+
+* present: Germany Regionalliga Nord 
+
+NOTE: Log Print Time:  2025-05-03 16:46:09.530978 
+NOTE: Elapsed Time: 1.61690521240234 secs 
+
+Germany Regionalliga West 
+
+NOTE: Log Print Time:  2025-05-03 16:46:09.638663 
+NOTE: Elapsed Time: 0.107684850692749 secs 
+
+* present: Germany Regionalliga West 
+
+NOTE: Log Print Time:  2025-05-03 16:46:11.984233 
+NOTE: Elapsed Time: 2.34557056427002 secs 
+
+Gibraltar championship 
+
+NOTE: Log Print Time:  2025-05-03 16:46:12.135525 
+NOTE: Elapsed Time: 0.151291370391846 secs 
+
+* present: Gibraltar championship 
+
+NOTE: Log Print Time:  2025-05-03 16:46:14.353415 
+NOTE: Elapsed Time: 2.21789050102234 secs 
+
+Greece ECL playoff 
+
+NOTE: Log Print Time:  2025-05-03 16:46:14.396909 
+NOTE: Elapsed Time: 0.0434944629669189 secs 
+
+* present: Greece ECL playoff 
+
+NOTE: Log Print Time:  2025-05-03 16:46:16.076269 
+NOTE: Elapsed Time: 1.67935991287231 secs 
+
+Hungary 
+
+NOTE: Log Print Time:  2025-05-03 16:46:16.151148 
+NOTE: Elapsed Time: 0.074878454208374 secs 
+
+* present: Hungary 
+
+NOTE: Log Print Time:  2025-05-03 16:46:17.621394 
+NOTE: Elapsed Time: 1.47024583816528 secs 
+
+Iceland 1 Deild 
+
+NOTE: Log Print Time:  2025-05-03 16:46:17.71666 
+NOTE: Elapsed Time: 0.0952661037445068 secs 
+
+* present: Iceland 1 Deild 
+
+NOTE: Log Print Time:  2025-05-03 16:46:19.346977 
+NOTE: Elapsed Time: 1.63031697273254 secs 
+
+Ireland First 
+
+NOTE: Log Print Time:  2025-05-03 16:46:19.429357 
+NOTE: Elapsed Time: 0.0823798179626465 secs 
+
+* present: Ireland First 
+
+NOTE: Log Print Time:  2025-05-03 16:46:20.917198 
+NOTE: Elapsed Time: 1.48784160614014 secs 
+
+Israel championship 
+
+NOTE: Log Print Time:  2025-05-03 16:46:21.011831 
+NOTE: Elapsed Time: 0.0946323871612549 secs 
+
+* present: Israel championship 
+
+NOTE: Log Print Time:  2025-05-03 16:46:23.230053 
+NOTE: Elapsed Time: 2.21822214126587 secs 
+
+Israel relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:46:23.32399 
+NOTE: Elapsed Time: 0.0939371585845947 secs 
+
+* present: Israel relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:46:24.844493 
+NOTE: Elapsed Time: 1.52050280570984 secs 
+
+Italy 
+
+NOTE: Log Print Time:  2025-05-03 16:46:24.923214 
+NOTE: Elapsed Time: 0.078721284866333 secs 
+
+* present: Italy 
+
+NOTE: Log Print Time:  2025-05-03 16:46:27.182037 
+NOTE: Elapsed Time: 2.25882315635681 secs 
+
+Kazakhstan 
+
+NOTE: Log Print Time:  2025-05-03 16:46:27.328649 
+NOTE: Elapsed Time: 0.146611452102661 secs 
+
+* present: Kazakhstan 
+
+NOTE: Log Print Time:  2025-05-03 16:46:29.074023 
+NOTE: Elapsed Time: 1.74537491798401 secs 
+
+Kosovo 
+
+NOTE: Log Print Time:  2025-05-03 16:46:29.185083 
+NOTE: Elapsed Time: 0.111059188842773 secs 
+
+* present: Kosovo 
+
+NOTE: Log Print Time:  2025-05-03 16:46:30.938443 
+NOTE: Elapsed Time: 1.75336050987244 secs 
+
+Lithuania 
+
+NOTE: Log Print Time:  2025-05-03 16:46:31.031693 
+NOTE: Elapsed Time: 0.0932493209838867 secs 
+
+* present: Lithuania 
+
+NOTE: Log Print Time:  2025-05-03 16:46:33.181465 
+NOTE: Elapsed Time: 2.14977240562439 secs 
+
+Luxembourg 
+
+NOTE: Log Print Time:  2025-05-03 16:46:33.275177 
+NOTE: Elapsed Time: 0.0937118530273438 secs 
+
+* present: Luxembourg 
+
+NOTE: Log Print Time:  2025-05-03 16:46:35.223758 
+NOTE: Elapsed Time: 1.94858121871948 secs 
+
+Malta Closing B6 
+
+NOTE: Log Print Time:  2025-05-03 16:46:35.32272 
+NOTE: Elapsed Time: 0.0989620685577393 secs 
+
+* present: Malta Closing B6 
+
+NOTE: Log Print Time:  2025-05-03 16:46:37.458863 
+NOTE: Elapsed Time: 2.13614273071289 secs 
+
+Moldova Phase 2 
+
+NOTE: Log Print Time:  2025-05-03 16:46:37.53863 
+NOTE: Elapsed Time: 0.0797672271728516 secs 
+
+* present: Moldova Phase 2 
+
+NOTE: Log Print Time:  2025-05-03 16:46:39.501877 
+NOTE: Elapsed Time: 1.96324729919434 secs 
+
+Moldova relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:46:39.573635 
+NOTE: Elapsed Time: 0.0717580318450928 secs 
+
+* present: Moldova relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:46:41.773506 
+NOTE: Elapsed Time: 2.19987082481384 secs 
+
+Netherlands 
+
+NOTE: Log Print Time:  2025-05-03 16:46:41.845295 
+NOTE: Elapsed Time: 0.0717887878417969 secs 
+
+* present: Netherlands 
+
+NOTE: Log Print Time:  2025-05-03 16:46:43.96399 
+NOTE: Elapsed Time: 2.11869478225708 secs 
+
+Norway 
+
+NOTE: Log Print Time:  2025-05-03 16:46:44.09325 
+NOTE: Elapsed Time: 0.129260540008545 secs 
+
+* present: Norway 
+
+NOTE: Log Print Time:  2025-05-03 16:46:45.894307 
+NOTE: Elapsed Time: 1.80105710029602 secs 
+
+Poland 
+
+NOTE: Log Print Time:  2025-05-03 16:46:45.996365 
+NOTE: Elapsed Time: 0.102057218551636 secs 
+
+* present: Poland 
+
+NOTE: Log Print Time:  2025-05-03 16:46:47.724042 
+NOTE: Elapsed Time: 1.72767758369446 secs 
 
 Portugal 
 
-NOTE: Log Print Time:  2024-12-05 17:22:26.812819 
-NOTE: Elapsed Time: 0.152150392532349 secs 
+NOTE: Log Print Time:  2025-05-03 16:46:47.875468 
+NOTE: Elapsed Time: 0.151426076889038 secs 
 
 * present: Portugal 
 
-NOTE: Log Print Time:  2024-12-05 17:22:28.536663 
-NOTE: Elapsed Time: 1.7238438129425 secs 
+NOTE: Log Print Time:  2025-05-03 16:46:50.110111 
+NOTE: Elapsed Time: 2.23464322090149 secs 
+
+Romania championship 
+
+NOTE: Log Print Time:  2025-05-03 16:46:50.238727 
+NOTE: Elapsed Time: 0.128615617752075 secs 
+
+* present: Romania championship 
+
+NOTE: Log Print Time:  2025-05-03 16:46:51.994299 
+NOTE: Elapsed Time: 1.75557160377502 secs 
+
+Romania relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:46:52.057828 
+NOTE: Elapsed Time: 0.0635297298431396 secs 
+
+* present: Romania relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:46:53.501373 
+NOTE: Elapsed Time: 1.44354462623596 secs 
+
+Russia 
+
+NOTE: Log Print Time:  2025-05-03 16:46:53.572298 
+NOTE: Elapsed Time: 0.0709247589111328 secs 
+
+* present: Russia 
+
+NOTE: Log Print Time:  2025-05-03 16:46:55.25984 
+NOTE: Elapsed Time: 1.68754172325134 secs 
+
+Russia 1 
+
+NOTE: Log Print Time:  2025-05-03 16:46:55.394246 
+NOTE: Elapsed Time: 0.134406089782715 secs 
+
+* present: Russia 1 
+
+NOTE: Log Print Time:  2025-05-03 16:46:57.604011 
+NOTE: Elapsed Time: 2.20976519584656 secs 
+
+Scotland League One 
+
+NOTE: Log Print Time:  2025-05-03 16:46:57.729681 
+NOTE: Elapsed Time: 0.125670433044434 secs 
+
+* present: Scotland League One 
+
+NOTE: Log Print Time:  2025-05-03 16:47:00.316437 
+NOTE: Elapsed Time: 2.58675527572632 secs 
+
+Scotland League Two 
+
+NOTE: Log Print Time:  2025-05-03 16:47:00.429462 
+NOTE: Elapsed Time: 0.113025903701782 secs 
+
+* present: Scotland League Two 
+
+NOTE: Log Print Time:  2025-05-03 16:47:02.62371 
+NOTE: Elapsed Time: 2.19424724578857 secs 
+
+Scotland championship 
+
+NOTE: Log Print Time:  2025-05-03 16:47:02.720794 
+NOTE: Elapsed Time: 0.0970840454101562 secs 
+
+* present: Scotland championship 
+
+NOTE: Log Print Time:  2025-05-03 16:47:05.08649 
+NOTE: Elapsed Time: 2.36569619178772 secs 
+
+Scotland relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:47:05.147935 
+NOTE: Elapsed Time: 0.0614454746246338 secs 
+
+* present: Scotland relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:47:06.934227 
+NOTE: Elapsed Time: 1.7862913608551 secs 
+
+Serbia championship 
+
+NOTE: Log Print Time:  2025-05-03 16:47:06.998617 
+NOTE: Elapsed Time: 0.0643901824951172 secs 
+
+* present: Serbia championship 
+
+NOTE: Log Print Time:  2025-05-03 16:47:08.922651 
+NOTE: Elapsed Time: 1.92403411865234 secs 
+
+Serbia relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:47:09.071937 
+NOTE: Elapsed Time: 0.149286270141602 secs 
+
+* present: Serbia relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:47:10.537799 
+NOTE: Elapsed Time: 1.46586132049561 secs 
+
+Slovakia championship 
+
+NOTE: Log Print Time:  2025-05-03 16:47:10.602969 
+NOTE: Elapsed Time: 0.0651705265045166 secs 
+
+* present: Slovakia championship 
+
+NOTE: Log Print Time:  2025-05-03 16:47:12.294343 
+NOTE: Elapsed Time: 1.69137334823608 secs 
+
+Slovakia relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:47:12.362857 
+NOTE: Elapsed Time: 0.0685145854949951 secs 
+
+* present: Slovakia relegation 
+
+NOTE: Log Print Time:  2025-05-03 16:47:14.549029 
+NOTE: Elapsed Time: 2.18617224693298 secs 
+
+Slovenia 
+
+NOTE: Log Print Time:  2025-05-03 16:47:14.619045 
+NOTE: Elapsed Time: 0.0700161457061768 secs 
+
+* present: Slovenia 
+
+NOTE: Log Print Time:  2025-05-03 16:47:16.315234 
+NOTE: Elapsed Time: 1.6961886882782 secs 
+
+Spain 
+
+NOTE: Log Print Time:  2025-05-03 16:47:16.449932 
+NOTE: Elapsed Time: 0.134698152542114 secs 
+
+* present: Spain 
+
+NOTE: Log Print Time:  2025-05-03 16:47:17.998924 
+NOTE: Elapsed Time: 1.54899120330811 secs 
+
+Spain Primera RFEF 1 
+
+NOTE: Log Print Time:  2025-05-03 16:47:18.160233 
+NOTE: Elapsed Time: 0.161309242248535 secs 
+
+* present: Spain Primera RFEF 1 
+
+NOTE: Log Print Time:  2025-05-03 16:47:20.601657 
+NOTE: Elapsed Time: 2.44142436981201 secs 
+
+Spain Primera RFEF 2 
+
+NOTE: Log Print Time:  2025-05-03 16:47:20.756541 
+NOTE: Elapsed Time: 0.15488338470459 secs 
+
+* present: Spain Primera RFEF 2 
+
+NOTE: Log Print Time:  2025-05-03 16:47:22.75343 
+NOTE: Elapsed Time: 1.99688959121704 secs 
+
+Spain Segunda División 
+
+NOTE: Log Print Time:  2025-05-03 16:47:22.923279 
+NOTE: Elapsed Time: 0.169849157333374 secs 
+
+* present: Spain Segunda División 
+
+NOTE: Log Print Time:  2025-05-03 16:47:25.22702 
+NOTE: Elapsed Time: 2.30374026298523 secs 
+
+Sweden 
+
+NOTE: Log Print Time:  2025-05-03 16:47:25.388574 
+NOTE: Elapsed Time: 0.161554098129272 secs 
+
+* present: Sweden 
+
+NOTE: Log Print Time:  2025-05-03 16:47:27.639376 
+NOTE: Elapsed Time: 2.25080251693726 secs 
+
+Switzerland championship 
+
+NOTE: Log Print Time:  2025-05-03 16:47:27.753682 
+NOTE: Elapsed Time: 0.114306211471558 secs 
+
+* present: Switzerland championship 
+
+NOTE: Log Print Time:  2025-05-03 16:47:29.855259 
+NOTE: Elapsed Time: 2.10157656669617 secs 
+
+Turkey 
+
+NOTE: Log Print Time:  2025-05-03 16:47:29.926892 
+NOTE: Elapsed Time: 0.0716331005096436 secs 
+
+* present: Turkey 
+
+NOTE: Log Print Time:  2025-05-03 16:47:31.44723 
+NOTE: Elapsed Time: 1.52033829689026 secs 
+
+USA 
+
+NOTE: Log Print Time:  2025-05-03 16:47:31.571409 
+NOTE: Elapsed Time: 0.124178886413574 secs 
+
+* present: USA 
+
+NOTE: Log Print Time:  2025-05-03 16:47:33.961692 
+NOTE: Elapsed Time: 2.39028263092041 secs 
+
+Ukraine 
+
+NOTE: Log Print Time:  2025-05-03 16:47:34.138655 
+NOTE: Elapsed Time: 0.176962852478027 secs 
+
+* present: Ukraine 
+
+NOTE: Log Print Time:  2025-05-03 16:47:36.166533 
+NOTE: Elapsed Time: 2.02787780761719 secs 
 
 ========================================================================= 
-Log End Time: 2024-12-05 17:22:28.827284 
-Log Elapsed Time: 0 00:00:03 
+Log End Time: 2025-05-03 16:47:36.2678 
+Log Elapsed Time: 0 00:02:24 
 ========================================================================= 

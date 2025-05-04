@@ -34,7 +34,28 @@ show_the_changes(ggg, league_urls) %>% View(str_c("at: ", when_got))
 
 ```{r}
 #| warning: false
-request <- c("swi")
+request <- character(0)
+request <- c(request, "albania")
+request <- c(request, "bosnia")
+request <- c(request, "bulgaria")
+request <- c(request, "canada")
+request <- c(request, "cyprus")
+request <- c(request, "czech")
+request <- c(request, "greece")
+request <- c(request, "italy")
+request <- c(request, "kosovo")
+request <- c(request, "malta")
+request <- c(request, "mexico")
+request <- c(request, "montenegro")
+request <- c(request, "national")
+request <- c(request, "portugal")
+request <- c(request, "san marino")
+request <- c(request, "scotland")
+request <- c(request, "serbia")
+request <- c(request, "slovakia")
+request <- c(request, "spain")
+request <- c(request, "switz")
+
 pat <- str_flatten(request, "|")
 pat
 league_urls %>% 
@@ -43,7 +64,7 @@ get_these
 log_open("not_any.log")
 download_these_ones(get_these)
 log_close()
-update_predictions_url(league_urls)
+update_predictions_url(league_urls) %>% View("predictions")
 ```
 
 ## which leagues do I not have at all?

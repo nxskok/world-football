@@ -1,58 +1,186 @@
 ---
 title: "Report"
-format: html
-editor: visual
+format:
+  html:
+    echo: false
+
 ---
+
+
+new version of report with each rank separately
+
+also todo:
+
+- remove games for teams expelled from league
+- do something about two divisions (these belong in sim or earlier)
 
 ```{r}
 #| echo: false
 #| message: false
 library(tidyverse)
 library(knitr)
-# library(tinytable)
+library(gt)
 source("report_functions.R")
-# cutoff_date <- ymd_hm("2023-08-23 12:00", tz = 'America/Toronto') # remember!
 cutoff_date <- now() - hours(4)
-
 ```
 
-Cutoff date: `r cutoff_date`
+test
+
+
 
 ```{r}
-#| echo: false
-make_report <- function(rdsname, cutoff_date) {
-  tables <- tables_for_report(rdsname, cutoff_date)
-  if (length(tables) == 0) {
-    a <- knit_expand(text = c("# {{rdsname}}",
-                         "Nothing to say.\n"))
-  } else {
-    a <- knit_expand(text = c("# {{rdsname}}",
-                         # "## M-times", {{as.POSIXct(tables[[4]])}},
-                         "## Games", "{{kable(tables[[2]])}}",
-                         "## Changes", "{{kable(tables[[1]])}}",
-                         "## Odds now", "{{kable(tables[[3]])}}"
-                         ))
+date_of <- function(x) {
+  ds <- str_extract(x, "_([^_]*).rds", group = TRUE)
+  ymd_hms(ds, tz = "America/Toronto")
+}
+reverse_score <- function(x) {
+  m <- str_match(x, "([0-9]*)( - )([0-9]*)")
+  cbind(m[,4], m[,2]) %>% as_tibble() %>% 
+    unite(score, V1, V2, sep = " - ") %>% 
+    pull(score)
+}
+# games left per team
+find_games_left <- function(f0) {
+  games <- read_rds(f0)
+  # get teams
+  v <- c(games$t1, games$t2)
+  nt <- length(unique(v))
+  games %>% filter(is.na(score)) %>% nrow() -> ng
+  round(ng / nt * 2, 1)
+}
+nsim <- 1000
+make_table_list <- function(f0, f1, f2) {
+  # inputs:
+  # f0: rdsname of league results (in rds)
+  # f1: rdsname of previous simulation (in sim)
+  # f2: rdsname of current simulation (in sim)
+  
+  x1 <- read_rds(f1)
+  x2 <- read_rds(f2)
+  # if x2 doesn't have an r column, add one, the same as row
+  if (!("r" %in% names(f2))) {
+    x2 %>% mutate(r = row) -> x2
   }
+  x1 %>% pivot_longer(matches("^[0-9]"), names_to = "sim_rank", values_to = "prob") -> xx1
+  x2 %>% pivot_longer(matches("^[0-9]"), names_to = "sim_rank", values_to = "prob") -> xx2
+  xx1 %>% select(team, sim_rank, prob) %>% 
+    left_join(xx2, join_by(team, sim_rank)) %>% 
+    # mutate(diff = prob.y - prob.x) %>% 
+    mutate(diff = qlogis(prob.y/nsim) - qlogis(prob.x/nsim), 2) %>%
+    mutate(diff = case_when(
+      is.nan(diff)                   ~ "",
+      is.infinite(diff) & (diff > 0) ~ "+++",
+      is.infinite(diff) & (diff < 0) ~ "---",
+      .default                       = sprintf("%.2f", diff)
+    )) %>% 
+    rename(prob = prob.y, prob_old = prob.x) %>% 
+    select(-pld) -> sims0
+  sims0 %>% 
+    arrange(sim_rank, r) -> sims
+  games <- read_rds(f0)
+  games %>% 
+    filter(between(ko, date_of(f1), date_of(f2))) %>% 
+    select(-ko) -> games0
+  v1 <- games0$t1
+  v2 <- games0$t2
+  sc <- games0$score
+  games1 <- tibble(t1 = v2, t2 = v1, score = reverse_score(sc))
+  bind_rows(games0, games1, .id = "id") %>% 
+    mutate(opp = ifelse(id == 1, str_c(score, " v ", t2), str_c(score, " @ ", t2))) %>% 
+    select(t1, opp) -> oppo
+  sims %>% 
+    left_join(oppo, join_by(team == t1)) %>% 
+    select(sim_rank, team, played, gd, pts, prob_old, prob, diff, opp) -> sims2
+  split(sims2, f = sims2$sim_rank) 
+}
+```
+
+
+
+```{r}
+# prev
+# cutoff_date
+list.files(path = "sim", pattern = "\\.rds", full.names = TRUE) %>% 
+  enframe(name = NULL, value = "fname") %>%  # grab league names and date-time 
+  mutate(dt_txt = str_extract(fname, "_([^_]+).rds", group = TRUE)) %>% 
+  mutate(dt = ymd_hms(dt_txt, tz = "America/Toronto")) %>% 
+  mutate(f0 = str_extract(fname, "(^.*)_[^_]*.rds", group = TRUE)) %>% 
+  mutate(f0 = str_remove(f0, "^sim/")) %>%
+  mutate(f0 = str_c(f0, ".rds")) %>%
+  group_by(f0) %>% 
+  slice_max(dt, n = 2) %>%
+  select(fname, f0, dt) %>%
+  # arrange(desc(dt))
+  mutate(past_cut = dt > cutoff_date) %>% 
+  filter(any(past_cut)) %>% 
+  select(-dt) %>% 
+  pivot_wider(names_from = past_cut, values_from = fname) %>% 
+  rename(f1 = `FALSE`, f2 = `TRUE`) %>% 
+  drop_na(f1) %>% 
+mutate(f0 = str_c("rds/", f0))-> to_do
+```
+
+## Leagues to do
+
+```{r}
+#| output: asis
+#| warning: false
+to_do %>% 
+  mutate(fname = str_remove(f0, "^rds/")) %>% 
+  ungroup() %>% 
+  mutate(r = row_number()) %>% 
+  select(r, fname) %>% kable()
+```
+
+
+```{r}
+#| warning: false
+
+# View(to_do)
+to_do %>% 
+  rowwise() %>% 
+  mutate(tbls = list(make_table_list(f0, f1, f2))) %>% 
+  ungroup() -> to_do
+```
+
+
+
+```{r}
+#| output: asis
+make_report <- function(i, j, todo) {
+  league <- todo$f0[i]
+  games_left <- find_games_left(league)
+  league <- str_remove(league, "^rds/")
+  tab <- todo$tbls[i][[1]][[j]]
+  top <- tab$sim_rank[1]
+  tab %>% arrange(desc(prob), desc(pts), desc(gd)) %>% 
+    select(-sim_rank) %>% 
+    mutate(r = row_number()) %>% 
+    select(r, everything()) -> tab
+  a <- knit_expand(text = c( "# {{league}}",
+                             "## Games left / team: {{games_left}}\n",
+                             "## Top {{top}}",
+                            {{kable(tab, align = "rlrrrrrrl")}}, "\n"))
   cat(a, sep = "\n")
 }
 ```
 
-```{r}
-#| echo: false
-#| output: asis
-list.files(path = "fit", pattern = "\\.rds", full.names = TRUE) %>% 
-  enframe(name = NULL, value = "fname") %>% 
-  mutate(mtime = file.mtime(fname)) %>%
-  filter(mtime > cutoff_date) %>% 
-  mutate(fname = str_remove(fname, "^fit/")) %>% 
-  pull(fname) -> fnames
-fnames %>% enframe() %>% kable()
 
+```{r}
+#| output: asis
+# walk(1:nrow(to_do), \(i) make_report(i, 1, to_do))
 ```
 
 ```{r}
-#| echo: false
 #| output: asis
 
-walk(fnames, \(x) make_report(x, cutoff_date))
+for (i in 1:nrow(to_do)) {
+  ll <- to_do$tbls[i][[1]]
+  jj <- order(as.numeric(names(ll)))
+  for (j in jj) {
+    make_report(i, j, to_do)
+  }
+}
+
 ```
+

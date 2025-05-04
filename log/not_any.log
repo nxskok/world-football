@@ -1,72 +1,72 @@
-=========================================================================
-Log Path: ./log/not_any.log
-Program Path: /home/ken/Documents/r-projects/world-football/play.qmd
-Working Directory: /home/ken/Documents/r-projects/world-football
-User Name: ken
-R Version: 4.4.2 (2024-10-31)
-Machine: ken-desktop x86_64
-Operating System: Linux 5.15.0-126-generic #136-Ubuntu SMP Wed Nov 6 10:38:22 UTC 2024
-Base Packages: stats graphics grDevices datasets utils methods base
-Other Packages: knitr_1.49 cmdstanr_0.8.0 posterior_1.5.0 conflicted_1.2.0 logr_1.3.8 common_1.1.3 rvest_1.0.4 lubridate_1.9.3 forcats_1.0.0 stringr_1.5.1 dplyr_1.1.4 purrr_1.0.2 readr_2.1.5 tidyr_1.3.1 tibble_3.2.1 ggplot2_3.5.1 tidyverse_2.0.0 devtools_2.4.5 usethis_3.1.0
-Log Start Time: 2024-12-04 12:13:53.334132
-=========================================================================
+========================================================================= 
+Log Path: ./log/not_any.log 
+Program Path: /home/ken/r-projects/world-football/play.qmd 
+Working Directory: /home/ken/r-projects/world-football 
+User Name: ken 
+R Version: 4.5.0 (2025-04-11) 
+Machine: ken-desktop x86_64 
+Operating System: Linux 6.8.0-58-generic #60-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 14 18:29:48 UTC 2025 
+Base Packages: stats graphics grDevices datasets utils methods base 
+Other Packages: conflicted_1.2.0 logr_1.3.9 common_1.1.3 rvest_1.0.4 cmdstanr_0.9.0 posterior_1.6.1 lubridate_1.9.4 forcats_1.0.0 stringr_1.5.1 dplyr_1.1.4 purrr_1.0.4 readr_2.1.5 tidyr_1.3.1 tibble_3.2.1 ggplot2_3.5.2 tidyverse_2.0.0 
+Log Start Time: 2025-05-03 15:24:20.459903 
+========================================================================= 
 
-[1] "Switzerland Challenge"    "Switzerland Promotion"    "Switzerland"              "Switzerland championship" "Switzerland relegation"
+[1] "Switzerland"              "Switzerland Challenge"    "Switzerland Promotion"    "Switzerland championship" "Switzerland relegation"  
 
-NOTE: Log Print Time:  2024-12-04 12:13:53.549834
-NOTE: Elapsed Time: 0.215267896652222 secs
+NOTE: Log Print Time:  2025-05-03 15:24:21.746686 
+NOTE: Elapsed Time: 1.28632926940918 secs 
 
-Switzerland Challenge
+Switzerland 
 
-NOTE: Log Print Time:  2024-12-04 12:13:53.550651
-NOTE: Elapsed Time: 0.000817537307739258 secs
+NOTE: Log Print Time:  2025-05-03 15:24:21.747932 
+NOTE: Elapsed Time: 0.00124597549438477 secs 
 
-* present: Switzerland Challenge
+* present: Switzerland 
 
-NOTE: Log Print Time:  2024-12-04 12:13:55.64721
-NOTE: Elapsed Time: 2.09655904769897 secs
+NOTE: Log Print Time:  2025-05-03 15:24:23.901638 
+NOTE: Elapsed Time: 2.15370583534241 secs 
 
-Switzerland Promotion
+Switzerland Challenge 
 
-NOTE: Log Print Time:  2024-12-04 12:13:55.7286
-NOTE: Elapsed Time: 0.0813896656036377 secs
+NOTE: Log Print Time:  2025-05-03 15:24:24.007297 
+NOTE: Elapsed Time: 0.105659246444702 secs 
 
-* present: Switzerland Promotion
+* present: Switzerland Challenge 
 
-NOTE: Log Print Time:  2024-12-04 12:13:57.357266
-NOTE: Elapsed Time: 1.62866640090942 secs
+NOTE: Log Print Time:  2025-05-03 15:24:26.330615 
+NOTE: Elapsed Time: 2.32331800460815 secs 
 
-Switzerland
+Switzerland Promotion 
 
-NOTE: Log Print Time:  2024-12-04 12:13:57.477688
-NOTE: Elapsed Time: 0.120421648025513 secs
+NOTE: Log Print Time:  2025-05-03 15:24:26.422482 
+NOTE: Elapsed Time: 0.0918674468994141 secs 
 
-* present: Switzerland
+* present: Switzerland Promotion 
 
-NOTE: Log Print Time:  2024-12-04 12:13:59.191921
-NOTE: Elapsed Time: 1.71423268318176 secs
+NOTE: Log Print Time:  2025-05-03 15:24:28.749875 
+NOTE: Elapsed Time: 2.32739233970642 secs 
 
-Switzerland championship
+Switzerland championship 
 
-NOTE: Log Print Time:  2024-12-04 12:13:59.279537
-NOTE: Elapsed Time: 0.0876164436340332 secs
+NOTE: Log Print Time:  2025-05-03 15:24:28.880744 
+NOTE: Elapsed Time: 0.130869626998901 secs 
 
-* missing: Switzerland championship
+* present: Switzerland championship 
 
-NOTE: Log Print Time:  2024-12-04 12:14:01.034581
-NOTE: Elapsed Time: 1.75504350662231 secs
+NOTE: Log Print Time:  2025-05-03 15:24:30.1218 
+NOTE: Elapsed Time: 1.24105620384216 secs 
 
-Switzerland relegation
+Switzerland relegation 
 
-NOTE: Log Print Time:  2024-12-04 12:14:01.076563
-NOTE: Elapsed Time: 0.0419819355010986 secs
+NOTE: Log Print Time:  2025-05-03 15:24:30.197298 
+NOTE: Elapsed Time: 0.0754978656768799 secs 
 
-* missing: Switzerland relegation
+* present: Switzerland relegation 
 
-NOTE: Log Print Time:  2024-12-04 12:14:03.431061
-NOTE: Elapsed Time: 2.35449814796448 secs
+NOTE: Log Print Time:  2025-05-03 15:24:32.328508 
+NOTE: Elapsed Time: 2.1312096118927 secs 
 
-=========================================================================
-Log End Time: 2024-12-04 12:14:03.448306
-Log Elapsed Time: 0 00:00:10
-=========================================================================
+========================================================================= 
+Log End Time: 2025-05-03 15:24:33.896019 
+Log Elapsed Time: 0 00:00:13 
+========================================================================= 

@@ -14,7 +14,7 @@ source("rate_functions.R")
 source("stats_functions.R")
 source("predictions_functions.R")
 
-
+print("Done sourcing")
 
 the_url <- "https://www.predictthefootball.com/?lang=en_us"
 sess <- session(the_url)
@@ -28,30 +28,32 @@ filled_form <- html_form_set(form[[1]],
 
 session_submit(sess, filled_form)
 
-
+print("got form")
 
 leagues_txt <- "
 id, lg, rdsname, ptf
-1, eng-ch, eng_championship_2023-2024.rds, https://championship.predictthefootball.com
-2, eng-pr, eng_premier-league_2023-2024.rds, https://premierleague.predictthefootball.com
-3, fra, fra_ligue-1_2023-2024.rds, https://ligue1.predictthefootball.com
-4, ger, ger_bundesliga_2023-2024.rds, https://bundesliga.predictthefootball.com
-5, gre, gre_super-league_2023-2024.rds, https://superleague.predictthefootball.com
-6, ita, ita_serie-a_2023-2024.rds, https://seriea.predictthefootball.com
-7, sco, sco_premiership_2023-2024.rds, https://scottish-premier.predictthefootball.com
-8, esp, esp_primera-division_2023-2024.rds, https://laliga.predictthefootball.com
+1, eng-ch, eng_championship_2024-2025.rds, https://championship.predictthefootball.com
+2, eng-pr, eng_premier-league_2024-2025.rds, https://premierleague.predictthefootball.com
+3, fra, fra_ligue-1_2024-2025.rds, https://ligue1.predictthefootball.com
+4, ger, ger_bundesliga_2024-2025.rds, https://bundesliga.predictthefootball.com
+6, ita, ita_serie-a_2024-2025.rds, https://seriea.predictthefootball.com
+8, esp, esp_primera-division_2024-2025.rds, https://laliga.predictthefootball.com
+9, swe, swe_allsvenskan_2025.rds, https://allsvenskan.predictthefootball.com
 "
 
 league_df <- read_csv(leagues_txt)
+# read_csv(leagues_txt)
 
 # removals for the moment go here, commented out
 
+# 5, gre, gre_super-league_2024-2025.rds, https://superleague.predictthefootball.com
+# 7, sco, sco_premiership_2024-2025.rds, https://scottish-premier.predictthefootball.com
 
-# 9, swe, swe_allsvenskan_2024.rds, https://allsvenskan.predictthefootball.com
 
 
 
 get_league_preds <- function(league_url, fname, sess) {
+  print(league_url)
   lu_name <- str_c("lu/", fname)
   lu <- read_rds(lu_name)
   get_form(league_url, sess) %>%
@@ -67,6 +69,10 @@ get_league_preds <- function(league_url, fname, sess) {
     mutate(opt_pred = max_ept(ppd, results, scores)) %>%
     select(name_1, name_2, opt_pred, crowd)
 }
+
+# testing
+
+
 
 
 suppressWarnings(
@@ -85,7 +91,7 @@ d %>%
 
 get_form("https://seriea.predictthefootball.com", sess) %>%
     filter(is.na(pred_1)) -> ptf_form
-fname <- "ita_serie-a_2023-2024.rds"
+fname <- "ita_serie-a_2024-2025.rds"
 lu_name <- str_c("lu/", fname)
 lu <- read_rds(lu_name)
 options("dplyr.summarise.inform" = FALSE)

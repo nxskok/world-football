@@ -52,7 +52,7 @@ tables_for_report <- function(rdsname, cutoff_date) {
   changes <- make_changes(filenames)
   games <- read_rds(str_c("rds/", rdsname))
   filenames %>% file.mtime() -> mtimes
-  games %>% filter(between(ko, mtimes[1]-hours(3), now())) -> games
+  games %>% filter(between(ko, mtimes[1]-2, now())) -> games
   tab_recent <- read_rds(filenames[2])
   tab_recent %>% mutate(r = row_number()) -> tab_recent
   tab_recent %>% select(r, everything()) %>% select(-played) %>% rename(mn_rk = mean_rank) -> tab_recent
