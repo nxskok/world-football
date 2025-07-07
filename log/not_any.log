@@ -1,72 +1,123 @@
-========================================================================= 
-Log Path: ./log/not_any.log 
-Program Path: /home/ken/r-projects/world-football/play.qmd 
-Working Directory: /home/ken/r-projects/world-football 
-User Name: ken 
-R Version: 4.5.0 (2025-04-11) 
-Machine: ken-desktop x86_64 
-Operating System: Linux 6.8.0-58-generic #60-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 14 18:29:48 UTC 2025 
-Base Packages: stats graphics grDevices datasets utils methods base 
-Other Packages: conflicted_1.2.0 logr_1.3.9 common_1.1.3 rvest_1.0.4 cmdstanr_0.9.0 posterior_1.6.1 lubridate_1.9.4 forcats_1.0.0 stringr_1.5.1 dplyr_1.1.4 purrr_1.0.4 readr_2.1.5 tidyr_1.3.1 tibble_3.2.1 ggplot2_3.5.2 tidyverse_2.0.0 
-Log Start Time: 2025-05-03 15:24:20.459903 
-========================================================================= 
+=========================================================================
+Log Path: ./log/not_any.log
+Program Path: /home/ken/r-projects/world-football/play.qmd
+Working Directory: /home/ken/r-projects/world-football
+User Name: ken
+R Version: 4.5.1 (2025-06-13)
+Machine: ken-desktop x86_64
+Operating System: Linux 6.8.0-63-generic #66-Ubuntu SMP PREEMPT_DYNAMIC Fri Jun 13 20:25:30 UTC 2025
+Base Packages: stats graphics grDevices datasets utils methods base
+Other Packages: conflicted_1.2.0 logr_1.3.9 common_1.1.3 rvest_1.0.4 lubridate_1.9.4 forcats_1.0.0 stringr_1.5.1 dplyr_1.1.4 purrr_1.0.4 readr_2.1.5 tidyr_1.3.1 tibble_3.3.0 ggplot2_3.5.2 tidyverse_2.0.0 devtools_2.4.5 usethis_3.1.0
+Log Start Time: 2025-07-07 13:02:30.363906
+=========================================================================
 
-[1] "Switzerland"              "Switzerland Challenge"    "Switzerland Promotion"    "Switzerland championship" "Switzerland relegation"  
+ [1] "Malta Opening T6"       "Mexico Clausura"        "Montenegro"             "North Macedonia"        "Russia 1"               "San Marino"
+ [7] "Spain Primera RFEF 1"   "Spain Primera RFEF 2"   "UEFA Champions League"  "UEFA Conference League"
 
-NOTE: Log Print Time:  2025-05-03 15:24:21.746686 
-NOTE: Elapsed Time: 1.28632926940918 secs 
+NOTE: Log Print Time:  2025-07-07 13:02:30.413937
+NOTE: Elapsed Time: 0.0495479106903076 secs
 
-Switzerland 
+Malta Opening T6
 
-NOTE: Log Print Time:  2025-05-03 15:24:21.747932 
-NOTE: Elapsed Time: 0.00124597549438477 secs 
+NOTE: Log Print Time:  2025-07-07 13:02:30.414667
+NOTE: Elapsed Time: 0.000730276107788086 secs
 
-* present: Switzerland 
+* missing: Malta Opening T6
 
-NOTE: Log Print Time:  2025-05-03 15:24:23.901638 
-NOTE: Elapsed Time: 2.15370583534241 secs 
+NOTE: Log Print Time:  2025-07-07 13:02:39.848143
+NOTE: Elapsed Time: 9.4334762096405 secs
 
-Switzerland Challenge 
+Mexico Clausura
 
-NOTE: Log Print Time:  2025-05-03 15:24:24.007297 
-NOTE: Elapsed Time: 0.105659246444702 secs 
+NOTE: Log Print Time:  2025-07-07 13:02:39.868776
+NOTE: Elapsed Time: 0.0206325054168701 secs
 
-* present: Switzerland Challenge 
+* missing: Mexico Clausura
 
-NOTE: Log Print Time:  2025-05-03 15:24:26.330615 
-NOTE: Elapsed Time: 2.32331800460815 secs 
+NOTE: Log Print Time:  2025-07-07 13:02:42.087716
+NOTE: Elapsed Time: 2.21894073486328 secs
 
-Switzerland Promotion 
+Montenegro
 
-NOTE: Log Print Time:  2025-05-03 15:24:26.422482 
-NOTE: Elapsed Time: 0.0918674468994141 secs 
+NOTE: Log Print Time:  2025-07-07 13:02:42.101792
+NOTE: Elapsed Time: 0.0140755176544189 secs
 
-* present: Switzerland Promotion 
+* missing: Montenegro
 
-NOTE: Log Print Time:  2025-05-03 15:24:28.749875 
-NOTE: Elapsed Time: 2.32739233970642 secs 
+NOTE: Log Print Time:  2025-07-07 13:02:44.038892
+NOTE: Elapsed Time: 1.93710017204285 secs
 
-Switzerland championship 
+North Macedonia
 
-NOTE: Log Print Time:  2025-05-03 15:24:28.880744 
-NOTE: Elapsed Time: 0.130869626998901 secs 
+NOTE: Log Print Time:  2025-07-07 13:02:44.056919
+NOTE: Elapsed Time: 0.0180268287658691 secs
 
-* present: Switzerland championship 
+* missing: North Macedonia
 
-NOTE: Log Print Time:  2025-05-03 15:24:30.1218 
-NOTE: Elapsed Time: 1.24105620384216 secs 
+NOTE: Log Print Time:  2025-07-07 13:02:45.969862
+NOTE: Elapsed Time: 1.91294312477112 secs
 
-Switzerland relegation 
+Russia 1
 
-NOTE: Log Print Time:  2025-05-03 15:24:30.197298 
-NOTE: Elapsed Time: 0.0754978656768799 secs 
+NOTE: Log Print Time:  2025-07-07 13:02:45.9882
+NOTE: Elapsed Time: 0.0183384418487549 secs
 
-* present: Switzerland relegation 
+* missing: Russia 1
 
-NOTE: Log Print Time:  2025-05-03 15:24:32.328508 
-NOTE: Elapsed Time: 2.1312096118927 secs 
+NOTE: Log Print Time:  2025-07-07 13:02:47.474952
+NOTE: Elapsed Time: 1.48675203323364 secs
 
-========================================================================= 
-Log End Time: 2025-05-03 15:24:33.896019 
-Log Elapsed Time: 0 00:00:13 
-========================================================================= 
+San Marino
+
+NOTE: Log Print Time:  2025-07-07 13:02:47.494705
+NOTE: Elapsed Time: 0.0197525024414062 secs
+
+* missing: San Marino
+
+NOTE: Log Print Time:  2025-07-07 13:02:49.405517
+NOTE: Elapsed Time: 1.91081213951111 secs
+
+Spain Primera RFEF 1
+
+NOTE: Log Print Time:  2025-07-07 13:02:49.423333
+NOTE: Elapsed Time: 0.0178155899047852 secs
+
+* missing: Spain Primera RFEF 1
+
+NOTE: Log Print Time:  2025-07-07 13:02:50.724504
+NOTE: Elapsed Time: 1.30117154121399 secs
+
+Spain Primera RFEF 2
+
+NOTE: Log Print Time:  2025-07-07 13:02:50.743386
+NOTE: Elapsed Time: 0.0188820362091064 secs
+
+* missing: Spain Primera RFEF 2
+
+NOTE: Log Print Time:  2025-07-07 13:02:52.658338
+NOTE: Elapsed Time: 1.91495203971863 secs
+
+UEFA Champions League
+
+NOTE: Log Print Time:  2025-07-07 13:02:52.676732
+NOTE: Elapsed Time: 0.0183937549591064 secs
+
+* missing: UEFA Champions League
+
+NOTE: Log Print Time:  2025-07-07 13:02:54.384946
+NOTE: Elapsed Time: 1.70821404457092 secs
+
+UEFA Conference League
+
+NOTE: Log Print Time:  2025-07-07 13:02:54.402828
+NOTE: Elapsed Time: 0.0178816318511963 secs
+
+* missing: UEFA Conference League
+
+NOTE: Log Print Time:  2025-07-07 13:02:56.587229
+NOTE: Elapsed Time: 2.18440079689026 secs
+
+=========================================================================
+Log End Time: 2025-07-07 13:02:56.594901
+Log Elapsed Time: 0 00:00:26
+=========================================================================

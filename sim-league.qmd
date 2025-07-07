@@ -28,7 +28,8 @@ sim_as_needed_safe <- safely(sim_as_needed) # ones that give an error will be ig
 log_open("sim/sim.log")
 sim_as_needed_safe(leagues)  
 log_close()
-
+Matched leagues (but not games)
+[1] "No non-matched games"
 ```
 
 report: see report.qmd

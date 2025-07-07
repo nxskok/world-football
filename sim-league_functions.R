@@ -73,6 +73,9 @@ league_table_from_rdsname <- function(rdsname) {
 }
 
 get_unplayed <- function(rdsname) {
+  # this is where I can remove games for teams that have 0 played (have been expelled)
+  # idea: input the names of such teams as a (usually empty) vector
+  # then remove any game featuring any one of these teams
   read_rds(str_c("rds/", rdsname)) %>%
     filter(is.na(score)) %>%
     select(-score)

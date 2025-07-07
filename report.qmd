@@ -37,7 +37,7 @@ reverse_score <- function(x) {
   m <- str_match(x, "([0-9]*)( - )([0-9]*)")
   cbind(m[,4], m[,2]) %>% as_tibble() %>% 
     unite(score, V1, V2, sep = " - ") %>% 
-    pull(score)
+    pull(score) 
 }
 # games left per team
 find_games_left <- function(f0) {

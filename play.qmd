@@ -36,16 +36,23 @@ show_the_changes(ggg, league_urls) %>% View(str_c("at: ", when_got))
 #| warning: false
 request <- character(0)
 request <- c(request, "albania")
+request <- c(request, "andorra")
+request <- c(request, "belarus")
 request <- c(request, "bosnia")
 request <- c(request, "bulgaria")
 request <- c(request, "canada")
 request <- c(request, "cyprus")
 request <- c(request, "czech")
+request <- c(request, "germany")
 request <- c(request, "greece")
+request <- c(request, "hungary")
 request <- c(request, "italy")
+request <- c(request, "kaz")
 request <- c(request, "kosovo")
+request <- c(request, "macedonia")
 request <- c(request, "malta")
 request <- c(request, "mexico")
+request <- c(request, "moldova")
 request <- c(request, "montenegro")
 request <- c(request, "national")
 request <- c(request, "portugal")
@@ -55,6 +62,11 @@ request <- c(request, "serbia")
 request <- c(request, "slovakia")
 request <- c(request, "spain")
 request <- c(request, "switz")
+request <- c(request, "turkey")
+request <- c(request, "uefa")
+request <- c(request, "ukraine")
+request <- c(request, "world cup")
+
 
 pat <- str_flatten(request, "|")
 pat
@@ -70,15 +82,42 @@ update_predictions_url(league_urls) %>% View("predictions")
 ## which leagues do I not have at all?
 
 ```{r}
+my_url <- "last_get.rds"
+start_season <- "f"
+last_gotten <- read_rds(my_url)
+last_gotten
 log_open("not_any.log")
 league_urls %>% 
   rowwise() %>% 
   mutate(mtime = file.mtime(paste0("rds/", rds_name))) %>% 
+  ungroup() %>% 
+  filter(start == start_season) %>% 
   filter(is.na(mtime)) -> l_to_get
+l_to_get %>% left_join(last_gotten, join_by(rds_name)) %>% 
+  arrange(last_get) %>% slice(1:10) -> l_to_get
 l_to_get
 download_these_ones(l_to_get)
 log_close()
+# update last gotten
+l_to_get %>% 
+  select(rds_name) %>% 
+  mutate(last_get = now(tzone = "America/Toronto")) -> new_ones
+new_ones
+last_gotten %>% rows_update(new_ones, by = "rds_name") -> last_gotten
+write_rds(last_gotten, my_url)
 ```
+
+
+## set up initial last-gotten
+
+```{r}
+my_url <- "last_get.rds"
+league_urls %>% 
+  select(rds_name) %>% 
+  mutate(last_get = ymd_hms("2000-01-03 03:15:00")) %>% 
+  write_rds(my_url)
+```
+
 
 ## testing report (league tables)
 
